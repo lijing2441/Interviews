@@ -73,4 +73,7 @@ public class Merge_K_Sorted_Lists {
 		tail.next = null;
 		return head.next;
 	}
+	
+	// Merge k lists using Iterator
+	
 }

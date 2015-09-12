@@ -51,6 +51,7 @@ public class Longest_Substring_with_At_Most_Two_Distinct_Characters {
 	 * 			  the iteration position.
 	 * worst case: O(n^2)
 	 */
+	@SuppressWarnings("unused")
 	public static String substringWith2Chars(String str){
 		if(str == null || str.length() <= 2) return str;
 		char[] arr = str.toCharArray();

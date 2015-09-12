@@ -7,7 +7,7 @@ public class URL_Shortener_And_Retrievaler {
 	 * Provide a system design for real world URL shortener (solution must scale
 	 * to millions of users). Back up your assumptions with real numbers.
 	 *
-	 * tinyurl is a URL service that users enter a long URL and then the service 
+	 * Tiny url is a URL service that users enter a long URL and then the service 
 	 * return a shorter and unique url such as "http://tiny.me/5ie0V2". 
 	 * The highlight part can be any string with 6 letters containing [0-9, a-z, A-Z]. 
 	 * That is, 62^6 ~= 56.8 billions unique strings.
@@ -69,7 +69,6 @@ public class URL_Shortener_And_Retrievaler {
 			int digit = APPLICABLE_CHARS.indexOf(letter);
 			dbID += digit * Math.pow(BASE, j);
 		}
-
 		return dbID;
 	}
 }

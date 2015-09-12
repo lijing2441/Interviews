@@ -1,4 +1,8 @@
 package interviews;
+
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Except the backtracking brute force method used here, we can: 
  * -> randomly assign numbers to the blank cells
@@ -84,6 +88,56 @@ public class Sudoku {
             }
         }
         return true; 
+    }
+	
+	/**
+	 * Another way
+	 */
+	public boolean isValidSudokuAnother(char[][] board) {
+        // check every line
+        for(int i=0; i<9; i++){
+            if(!check(board, i, i, 0, 8)){
+                return false;
+            }
+        }
+        
+        // check every col
+        for(int j=0; j<9; j++){
+            if(!check(board, 0, 8, j, j)){
+                return false;
+            }
+        }
+        
+        // check every 3*3 block
+        for(int i=0; i<9; i=i+3){
+            for(int j=0; j<9; j=j+3){
+                if(!check(board, i, i+2, j, j+2)){
+                    return false;
+                }
+            }
+        }
+        
+        return true;
+    }
+    
+    public boolean check(char[][] board, int rows, int rowe, int cols, int cole){
+        Set<Integer> already = new HashSet<Integer>();
+        
+        for(int i=rows; i<=rowe; i++){
+            for(int j=cols; j<=cole; j++){
+                if(board[i][j]=='.'){
+                    continue;
+                }
+                int tmp = board[i][j] - '0';
+                
+                if(tmp==0 || already.contains(tmp)){
+                    return false;
+                }
+                already.add(tmp);
+            }
+        }
+        
+        return true;
     }
 	
 	/**

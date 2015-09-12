@@ -18,6 +18,7 @@ public class Palindrome_Partition {
 	//DP solution, save time by using more space for memorization
 	//O(n^2) time
 	//would cause generic array creation error
+	@SuppressWarnings("unchecked")
 	public ArrayList<ArrayList<String>> partitionDP(String s){
 		ArrayList<ArrayList<String>> res = new ArrayList<ArrayList<String>>();
         
