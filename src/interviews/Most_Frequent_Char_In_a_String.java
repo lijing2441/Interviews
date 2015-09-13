@@ -37,6 +37,7 @@ public class Most_Frequent_Char_In_a_String {
 		return maxChar;
 	}
 	
+	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception{
 		Scanner it = new Scanner(System.in);
 		System.out.print("Enter a string to start: ");

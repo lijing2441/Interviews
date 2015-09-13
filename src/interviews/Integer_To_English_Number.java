@@ -1,6 +1,6 @@
 package interviews;
 
-public class Pronounce_Number {
+public class Integer_To_English_Number {
 	/**
 	 * Given a number write a function to convert that number to a string that
 	 * would be seen on a check. 

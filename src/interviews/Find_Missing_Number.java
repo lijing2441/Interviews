@@ -26,4 +26,14 @@ public class Find_Missing_Number {
 		}
 		return res;
 	}
+	
+	// or use math
+	public int missingNumber(int[] nums) {
+        int len = nums.length;
+        int res = len * (len + 1) / 2;
+        for(int i : nums) {
+            res -= i;
+        }
+        return res;
+    }
 }

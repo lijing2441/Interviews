@@ -32,4 +32,29 @@ public class Search_target_In_Sorted_Matrix {
 		}
 		return false;
 	}
+	
+	// O(m+n) time and O(1) space
+	public int searchMatrixOptimized(int[][] matrix, int target) {
+        // write your code here
+        int res = 0;
+        int m = matrix.length;
+        if (m == 0) return res;
+        int n = matrix[0].length;
+        if (n == 0) return res;
+        if (target < matrix[0][0] || target > matrix[m - 1][n - 1]) return 0;
+        // search from top right corner 
+        int row = 0, col = n - 1;
+        while (row < m && col >= 0) {
+            if (target == matrix[row][col]) {
+                res++;
+                row++;
+                col--;
+            } else if (target < matrix[row][col]) {
+                col--;
+            } else {
+                row++;
+            }
+        }
+        return res;
+    }
 }

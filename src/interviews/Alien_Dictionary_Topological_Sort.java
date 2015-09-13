@@ -1,8 +1,9 @@
 package interviews;
 
 import java.util.*;
+import java.util.HashMap;
 
-public class Topological_Sort_Dictionary_Order {
+public class Alien_Dictionary_Topological_Sort {
 	/**
 	 * Given a list of sorted words, output the order of the letters used to sort them. 
 	 * 
@@ -22,6 +23,70 @@ public class Topological_Sort_Dictionary_Order {
 	 * 
 	 * 3) Print topological sorting of the above created graph.
 	 */
+	public String alienOrder(String[] words) {
+        int len = words.length;
+        if(len == 0) return "";
+        // build the graph first, use set to avoid dups
+        Map<Character, Set<Character>> graph = new HashMap<Character, Set<Character>>();
+        for(int i = 0; i < len; i++) {
+            for(int j = 0; j < words[i].length(); j++) {
+                if(!graph.containsKey(words[i].charAt(j))) {
+                    graph.put(words[i].charAt(j), new HashSet<Character>());
+                }
+            }
+            if(i > 0) getOrder(words[i - 1], words[i], graph);
+        }
+        return topoSort(graph);
+    }
+    // topological sort
+    public String topoSort(Map<Character, Set<Character>> graph) {
+        StringBuilder sb = new StringBuilder();
+        Map<Character, Integer> indegree = new HashMap<Character, Integer>();
+        Queue<Character> noIncome = new LinkedList<Character>();
+        // get the indegree
+        for(char c: graph.keySet()) {
+            for(char end: graph.get(c)) {
+                int num = 1;
+                if(indegree.containsKey(end)) num += indegree.get(end);
+                indegree.put(end, num);
+            }
+        }
+        for(char c: graph.keySet()) {
+            if(!indegree.containsKey(c)) {
+                noIncome.offer(c);
+            }
+        }
+        while(!noIncome.isEmpty()) {
+            char curChar = noIncome.poll();
+            sb.append(curChar);
+            Set<Character> set = graph.get(curChar);
+            graph.remove(curChar);
+            if(set == null) continue;
+            for(char c : set) {
+                indegree.put(c, indegree.get(c) - 1);
+                if(indegree.get(c) == 0) noIncome.offer(c);
+            }
+        }
+        for(int i: indegree.values()) {
+            if(i != 0) return "";
+        }
+        return sb.toString();
+    }
+    public void getOrder(String word1, String word2, Map<Character, Set<Character>> graph) {
+        for(int i = 0; i < Math.min(word1.length(), word2.length()); i++) {
+            char c1 = word1.charAt(i), c2 = word2.charAt(i);
+            if(c1 != c2) {
+                if(!graph.get(c1).contains(c2)) {
+                    graph.get(c1).add(c2);
+                }
+                break;
+            }
+        }
+    }
+	
+	
+	
+	
 	public ArrayList<Character> topoSortDictOrder(String[] dict, int alphasize){
 		DGraph g = new DGraph(alphasize);
 		// Process all adjacent pairs of words and create a graph

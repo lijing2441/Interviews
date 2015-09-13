@@ -1,6 +1,9 @@
  package interviews;
 
-public class Reverse_Strings_In_A_Sentence {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Reverse_Words_In_A_String {
 	/**
 	 * Given an input string, reverse the string word by word.
 	 * 
@@ -43,31 +46,40 @@ public class Reverse_Strings_In_A_Sentence {
         }
         return new String(reverse);
     }
-	public static void main(String[] args){
-		String x = "   Hello  Dear";
-		System.out.println(removeSpaces(x));
-		System.out.println(reverseWords(x));
-	}
 	
-	/**
-	 * remove all the unnecessary spaces
-	 */
-	public static String removeSpaces(String s) {
+	// Another way
+	public String reverseWordsSB(String s) {
+        // write your code
         if(s == null || s.length() == 0) return "";
-        String res = "";
-        int start = 0;
-        int n = s.length();
-        for(int i = 0; i < n; i++){
-            if(s.charAt(i) == ' ') start = i + 1; // ignore this whitespace 
-            else{
-            	if(i > 0 && s.charAt(i - 1) == ' '){
-            		res = res + " ";
-            	}
-                // if normal order, use stringBuilder is enough
-                res = res + s.substring(start, i + 1);
-                start = i + 1;
+        int len = s.length();
+        List<String> list = new ArrayList<String>();
+        int start = 0, end = 0;
+        while(start < len && end < len) {
+            while(start < len && s.charAt(start) == ' ') {
+                start++;
             }
+            if(start >= len) break;
+            end = start;
+            while(end < len && s.charAt(end) != ' ') {
+                end++;
+            }
+            if(start != end) {
+                String cur = s.substring(start, end);
+                list.add(cur);
+                start = end;
+            }
+        }
+        String res = "";
+        for(int i = 0; i < list.size(); i++) {
+            if(i > 0) res = " " + res;
+            res = list.get(i) + res;
         }
         return res;
     }
+	
+	public static void main(String[] args){
+		String x = "   Hello  Dear";
+		//System.out.println(removeSpaces(x));
+		System.out.println(reverseWords(x));
+	}
 }

@@ -101,6 +101,7 @@ public class Longest_Substring_with_At_Most_Two_Distinct_Characters {
 		return len;
 	}
 	
+	@SuppressWarnings("resource")
 	public static void main(String[] args){
 		Scanner it = new Scanner(System.in);
 		System.out.println("Enter a string to start: ");

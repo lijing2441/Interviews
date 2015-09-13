@@ -54,6 +54,7 @@ public class Print_X_to_j_or_k {
 		}
 	}
 	*/
+	@SuppressWarnings("resource")
 	public static void main(String[] args){
 		Scanner in = new Scanner(System.in);
 		System.out.print("Enter a string to start: ");

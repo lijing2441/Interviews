@@ -18,6 +18,26 @@ package interviews;
  *
  */
 public class Celebrity {
+	// 这个case，所有人必须认识名人，名人谁都不认识
+	public int findCelebrity(int n) {
+        if (n < 2) return -1;
+        int potential = 0;
+        for (int i = 1; i < n; i++) {
+            if (knows(potential, i)) {
+                potential = i;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (potential == i) continue;
+            if (knows(potential, i) || !knows(i, potential)) return -1;
+        }
+        return potential;
+    }
+	
+	boolean knows(int i, int j) {
+		return false;
+	}
+	// 不用所有人认识名人，名人必须谁都不认识
 	public int searchCelebrity(int[] personIdArr){
 		int n = personIdArr.length;
 		if(n < 2) return -1; // base case, none or only 1 exists

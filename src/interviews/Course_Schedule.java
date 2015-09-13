@@ -72,6 +72,7 @@ public class Course_Schedule {
 	
 	
 	// DFS, Topological sort, O(|E| + |V|)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public boolean canFinishDFS(int numCourses, int[][] prerequisites) {
         if(numCourses < 2) return true;
         if(prerequisites == null || prerequisites.length == 0 || prerequisites[0].length == 0) return true;
@@ -91,7 +92,8 @@ public class Course_Schedule {
         }
         return true;
     }
-    public boolean dfs(ArrayList[] edgeList, boolean[] visited, int start) {
+    @SuppressWarnings("rawtypes")
+	public boolean dfs(ArrayList[] edgeList, boolean[] visited, int start) {
         if(visited[start]) {
             return false;
         } else {

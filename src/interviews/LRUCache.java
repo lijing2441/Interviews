@@ -1,9 +1,6 @@
 package interviews;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 /**
  * In gmail, while composing an email, upon adding a contact, related contacts are displayed. 
  * how would you implement that feature?
