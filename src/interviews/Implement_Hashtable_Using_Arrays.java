@@ -21,33 +21,27 @@ public class Implement_Hashtable_Using_Arrays {
 
 		// constructors, getters and setters below
 		public Entry(K key, V value) {
-			// TODO Auto-generated constructor stub
 			this.key = key;
 			this.value = value;
 		}
 
 		public Entry next() {
-			// TODO Auto-generated method stub
 			return this.next;
 		}
 
 		public Object getKey() {
-			// TODO Auto-generated method stub
 			return this.key;
 		}
 
 		public void setNext(Entry entry) {
-			// TODO Auto-generated method stub
 			this.next = entry;
 		}
 
 		public void setValue(V value) {
-			// TODO Auto-generated method stub
 			this.value = value;
 		}
 
 		public V getValue() {
-			// TODO Auto-generated method stub
 			return this.value;
 		}
 	}
