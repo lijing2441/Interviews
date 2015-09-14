@@ -1,9 +1,9 @@
 package interviews;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class Largetst_Numer_With_Concatenation_of_Array {
 	/**
@@ -43,9 +43,10 @@ public class Largetst_Numer_With_Concatenation_of_Array {
     }
 	
 	// 用另一种comparator
-	public String largestNumber2(int[] nums) {
-        Arrays.sort(nums, new Comparator<Integer>() {
-            @Override
+	public static String largestNumber2(int[] nums) {
+		List<Integer> list = new ArrayList<Integer>();
+		for (int i: nums) list.add(i);
+        Collections.sort(list, new Comparator<Integer>() {
             public int compare(Integer n1, Integer n2) {
 		        String str1 = Integer.toString(n1);
 	    	    String str2 = Integer.toString(n2);
@@ -86,8 +87,14 @@ public class Largetst_Numer_With_Concatenation_of_Array {
         
         StringBuilder sb = new StringBuilder();
         for(int i = nums.length - 1; i >= 0; i--) {
-            sb.append(Integer.toString(nums[i]));
+            sb.append(Integer.toString(list.get(i)));
         }
         return sb.toString();
     }
+	
+	public static void main(String[] args) {
+		int[] num = {3, 30, 34, 5, 9};
+		String res = largestNumber2(num);
+		System.out.println(res);
+	}
 }

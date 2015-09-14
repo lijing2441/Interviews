@@ -3,7 +3,7 @@ package interviews;
 public class Coin_Change {
 	/**
 	 * Find the minimum no. of coins to make up the given sum from the list of
-	 * the denomination of coins.
+	 * the denomination of coins. non-duplicates
 	 * 
 	 * @DP: the subproblem is either we use the jth coin or not
 	 */

@@ -1,4 +1,5 @@
 package interviews;
+
 import java.util.*;
 
 public class GrayCode {
