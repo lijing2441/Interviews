@@ -126,7 +126,7 @@ class BSTIterator {
             if(cur != null){
                 stack.push(cur);
                 cur = cur.left;
-            }else{
+            } else {
                 node = stack.pop();
                 cur = node.right;
                 break;

@@ -70,7 +70,6 @@ public class Course_Schedule {
         else return false;
     }
 	
-	
 	// DFS, Topological sort, O(|E| + |V|)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public boolean canFinishDFS(int numCourses, int[][] prerequisites) {

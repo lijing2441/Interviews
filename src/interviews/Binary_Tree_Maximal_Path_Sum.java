@@ -21,9 +21,10 @@ public class Binary_Tree_Maximal_Path_Sum {
 		int rdiameter = maxPath(root.right);
 
 		/*
-		 * Return max of following three 1) Diameter of left subtree 2) Diameter
-		 * of right subtree 3) Height of left subtree + height of right subtree
-		 * + 1
+		 * Return max of following three 
+		 * 1) Diameter of left subtree 
+		 * 2) Diameter of right subtree 
+		 * 3) Height of left subtree + height of right subtree + 1
 		 */
 		return Math.max(lheight + rheight + 1, Math.max(ldiameter, rdiameter));
 	}

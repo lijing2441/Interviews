@@ -79,7 +79,7 @@ public class Edit_Distance {
 		if (shift == 0)
 			// if n == m skip current char in s (modify operation in s)
 			// the one edit distance is used here
-			i++; 
+			i++;
 		// since if shift == 1, t has one more character
 		while (i < m && s.charAt(i) == t.charAt(i + shift))
 			// use shift to skip one char in t

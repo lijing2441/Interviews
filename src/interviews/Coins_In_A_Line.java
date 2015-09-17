@@ -28,7 +28,7 @@ public class Coins_In_A_Line {
 		int n = A.length;
 		if(n == 0) return 0;
 		if(n == 1) return A[0];
-		if(n == 2) return A[0] > A[1]? A[0] : A[1];
+		if(n == 2) return A[0] > A[1] ? A[0] : A[1];
 		int[][] dp = new int[n][n];
 		//if only one coin left
 		for(int i = 0; i < n; i++){
@@ -36,7 +36,7 @@ public class Coins_In_A_Line {
 		}
 		//if two left, get the bigger one
 		for(int i = 0; i < n- 1; i++){
-			dp[i][i+1] = A[i] > A[i + 1]? A[i] : A[i+1];
+			dp[i][i+1] = A[i] > A[i + 1] ? A[i] : A[i+1];
 		}
 		//the other cases, diagonally
 		for(int len = 2; len < n; len++){
@@ -50,5 +50,4 @@ public class Coins_In_A_Line {
 		}
 		return dp[0][n-1];
 	}
-	
 }

@@ -1,6 +1,6 @@
 package interviews;
 
-public class Binary_Search_Tree_Insert_Delete_Node {
+public class BST_Insert_Delete_Node {
 	/**
 	 * Given binary search tree as follow, after Insert node 6, the tree should be:
 
@@ -53,4 +53,9 @@ public class Binary_Search_Tree_Insert_Delete_Node {
         }
         return root;
     }
+    
+    /**
+     * Delete a node from BST
+     */
+    
 }

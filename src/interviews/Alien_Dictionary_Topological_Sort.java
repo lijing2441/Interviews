@@ -43,7 +43,7 @@ public class Alien_Dictionary_Topological_Sort {
         StringBuilder sb = new StringBuilder();
         Map<Character, Integer> indegree = new HashMap<Character, Integer>();
         Queue<Character> noIncome = new LinkedList<Character>();
-        // get the indegree
+        // get the in-degree
         for(char c: graph.keySet()) {
             for(char end: graph.get(c)) {
                 int num = 1;
@@ -51,6 +51,7 @@ public class Alien_Dictionary_Topological_Sort {
                 indegree.put(end, num);
             }
         }
+        // no income, then add
         for(char c: graph.keySet()) {
             if(!indegree.containsKey(c)) {
                 noIncome.offer(c);
@@ -67,11 +68,13 @@ public class Alien_Dictionary_Topological_Sort {
                 if(indegree.get(c) == 0) noIncome.offer(c);
             }
         }
+        // in case there is a cycle or not connected
         for(int i: indegree.values()) {
             if(i != 0) return "";
         }
         return sb.toString();
     }
+    
     public void getOrder(String word1, String word2, Map<Character, Set<Character>> graph) {
         for(int i = 0; i < Math.min(word1.length(), word2.length()); i++) {
             char c1 = word1.charAt(i), c2 = word2.charAt(i);
@@ -83,10 +86,8 @@ public class Alien_Dictionary_Topological_Sort {
             }
         }
     }
-	
-	
-	
-	
+    
+    // another method to use a brand new data structure as directed graph
 	public ArrayList<Character> topoSortDictOrder(String[] dict, int alphasize){
 		DGraph g = new DGraph(alphasize);
 		// Process all adjacent pairs of words and create a graph

@@ -32,18 +32,17 @@ public class Adjust_To_Smaller_Difference {
 		// since the number in the array is a positive integer and not great than 100 -> 1<=x<=100
 		int[][] dp = new int[n][101];
 		
-		for(int i = 0; i < n; i++){
+		for (int i = 0; i < n; i++) {
 			// the value can be 1 <= j <= 100
-			for(int j = 1; j <= 100; j++){
+			for (int j = 1; j <= 100; j++) {
 				//base case, A[0] cannot compare with the left element
-				if(i == 0){
+				if (i == 0){
 					dp[i][j] = Math.abs(A[0] - j);
-				}
-				else{
+				} else {
 					// set it to some value larger than 100
 					dp[i][j] = 200; 
 					//compare the current grid value with the last one
-					for(int k = 1; k <= 100; k++){
+					for (int k = 1; k <= 100; k++) {
 						// we assume the last element is k, if the difference can not fit, skip this k
 						if(Math.abs(k - j) > target) continue;
 						// fit the requirement

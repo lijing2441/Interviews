@@ -40,7 +40,6 @@ public class Conversion_Numerial {
 	 * (1) from octal to decimal
 	 * (2) from ERIC to decimal
 	 */
-	
 	public static int convert_From_Octal_to_Decimal(String oct){
 		int res = 0;
 		for(int i = 0; i < oct.length(); i++){

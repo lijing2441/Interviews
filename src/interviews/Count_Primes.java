@@ -40,7 +40,6 @@ public class Count_Primes {
         for(int i = 2; i < n; i++) {
             if(isPrime[i]) count++;
         }
-
         return count;
     }
 	
@@ -55,7 +54,6 @@ public class Count_Primes {
 	 * Therefore, we only need to consider factors up to √n because, if n is 
 	 * divisible by some number p, then n = p × q and since p ≤ q, we could derive that p ≤ √n.
 	 */
-	
 	public int countPrimesEasy(int n) {
         //int[] dp = new int[n];
         int count = 0;

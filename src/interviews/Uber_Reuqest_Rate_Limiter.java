@@ -33,7 +33,7 @@ public class Uber_Reuqest_Rate_Limiter {
 	
 	public boolean make_request_Queue() {
 		int currentSecond = getCurrentSecond();
-		preFifthSecond = mRequestList.get(mRequestList.size() -5);
+		preFifthSecond = mRequestList.get(mRequestList.size()-5);
 		if (currentSecond - preFifthSecond > 1) {
 			mRequestList.add(currentSecond); 
 			return true;

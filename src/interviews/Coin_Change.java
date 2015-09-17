@@ -47,7 +47,7 @@ public class Coin_Change {
 		int[][] dp = new int[change + 1][types];
 		
 		// Fill the entries for 0 value case (n = 0)
-	    for (int i=0; i < types; i++){
+	    for (int i = 0; i < types; i++){
 	        dp[0][i] = 1;
 	    }
 	    // Fill rest of the table entries in bottom up manner  
