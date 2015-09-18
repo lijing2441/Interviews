@@ -40,7 +40,7 @@ public class Divide_Two_Integers {
         // find the maximal bit before the dividend 
         // make the divisor as large as possible 
         while(divisor <= (dividend >> 1)){
-            divisor <<= 1; // times 2
+            divisor <<= 1;
             digit++;
         }
         // start with the highest divisor, 
@@ -48,7 +48,7 @@ public class Divide_Two_Integers {
         while(digit >= 0){
             if(dividend >= divisor){
                 dividend -= divisor;
-                res += (1<<digit);
+                res += (1 << digit);
             }
             divisor >>= 1;
             digit--;

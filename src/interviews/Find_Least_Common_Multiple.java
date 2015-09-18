@@ -17,7 +17,7 @@ public class Find_Least_Common_Multiple {
 	public static int gcd(int a, int b){
 		while (b > 0){
 			int temp = b;
-	        b = a % b; // % is remainder
+	        b = a % b;
 	        a = temp;
 	    }
 	    return a;

@@ -1,6 +1,6 @@
 package interviews;
 
-public class DOM_Tree_Traversal {
+public class Medalia_DOM_Tree_Traversal {
 	/**
 	 * 这道题就是说给你一个DOM树，这个树里面有两种节点，一种节点叫Element，这种节点里面有三种元素：
 	=> tag,比如<html>...</html>中的<html>就是tag；
@@ -17,7 +17,7 @@ public class DOM_Tree_Traversal {
      <body id="content"> 
            This
            <div id="wrapper1">
-           is a
+              is a
                  <div id="container1">
                        <div id="container2">
                                funny

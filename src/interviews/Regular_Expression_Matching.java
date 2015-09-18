@@ -33,8 +33,12 @@ public class Regular_Expression_Matching {
 			if (isMatchHelper(s, p, endA, endB - 2) == true)
 				return true;
 			// process the preceding
+			/**
+			 *  Follow-up: if * can only match its preceding char no more than twice =>
+			 *  for (int i = endA; i >= Math.max(endA - 2, 0); i--) 
+			 */
 			for (int i = endA; i >= 0; i--) {
-				// if p.charAt(endB - 1) == ‘。’，可以跟所有match
+				// if p.charAt(endB - 1) == ‘.’，可以跟所有match
 				// if endB - 1与之前的一个mismatch，false
 				if (p.charAt(endB - 1) != '.' && s.charAt(i) != p.charAt(endB - 1))
 					return false;

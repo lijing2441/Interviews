@@ -50,7 +50,7 @@ public class Shorted_Word_Distance {
 	 * 
 	 * @idea make a map, with key as string, and value as position in the array
 	 */
-public Map<String, List<Integer>> indexMap;
+	public Map<String, List<Integer>> indexMap;
     
     public void WordDistance(String[] words) {
         indexMap = new HashMap<String, List<Integer>>();

@@ -9,7 +9,6 @@ public class Reverse_Bits {
 	 * binary as 00111001011110000010100101000000).
 	 */
 	// you need treat n as an unsigned value
-	// you need treat n as an unsigned value
     public int reverseBits(int n) {
         int res = 0;
         for(int i = 0; i < 32; i++) {

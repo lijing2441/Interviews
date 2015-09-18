@@ -39,7 +39,7 @@ public class String_Same_Pattern {
 			return putInMap(map, pattern.charAt(pIdx), input.substring(iStart, input.length()));
 		}
 		while(iEnd < input.length()){
-			//if we can put 
+			//if we can put
 			if(putInMap(map, pattern.charAt(pIdx), input.substring(iStart, iEnd))){
 				if(patternMatchHelper(pattern, pIdx + 1, input, iEnd, iEnd + 1, map)){
 					return true;

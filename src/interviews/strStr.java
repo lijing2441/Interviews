@@ -74,10 +74,11 @@ public class strStr {
 			if (haystack.charAt(big) == needle.charAt(small)) {
 				big++;
 				small++;
-			} else if (small == 0)
+			} else if (small == 0) {
 				big++;
-			else
+			} else {
 				small = overLay[small - 1] + 1;
+			}
 		}
 		if (small == needle.length())
 			return haystack.substring(big - small);

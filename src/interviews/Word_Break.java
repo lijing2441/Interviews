@@ -59,7 +59,7 @@ public class Word_Break {
 				int len = str.length();
 				if (i + len > n)
 					continue;
-				//if it's has been set to true, a valid break has been reached here
+				//if it has been set to true, a valid break has been reached here
 				if (dp[i + len])
 					continue;
 				if (s.substring(i, i + len).equals(str))

@@ -24,7 +24,6 @@ public class Word_Ladder {
 	 * have the same length. All words contain only lowercase alphabetic
 	 * characters.
 	 *
-	 * 
 	 * word ladder I only needs to return the length between start and end, BFS is enough.
 	 */
 	public int ladderLength(String start, String end, Set<String> dict) {

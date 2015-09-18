@@ -28,7 +28,7 @@ public class Longest_Substring_Without_Repeating_Char {
 				if(i - start > max){
 					max = i - start;
 				}
-				for(int j = start; j < i; j++){
+				for (int j = start; j < i; j++){
 					if(arr[j] == c){
 						start = j + 1;
 						break;

@@ -2,7 +2,7 @@ package interviews;
 
 public class Fast_Power {
 	/**
-	 * Calculate the an % b where a, b and n are all 32bit integers.
+	 * Calculate the a^n % b where a, b and n are all 32bit integers.
 	 * 
 	 * Example 
 	 * 

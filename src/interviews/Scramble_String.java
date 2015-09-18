@@ -35,7 +35,7 @@ public class Scramble_String {
 	 * 要么s11和s22是scramble的并且s12和s21是scramble的。
 	 * 
 	 * 三维DP, table[i][j][k] = 1 means we could get a scramble until now
-	 * 							from i in s1, j in s2, length = k sramble is valid
+	 * 							from i in s1, j in s2, length = k scramble is valid
 	 * 	      table[i][j][k] = 2 means we could not
 	 * 		  table[i][j][k] = 0 means we have not check this case
 	 */ 

@@ -1,6 +1,6 @@
 package interviews;
 
-public class Frequent_CoOccurrence {
+public class Medalia_Frequent_CoOccurrence {
 	/**
 	 * 背景就是假设相信类似于Yelp的那种评论，每个评论里面有好几句话，每句话里面有n个关键词，例如：“The food was delicious,
 	 * I had a great time”就被parse成(0,0,food),(0,0,delicious),(0,1,great),(0,1,time)

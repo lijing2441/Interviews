@@ -31,7 +31,7 @@ public class Subset_Sum {
 		if(target == 0) return true;
 		if(set[len - 1] > target) return subsetSumHelper(set, len - 1, target);
 		// we use the current element or not
-		return subsetSumHelper(set, len - 1, target - set[len - 1]) || subsetSumHelper(set, len-1, target); 
+		return subsetSumHelper(set, len - 1, target - set[len - 1]) || subsetSumHelper(set, len - 1, target); 
 	}
 	
 	/**

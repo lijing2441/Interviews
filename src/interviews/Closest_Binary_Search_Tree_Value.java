@@ -100,7 +100,7 @@ public class Closest_Binary_Search_Tree_Value {
             }
         }
         // in case we push too many nodes into the stack that peek() cannot get the target node
-        // we need to pop out some unnecessory daughter nodes
+        // we need to pop out some unnecessary daughter nodes
         while(stack.peek() != res) {
             stack.pop();
         }
