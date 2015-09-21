@@ -24,6 +24,34 @@ public class MaxSubarray {
 		}
 		return maxSum;
 	}
+	// 若要返回起始和终止位置
+	public static void findMaxSubArray(int[] inputArray){
+	    int maxStartIndex = 0;
+	    int maxEndIndex = 0;
+	    int maxSum = inputArray[0]; 
+
+	    int cumulativeSum = inputArray[0];
+	    int maxStartIndexUntilNow = 0;
+
+	    for (int i = 1; i < inputArray.length; i++) {
+	    	if (cumulativeSum < 0){
+	            maxStartIndexUntilNow = i;
+	            cumulativeSum = inputArray[i];
+	        } else {
+	        	cumulativeSum += inputArray[i];
+	        }
+	    	
+	        if(cumulativeSum > maxSum){
+	            maxSum = cumulativeSum;
+	            maxStartIndex = maxStartIndexUntilNow;
+	            maxEndIndex = i;
+	        }
+	    }
+
+	    System.out.println("Max sum         : "+maxSum);
+	    System.out.println("Max start index : "+maxStartIndex);
+	    System.out.println("Max end index   : "+maxEndIndex);
+	}
 
 	/**
 	 * Given an array of integers, find two non-overlapping subarrays which have
@@ -61,4 +89,10 @@ public class MaxSubarray {
         return maxInTotal;
     }
 	
+	public static void main(String[] args) {
+	    //int[] intArr={3, -1, -1, -1, -1, -1, 2, 0, 0, 0 };
+	    int[] intArr = {-1, 3, -5, 4, 6, -1, 2, -7, 13, -3};
+	    //int[] intArr={-6,-2,-3,-4,-1,-5,-5};
+	    findMaxSubArray(intArr);
+	}
 }

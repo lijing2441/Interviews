@@ -2,7 +2,7 @@ package interviews;
 
 import java.util.Arrays;
 
-public class K_Minimal_In_Unsorted_Array {
+public class K_Minimals_In_Unsorted_Array {
 	// using max heap, O(k) space
 	// Time: O(nlogk) time
 	public static int[] kthSmallest2(int[] a, int k) {

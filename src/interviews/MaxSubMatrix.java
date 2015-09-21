@@ -2,7 +2,7 @@ package interviews;
 
 public class MaxSubMatrix {
 	/**
-	 * Kadane can reach O(n^3)
+	 * Kadane can reach O(n^3)，就是把maxsubarray应用到了matrix每一行中
 	 */
 	public static int MaxSumMatrixImprove(int[][] matrix) {
 		// O(n^4)

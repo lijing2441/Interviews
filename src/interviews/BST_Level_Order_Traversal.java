@@ -2,6 +2,8 @@ package interviews;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BST_Level_Order_Traversal {
 	// BFS, O(n) time, O(n) space
@@ -9,7 +11,6 @@ public class BST_Level_Order_Traversal {
 		ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
 		//corner case
 		if (null == root) return res;
-		
 		ArrayList<TreeNode> cur = new ArrayList<TreeNode>();
 		cur.add(root);
 		while (!cur.isEmpty() && cur.get(0) != null) {
@@ -29,7 +30,33 @@ public class BST_Level_Order_Traversal {
 		}
 		return res;
 	}
-
+	// use only one queue to do BFS,每层记下queue初始size即可
+	public ArrayList<ArrayList<Integer>> levelOrderOneQueue(TreeNode root) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        if (root == null) return res;
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        q.offer(root);
+        while (!q.isEmpty()) {
+            ArrayList<Integer> list = new ArrayList<Integer>();
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = q.poll();
+                list.add(node.val);
+                if (node.left != null) {
+                    q.offer(node.left);
+                }
+                if (node.right != null) {
+                    q.offer(node.right);
+                }
+            }
+            res.add(list);
+        }
+        return res;
+    }
+	
+	/**
+	 * Print it out
+	 */
 	public void printByLevelOrder(TreeNode root) {
 		if (null == root)
 			return;
@@ -46,6 +73,25 @@ public class BST_Level_Order_Traversal {
 			}
 			System.out.println();
 			cur = next;
+		}
+	}
+	// without using extra spaces except stack
+	public void PrintLevel(TreeNode root, int level) {
+		helper(root,level,0);
+	}
+	public void helper(TreeNode root,int level,int currentLevel){
+		if(root == null){
+			return;
+		}else{
+			if(currentLevel == level){
+				System.out.print(root.val + " ");
+			}else if(currentLevel < level){
+				helper(root.left,level,currentLevel + 1);
+				helper(root.right,level,currentLevel + 1);
+			}else{
+				return;
+			}
+			return;
 		}
 	}
 
@@ -76,42 +122,4 @@ public class BST_Level_Order_Traversal {
 		levelOrder(node.left, levelNum + 1, map);
 		levelOrder(node.right, levelNum + 1, map);
 	}
-	
-	/**
-	 * Problem II: 
-	 * Given a binary tree, return the bottom-up level order traversal of its nodes' values. 
-	 * (ie, from left to right, level by level from leaf to root).
-			
-			For example:
-			Given binary tree {3,9,20,#,#,15,7},
-			    3
-			   / \
-			  9  20
-			    /  \
-			   15   7
-			return its bottom-up level order traversal as:
-			[
-			  [15,7],
-			  [9,20],
-			  [3]
-			]
-	 */
-	public ArrayList<ArrayList<Integer>> levelOrderBottom(TreeNode root) {
-        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
-        if(null == root) return res;
-        ArrayList<TreeNode> cur = new ArrayList<TreeNode>();
-        cur.add(root);
-        while(!cur.isEmpty()){
-            ArrayList<TreeNode> next = new ArrayList<TreeNode>();
-            ArrayList<Integer> list = new ArrayList<Integer>();
-            for(TreeNode node: cur){
-                list.add(node.val);
-                if(node.left != null) next.add(node.left);
-                if(node.right != null) next.add(node.right);
-            }
-            res.add(0, list);
-            cur = next;
-        }
-        return res;
-    }
 }

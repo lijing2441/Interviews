@@ -1,5 +1,7 @@
 package interviews;
 
+import java.util.ArrayList;
+
 public class Kth_Largest_Element_In_Array {
 	/**
 	 * Find the kth largest element in an unsorted array. Note that it is the
@@ -47,5 +49,37 @@ public class Kth_Largest_Element_In_Array {
         int tmp = arr[i];
         arr[i] = arr[j];
         arr[j] = tmp;
+    }
+    
+    /**
+     * Method 2: Quick Selection. Average O(n) time, worst case O(n^2), O(1) extra space
+     */
+    public int kthLargestElement(int k, ArrayList<Integer> numbers) {
+        if (k <= 0 || k > numbers.size()) return -1;
+        int[] arr = new int[numbers.size()];
+        for (int i = 0; i < numbers.size(); i++) arr[i] = numbers.get(i);
+        return quickSelect(arr, 0, numbers.size() - 1, arr.length - k + 1);
+    }
+    public int quickSelect(int[] nums, int start, int end, int size) {
+        // use the start index element as pivot
+        int pivot = nums[end];
+        int l = start, r = end;
+        while (true) {
+            while (l < r && nums[l] < pivot) {
+                l++;
+            }
+            while (l < r && nums[r] >= pivot) {
+                r--;
+            }
+            if(l == r) break;
+            swap(nums, l, r);
+        }
+        swap(nums, l, end);
+        if (size == l + 1) return nums[l];
+        else if (size < l + 1) {
+            return quickSelect(nums, start, l - 1, size);
+        } else {
+            return quickSelect(nums, l + 1, end, size);
+        }
     }
 }

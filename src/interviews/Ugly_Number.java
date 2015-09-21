@@ -70,4 +70,30 @@ public class Ugly_Number {
         }
         return ugly[n - 1];
     }
+	
+	// long casting, 3, 5, 7
+	public long kthPrimeNumber(int k) {
+        if (k <= 0) return -1;
+        long[] ugly = new long[k + 1];
+        ugly[0] = 1;
+        long factor3 = 3, factor5 = 5, factor7 = 7;
+        int index3 = 0, index5 = 0, index7 = 0;
+        for (int i = 1; i <= k; i++) {
+            long min = Math.min(Math.min(factor3, factor5), factor7);
+            ugly[i] = min;
+            if (min == factor3) {
+                index3++;
+                factor3 = (long)3 * ugly[index3];
+            } 
+            if (min == factor5) {
+                index5++;
+                factor5 = (long)5 * ugly[index5];
+            } 
+            if (min == factor7) {
+                index7++;
+                factor7 = (long)7 * ugly[index7];
+            }
+        }
+        return ugly[k];
+    }
 }
