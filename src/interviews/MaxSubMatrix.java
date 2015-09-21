@@ -47,27 +47,6 @@ public class MaxSubMatrix {
 		return maxSum;
 	}
 
-	// O(N^6)
-	public static int maxSumMatrixNaive(int[][] matrix) {
-		int maxSum = 0;
-		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix[0].length; j++) {
-				for (int m = i; m < matrix.length; m++) {
-					for (int n = j; n < matrix[0].length; n++) {
-						int tmp = 0;
-						for (int p = i; p <= m; p++) {
-							for (int q = j; q <= n; q++) {
-								tmp += matrix[p][q];
-							}
-						}
-						maxSum = Math.max(tmp, maxSum);
-					}
-				}
-			}
-		}
-		return maxSum;
-	}
-
 	// also return the positions of the max submatrix
 	// O(n^4)
 	public static void findMaxSum(int M[][]) {
@@ -142,17 +121,17 @@ public class MaxSubMatrix {
 		}
 
 		// Print final values
-		System.out
-				.println("(Top, Left): (" + finalTop + ", " + finalLeft + ")");
-		System.out.println("(Bottom, Right): (" + finalBottom + ", "
-				+ finalRight + ")");
+		System.out.println("(Top, Left): (" + finalTop + ", " + finalLeft + ")");
+		System.out.println("(Bottom, Right): (" + finalBottom + ", " + finalRight + ")");
 		System.out.println("Max sum is: " + maxSum);
 	}
 
 	// Driver program to test above functions
 	public static void main(String[] args) {
-		int[][] M = { { 1, 2, -1, -4, -20 }, { -8, -3, 4, 2, 1 },
-				{ 3, 8, 10, 1, 3 }, { -4, -1, 1, 7, -6 }, };
+		int[][] M = { { 1, 2, -1, -4, -20 }, 
+				      { -8, -3, 4, 2, 1 },
+				      { 3, 8, 10, 1, 3 }, 
+				      { -4, -1, 1, 7, -6 }, };
 		// findMaxSum(M);
 		System.out.print(MaxSumMatrixImprove(M));
 	}

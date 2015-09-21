@@ -33,10 +33,6 @@ public class Regular_Expression_Matching {
 			if (isMatchHelper(s, p, endA, endB - 2) == true)
 				return true;
 			// process the preceding
-			/**
-			 *  Follow-up: if * can only match its preceding char no more than twice =>
-			 *  for (int i = endA; i >= Math.max(endA - 2, 0); i--) 
-			 */
 			for (int i = endA; i >= 0; i--) {
 				// if p.charAt(endB - 1) == ‘.’，可以跟所有match
 				// if endB - 1与之前的一个mismatch，false
@@ -50,7 +46,36 @@ public class Regular_Expression_Matching {
 		}
 		return false;
 	}
+	/**
+	 *  Follow-up: if * can only match its preceding char twice
+	 */
+	@SuppressWarnings("unused")
+	private boolean isMatchHelper2(String s, String p, int endA, int endB) {
+		if (endA < 0 && endB < 0)
+			return true;
+		if (endB < 0 && endA >= 0)
+			return false;
+		if (endA < 0) {
+			if (endB > 0 && p.charAt(endB) == '*')
+				return isMatchHelper(s, p, endA, endB - 2);
+			return false;
+		}
+		// if p points to '.' or same letter exists, easy case, advance both pointers
+		if (p.charAt(endB) == '.' || p.charAt(endB) == s.charAt(endA))
+			return isMatchHelper2(s, p, endA - 1, endB - 1);
 
+		// if p points to '*', backtrack to see the last letters
+		if (p.charAt(endB) == '*') {
+			// if p.charAt(endB - 1) == ‘.’，可以跟所有match
+			// if endB - 1与之前的一个mismatch，false
+			if (p.charAt(endB - 1) != '.' && (s.charAt(endA) != p.charAt(endB - 1) || s.charAt(endA - 1) != p.charAt(endB - 1))) return false;
+			else if (isMatchHelper2(s, p, endA - 2, endB - 2)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * Method 2: DP. Using 2D-matrix to memorize the match pattern.
 	 */
