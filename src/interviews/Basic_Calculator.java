@@ -34,14 +34,12 @@ public class Basic_Calculator {
                     sign = -sign;
                 }
                 pos++;
-            }
-            else if(arr[pos] == ')') {
+            } else if (arr[pos] == ')') {
                 if(!stack.isEmpty() && stack.pop() == '-') {
                     sign = -sign;
                 }
                 pos++;
-            }
-            else {
+            } else {
                 int i = Character.isDigit(arr[pos]) ? pos : pos + 1;
                 int curRes = 0;
                 while(i < arr.length && Character.isDigit(arr[i])) {

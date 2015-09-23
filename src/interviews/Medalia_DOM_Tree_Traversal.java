@@ -94,7 +94,7 @@ public class Medalia_DOM_Tree_Traversal {
 			} else {
 				ContentNode cNode = (ContentNode) node;
 				// if whiteList, ignore
-				/************************* something wrong here, "a" "little" might be in different node */
+				/***** something wrong here, "a" "little" might be in different node */
 				/***** need to process to connect them before move to the next level */
 				if (whiteList.contains(cNode.content)) continue;
 				String curStr = res.get(curDepth - 1);
@@ -137,7 +137,9 @@ public class Medalia_DOM_Tree_Traversal {
 		}
 	}
 	
-	// Strings to process the 如果一直是开括号，就加深度，闭括号就减深度
+	
+	// 给的如果是file的话，需要parse
+	// Strings to process the file 如果一直是开括号，就加深度，闭括号就减深度
 	public List<List<String>> domTreeTraversal(List<String> input) {
 		List<List<String>> res = new ArrayList<List<String>>();
 		if (input == null || input.size() == 0) return res;

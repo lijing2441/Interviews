@@ -14,6 +14,9 @@ public class Interval_Checking {
 	 *        如果一个intervals的end和start连续弹出，则这个interval与其他intervals没有
 	 *        overlap，否则有overlap
 	 */
+	
+	// 如果给的是分钟或者秒钟数，开一个int[]，大小为1400 / 86400，把每个start-end中间设true，碰到已经true，返回overlap即可
+	// O(n) -> Uber_find_meeting_overlap
 	public boolean checkOverlap(Interval[] intervals) {
 		if (intervals.length < 2) return false;
 		int n = intervals.length;
@@ -91,9 +94,6 @@ public class Interval_Checking {
 	 * 
 	 * @logic 用 interval tree
 	 */
-	
-	
-	
 	
 	
 	/**

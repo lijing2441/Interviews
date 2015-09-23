@@ -29,7 +29,7 @@ class HashTable {
 			table[i] = null;
 		}
 	}
-
+	// insertion
 	public void put(int key, int value) {
 		//check whether the addition will get the table full
 		if (elemCount > table.length * loadFactor)
@@ -55,7 +55,7 @@ class HashTable {
 			cur.setNext(new HashEntry(key, value));
 		}
 	}
-
+	// search
 	public int get(int key) {
 		// find the spot
 		int index = hash(hash(key)) % table.length;
@@ -75,7 +75,7 @@ class HashTable {
 			return -1;
 		}
 	}
-	
+	// deletion
 	public void remove(int key){
 		// hash the hashCode of the key to the correct index of the table
 		int index = hash(key) % table.length;

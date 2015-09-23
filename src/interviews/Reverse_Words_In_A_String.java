@@ -1,4 +1,4 @@
- package interviews;
+package interviews;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,8 +78,64 @@ public class Reverse_Words_In_A_String {
     }
 	
 	public static void main(String[] args){
-		String x = "   Hello  Dear";
+		//String x = "   Hello  Dear";
+		String withSpace = "This,,,is.a word";
 		//System.out.println(removeSpaces(x));
-		System.out.println(reverseWords(x));
+//		System.out.println(reverseWords(x));
+		
+		System.out.println(reverseWithSpaces(withSpace));
+	}
+	
+	/**
+	 * 保留符号位置
+	 * 
+	 * "this,,,is.a word" => "word,,,a.is this"
+	 */
+//	public String reverseWithOpStay(String s) {
+//		if (s == null || s.length() < 2) return s;
+//		int start = 0;
+//		
+//		for (int i = 0; i < s.length(); i++) {
+//		}
+//		return "";
+//	}
+	
+	// 保留空格数量
+	public static String reverseWithSpaces(String s) {
+		if (s == null || s.length() < 2) return s;
+		int len = s.length();
+		char[] arr = s.toCharArray();
+		reverse(arr, 0, len - 1);
+		int start = 0, end = 0;
+		while (end < len && start < len) {
+			// 如果要求连符号也reverse，就用comment内的
+			while (start < len && arr[start] == ' '/* !Character.isLetterOrDigit(arr[start])*/) start++;
+			end = start;
+			while (end < len && Character.isLetterOrDigit(arr[end])) {
+				end++;
+			}
+			if (end - 1 > start) {
+				reverse(arr, start, end - 1);
+			}
+			start = end;
+		}
+		if (start != end) {
+			reverse(arr, start, len - 1);
+		}
+		return new String(arr);
+	}
+	
+	
+	public static void reverse(char[] arr, int start, int end) {
+		if (start >= end) return;
+		//char[] arr = s.toCharArray();
+		while (start < end) {
+			char tmp = arr[start];
+			arr[start] = arr[end];
+			arr[end] = tmp;
+			start++;
+			end--;
+		}
+		//return new String(arr);
 	}
 }

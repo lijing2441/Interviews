@@ -16,10 +16,8 @@ public class Word_Break {
 	
 	// time O(n^2), space O(n)
 	public boolean wordBreak(String s, Set<String> dict) {
-		if (s == null || s.length() == 0)
-			return false;
-		if (dict.size() == 0)
-			return false;
+		if (s == null) return false;
+        if (dict.size() == 0 && s.length() == 0) return true; // 全为空
 		if (dict.contains(s))
 			return true;
 
@@ -38,7 +36,7 @@ public class Word_Break {
 	}
 
 	/**
-	 *  DP solution can get O(n) time => O(n * dict.size), with O(n) space
+	 * DP solution can get O(n) time => O(n * dict.size), with O(n) space
 	 * dp[i] = true means we can get a valid break until index i
 	 */
 	public boolean wordBreakDP(String s, Set<String> dict) {
@@ -97,14 +95,17 @@ public class Word_Break {
 					dp[i + len] = true;
 			}
 		}
+		// 回溯的时候，先要找到一个true的位置，然后还要查，这个是不是在字典里，在的话才能加
 		if(dp[n]){
 			int end = n; //exclusive
 			for(int i = n - 1; i >= 0; i--){
 				if(!dp[i]) continue;
 				else{
 					String str = s.substring(i, end);
-					end = i;
-					res.add(0, str);
+					if (dict.contains(str)) {
+						end = i;
+						res.add(0, str); // 加至前面
+					}
 				}
 			}
 		}

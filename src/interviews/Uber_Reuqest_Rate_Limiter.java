@@ -20,7 +20,7 @@ public class Uber_Reuqest_Rate_Limiter {
 		int currentTime = getCurrentSecond();
 		if(currentTime - mRequestArray[mPtr] > 1) {
 			mRequestArray[mPtr] = currentTime;
-			mPtr = (mPtr + 1) % 5;
+			mPtr = (mPtr + 1) % 5; // 每次都是覆盖当前的数字（即往前数第五条），如果当前位置间隔小于1s，则说明这个为invalid
 			return true;
 		} else {
 			return false;

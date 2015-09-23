@@ -36,20 +36,17 @@ public class Parentheses_Valid {
 		return false;
 	}
 	/**
-	 * second version: 
+	 * second version: 找最长合法括号 
 	 * Given a string containing just the characters '(' and ')', find the length of the longest 
 	 * valid (well-formed) parentheses substring.
 	 * 
-	 * For "(()", the longest valid parentheses substring is "()", which has
-	 * length = 2.
+	 * "(()", the longest valid parentheses substring is "()", which has length = 2.
 	 * 
-	 * Another example is ")()())", where the longest valid parentheses
-	 * substring is "()()", which has length = 4.
+	 * ")()())", the longest valid parentheses substring is "()()", which has length = 4.
 	 *
 	 * @logic: 
-	 * Using stack to store the index of the parentheses.
-	 * if stack is empty, the total string is valid; other wise, we use the index
-	 * stored in the stack to get the max length of the inner strings
+	 * 用栈存括号在string中所在index，如果最后栈为空，说明整个字符均为legal；
+	 * 否则，我们用栈内index来决定是否有最长子串，每两个index之间为合法子串，不包含栈内index
 	 */
 	public int longestValidParentheses(String s) {
         if(s == null || s.length() < 2) return 0;
