@@ -1,6 +1,6 @@
 package interviews;
 
-public class Add_Two_Number_Shown_In_LinkedList {
+public class Add_Numbers_Shown_In_LinkedList {
 	/**
 	 * Add two numbers each represented by a linked list. The digits are stored
 	 * in reverse order, such that the 1's digit is at the head of the list.
