@@ -87,6 +87,8 @@ public class Alien_Dictionary_Topological_Sort {
         }
     }
     
+    
+    /** 加新的数据结构 */
     // another method to use a brand new data structure as directed graph
 	public ArrayList<Character> topoSortDictOrder(String[] dict, int alphasize){
 		DGraph g = new DGraph(alphasize);

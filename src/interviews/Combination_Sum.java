@@ -47,7 +47,7 @@ public class Combination_Sum {
 		}
 	}
 	/**
-	 * Iterative way: use two stacks
+	 * Iterative way: use two stacks，一个是数，另一个是index
 	 */
 	public ArrayList<ArrayList<Integer>> combinationSumIte(int[] candidates, int target) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();

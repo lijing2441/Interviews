@@ -44,7 +44,8 @@ public class Interleaving_String {
 		}
 		return dp[n1][n2];
 	}
-	//O(mn) time and O(n) space
+	// 可以把空间降到1维
+	// O(mn) time and O(n) space
 	// since we only use the current row and last row, we can reduce the space usage to 1-D
 	public boolean isInterleave2(String s1, String s2, String s3) {
         int n1 = s1.length();

@@ -12,6 +12,7 @@ public class House_Robber {
 	 * each house, determine the maximum amount of money you can rob tonight
 	 * without alerting the police.
 	 */
+	// O(1) space
 	public int robSimple(int[] nums) {
         int n1 = 0, n2 = 0, res = 0;
         for(int i = 0; i < nums.length; i++) {

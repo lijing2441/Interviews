@@ -7,6 +7,7 @@ public class Coin_Change {
 	 * 
 	 * @DP: the subproblem is either we use the jth coin or not
 	 */
+	// 一种硬币可以用多次
 	public static int getMinCoins(int[] coins, int change){
 		int[] counts = new int[change + 1];
 		//initialize to MAX_VALUE
@@ -110,7 +111,7 @@ public class Coin_Change {
 	
 	public static void main(String[] args){
 		int[] coins = {1, 2, 3, 5};
-		int x = 9;
+		int x = 22;
 		System.out.println(getMinCoins(coins, x));
 	}
 }

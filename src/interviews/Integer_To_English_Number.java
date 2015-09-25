@@ -31,6 +31,7 @@ public class Integer_To_English_Number {
 	}
 	// convert the number less than 1000
 	public String convertHundreds(int num){
+		// 百位和十位分开
 		if(num == 0) return "";
 		String res = "";
 		if(num % 100 < 20){

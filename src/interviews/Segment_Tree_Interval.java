@@ -52,10 +52,6 @@ Given start=1, end=6. The segment tree will be:
 		query(root, 2, 3), return 3
 
 		query(root, 0, 2), return 4
-     * @param root
-     * @param start
-     * @param end
-     * @return
      */
     public int query(SegmentTreeNode root, int start, int end) {
         if (root == null || start > end) return Integer.MIN_VALUE;

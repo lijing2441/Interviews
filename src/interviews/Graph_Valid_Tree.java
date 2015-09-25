@@ -1,6 +1,7 @@
 package interviews;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ public class Graph_Valid_Tree {
 	 * false.
 	 */
     // two things to check: cycle and connectivity
+	// union find的方法在下面
 	// 可以用dfs判断联通和找环
 	public boolean validTree(int n, int[][] edges) {
         int edgeNum = edges.length;
@@ -67,5 +69,34 @@ public class Graph_Valid_Tree {
             else if(end != parent) return true;
         }
         return false;
+    }
+    
+    // union find method
+    public class Solution {
+        public boolean validTree(int n, int[][] edges) {
+            // initialize n isolated islands
+            int[] nums = new int[n];
+            Arrays.fill(nums, -1);
+
+            // perform union find
+            for (int i = 0; i < edges.length; i++) {
+                int x = find(nums, edges[i][0]);
+                int y = find(nums, edges[i][1]);
+
+                // if two vertices happen to be in the same set
+                // then there's a cycle
+                if (x == y) return false;
+
+                // union
+                nums[x] = y;
+            }
+
+            return edges.length == n - 1;
+        }
+
+        public int find(int nums[], int i) {
+            if (nums[i] == -1) return i;
+            return find(nums, nums[i]);
+        }
     }
 }

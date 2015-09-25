@@ -33,15 +33,15 @@ public class Fraction_To_Recurring_Decimal {
         if((numeratorl > 0 && denoml < 0) || (numeratorl < 0 && denoml > 0)) sb.append('-');
         numeratorl = Math.abs(numeratorl);
         denoml = Math.abs(denoml);
-        //integral part
+        //整数部分
         long res = numeratorl/denoml;
         numeratorl = (numeratorl % denoml) * 10;
         sb.append(res);
         if(numeratorl != 0) sb.append('.');
-        //floating part
+        //小数 floating部分
         while(numeratorl != 0){
             if(map.containsKey(numeratorl)){
-                //repeating part, 如果这个分子在之前出现过了，那就说明出现了重复，继续下去只能出现一样的序列
+                // repeating part, 如果这个分子在之前出现过了，那就说明出现了重复，继续下去只能出现一样的序列
                 sb.insert(map.get(numeratorl).intValue(), '(');
                 sb.append(')');
                 break;

@@ -3,7 +3,7 @@ package interviews;
 import java.util.Map;
 import java.util.HashMap;
 
-public class Facebook_Phone {
+public class Facebook_Minimal_Time_to_Finish_Tasks {
 	/**
 	 * Given a k value and a list of tasks as string, k is the cooling time for each task.
 	 * 
@@ -37,6 +37,7 @@ public class Facebook_Phone {
 			}
 			map.put(cur, i);
 			count++;
+			// 如果需要优化空间。k很小的时候，只用保留k位内的
 			if (i >= k) {
 				if (map.get(tasks.charAt(i - k)) <= (i - k)) {
 					map.remove(tasks.charAt(i - k));

@@ -28,7 +28,7 @@ public class Gas_Station {
 			gasInTank += gas[i] - cost[i];
 			if (gasInTank < 0) {
 				start = i + 1;
-				gasInTotal += gasInTank;
+				gasInTotal += gasInTank; // gasInTotal是到现在为止还欠的油数
 				gasInTank = 0;
 			}
 		}

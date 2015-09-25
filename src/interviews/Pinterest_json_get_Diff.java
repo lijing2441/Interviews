@@ -19,7 +19,7 @@ public class Pinterest_json_get_Diff {
 	 * 
 	 * 本题中只保留json1中的那个。
 	 * 
-	 * 如果是，则Value的type可以用0，1，2表示，0->String, 1->int[], 2->String[]
+	 * 如果是都保留，则Value的type可以用0，1，2表示，0->String, 1->int[], 2->String[]
 	 */
 	public static Map<String, Value> findDiff(Map<String, Value> json1, Map<String, Value> json2) {
 		Map<String, Value> json3 = new HashMap<String, Value>();

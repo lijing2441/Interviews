@@ -34,6 +34,7 @@ public class Flatten_2D_Vector {
         return ite != null && ite.hasNext();
     }
     
+    // 数学算起点终点
     // Another math pointer way
     public List<List<Integer>> data;
     public int index1 = 0; // list index

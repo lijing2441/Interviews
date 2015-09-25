@@ -69,7 +69,7 @@ public class Course_Schedule {
         if(count == numCourses) return true;
         else return false;
     }
-	
+	// 另外一种做法
 	// DFS, Topological sort, O(|E| + |V|)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public boolean canFinishDFS(int numCourses, int[][] prerequisites) {

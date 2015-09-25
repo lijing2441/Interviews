@@ -18,7 +18,7 @@ package interviews;
  *
  */
 public class Celebrity {
-	// 这个case，所有人必须认识名人，名人谁都不认识
+	// 这个case，所有人必须认识名人，名人必须谁都不认识
 	public int findCelebrity(int n) {
         if (n < 2) return -1;
         int potential = 0;
@@ -37,6 +37,8 @@ public class Celebrity {
 	boolean knows(int i, int j) {
 		return false;
 	}
+	
+	// Another case 别的做法
 	// 不用所有人认识名人，名人必须谁都不认识
 	public int searchCelebrity(int[] personIdArr){
 		int n = personIdArr.length;

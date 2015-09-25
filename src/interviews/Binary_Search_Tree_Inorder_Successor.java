@@ -32,7 +32,7 @@ public class Binary_Search_Tree_Inorder_Successor {
         return null;
     }
 	
-	// 利用bst的特性
+	// 利用bst的特性, if balanced => can be logn, not => still O(n)
 	public TreeNode solution2(TreeNode root, TreeNode p) {
 		List<TreeNode> stack = new ArrayList<>();
 	    TreeNode node = root;

@@ -54,9 +54,9 @@ public class Reverse_LL_In_k_Group {
 	 * Medalia: Reverse a singly-linkedlist in blocks of k in place. An
 	 * iterative approach is preferred.
 	 * 
-	 * The first block of theresulting list should be maximal with regards to k.
-	 * If the list containsn elements, the last block will either be full
-	 * (containing k elements) orcontain n mod k elements.
+	 * The first block of the resulting list should be maximal with regards to k.
+	 * If the list contains n elements, the last block will either be full
+	 * (containing k elements) or contain n mod k elements.
 	 * 
 	 * For example:
 	 * 

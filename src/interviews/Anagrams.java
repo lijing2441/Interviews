@@ -1,6 +1,7 @@
 package interviews;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Anagrams {
@@ -56,8 +57,9 @@ public class Anagrams {
 		HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
 		for (String s : strs) {
 			char[] ch = s.toCharArray();
-			java.util.Arrays.sort(ch);
+			Arrays.sort(ch);
 			String sorted = new String(ch);
+			// 可以进一步压缩成a1c2b3当做key
 			ArrayList<String> l = null;
 			if (map.containsKey(sorted)) {
 				l = map.get(sorted);

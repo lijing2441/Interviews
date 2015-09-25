@@ -45,7 +45,7 @@ public class Construct_BT_From_Preorder_and_Inorder {
         return root;
     }
     
-    // Iterative method
+    /** Iterative method */
 	public TreeNode buildTreePIIte(int[] preorder, int[] inorder) {
         if(preorder.length == 0 || preorder.length != inorder.length) return null;
         int preorderIndex = 0;

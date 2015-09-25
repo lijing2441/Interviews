@@ -14,6 +14,7 @@ public class First_Bad_Version {
 	 * version is bad. Implement a function to find the first bad version. You
 	 * should minimize the number of calls to the API.
 	 */
+	// logn => binary search
 	public int firstBadVersion(int n) {
         if (n < 0) return -1;
         int left = 0, right = n;

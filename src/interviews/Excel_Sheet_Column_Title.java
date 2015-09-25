@@ -33,7 +33,7 @@ public class Excel_Sheet_Column_Title {
         int n = s.length();
         int res = 0;
         for(int i = 0; i < n; i++){
-            int index = s.charAt(i) - 'A' + 1;
+            int index = s.charAt(i) - 'A' + 1; // 'A' => 1, 而非0
             res = res * 26 + index;
         }
         return res;

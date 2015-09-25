@@ -16,7 +16,6 @@ public class Invert_Binary_Tree {
      * @return: nothing
      */
     public void invertBinaryTree(TreeNode root) {
-        // write your code here
         if(root == null || (root.left == null && root.right == null)) return;
         invertBinaryTree(root.right);
         invertBinaryTree(root.left);
@@ -24,9 +23,9 @@ public class Invert_Binary_Tree {
         root.left = root.right;
         root.right = tmpLeft;
     }
+    
     // iterative
     public void invertBinaryTreeIte(TreeNode root) {
-        // write your code here
         if(root == null) return;
         Stack<TreeNode> stack = new Stack<TreeNode>();
         stack.push(root);

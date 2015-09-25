@@ -28,7 +28,7 @@ public class Clone_Graph {
 					UndirectedGraphNode newNode = new UndirectedGraphNode(tmp.label);
 					map.put(tmp.label, newNode);
 					curCopy.neighbors.add(newNode);
-					q.add(tmp);
+					q.add(tmp);  // 之前没有被加入Queue中，放进去
 				} else {
 					curCopy.neighbors.add(map.get(tmp.label));
 				}

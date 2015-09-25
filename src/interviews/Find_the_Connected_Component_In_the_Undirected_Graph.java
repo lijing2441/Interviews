@@ -13,6 +13,7 @@ public class Find_the_Connected_Component_In_the_Undirected_Graph {
      * @param nodes a array of Undirected graph node
      * @return a connected set of a Undirected graph
      */
+	// O(n) => 对每个节点只操作一次
     public List<List<Integer>> connectedSet(ArrayList<UndirectedGraphNode> nodes) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
         //int res = 0;
@@ -26,6 +27,7 @@ public class Find_the_Connected_Component_In_the_Undirected_Graph {
         }
         return res;
     }
+    // bfs 去加所有的neighbor
     public List<Integer> addAllNeighbors(UndirectedGraphNode node, Set<UndirectedGraphNode> set, ArrayList<UndirectedGraphNode> nodes) {
         List<Integer> res = new ArrayList<Integer>();
         //res.add(node);

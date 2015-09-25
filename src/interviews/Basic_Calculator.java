@@ -4,6 +4,8 @@ import java.util.Stack;
 
 public class Basic_Calculator {
 	/**
+	 * 计算器+-乘/见add operators to get target
+	 * 
 	 * Implement a basic calculator to evaluate a simple expression string.
 	 * 
 	 * The expression string may contain open ( and closing parentheses ), the
@@ -68,18 +70,18 @@ public class Basic_Calculator {
 	 * " 3/2 " = 1
 	 * " 3+5 / 2 " = 5
 	 */
-	public int calculateWithMultiplyAndDivision(String s) {
-        if(s == null || s.length() == 0) return 0;
+	public int calculateWithMultiplyDivide(String s) {
+		if(s == null || s.length() == 0) return 0;
         Stack<Integer> nums = new Stack<Integer>();
         Stack<Character> ops = new Stack<Character>();
         char[] arr = s.toCharArray();
         // mark whether we have number to store / calculate
         boolean isLastNum = false;
         int count = 0;
-        for(int i = 0; i < arr.length; i++) {
-            if(arr[i] == ' ') continue;
+        for(int i = 0; i <= arr.length; i++) {
+            if(i < arr.length && arr[i] == ' ') continue;
             
-            if(Character.isDigit(arr[i])) {
+            if(i < arr.length && Character.isDigit(arr[i])) {
                 count = count * 10 + (arr[i] - '0');
                 isLastNum = true;
             } else if(isLastNum) {
@@ -98,22 +100,9 @@ public class Basic_Calculator {
                     }
                 }
             }
-            if(!Character.isDigit(arr[i])) ops.push(arr[i]);
+            if(i < arr.length && !Character.isDigit(arr[i])) ops.push(arr[i]);
         }
-        // deal with the last number
-        if(isLastNum) {
-            nums.push(count);
-            if(!ops.isEmpty() && (ops.peek() == '*' || ops.peek() == '/')) {
-                char operator = ops.pop();
-                int num2 = nums.pop();
-                int num1 = nums.pop();
-                if(operator == '*') {
-                    nums.push(num1 * num2);
-                } else if(operator == '/') {
-                    nums.push(num1 / num2);
-                }
-            }
-        }
+        
         // the last + and -, so far, we should have n operators and (n + 1) numbers to calculate
         if(!ops.isEmpty()) {
             int res = 0;
@@ -128,5 +117,5 @@ public class Basic_Calculator {
         }
         // the last number should be result
         return nums.pop();
-    }
+	}
 }

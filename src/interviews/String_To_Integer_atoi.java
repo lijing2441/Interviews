@@ -25,7 +25,6 @@ public class String_To_Integer_atoi {
 	public int INT_MIN = -2147483648;
 	
 	public int atoi(String str){
-		
 		if(str == null || str.length() == 0) return 0;
 		int res = 0;
 		int sign = 1;
