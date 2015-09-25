@@ -61,20 +61,20 @@ public class Medalia_Frequent_CoOccurrence {
 			}
 			list.add(comment.word);
 		}
-		for (Map.Entry<Integer, Map<Integer, List<String>>> entry: map.entrySet()) {
-			int key = entry.getKey();
-			Map<Integer, List<String>> cur = entry.getValue();
-			for (Map.Entry<Integer, List<String>> e: cur.entrySet()) {
-				int key2 = e.getKey();
-				List<String> list = e.getValue();
-				System.out.print(key + " " + key2 + " ");
-				for (String str: list) {
-					System.out.print(str + " ");
-				}
-				System.out.println();
-			}
-			
-		}
+//		for (Map.Entry<Integer, Map<Integer, List<String>>> entry: map.entrySet()) {
+//			int key = entry.getKey();
+//			Map<Integer, List<String>> cur = entry.getValue();
+//			for (Map.Entry<Integer, List<String>> e: cur.entrySet()) {
+//				int key2 = e.getKey();
+//				List<String> list = e.getValue();
+//				System.out.print(key + " " + key2 + " ");
+//				for (String str: list) {
+//					System.out.print(str + " ");
+//				}
+//				System.out.println();
+//			}
+//			
+//		}
 		// traverse to get the co-occurrence
 		Map<StringPair, Integer> countMap = new HashMap<StringPair, Integer>();
 		
@@ -111,8 +111,10 @@ public class Medalia_Frequent_CoOccurrence {
 		for (Map.Entry<StringPair, Integer> entry: countMap.entrySet()) {
 			pq.add(entry);
 		}
-		for (int i = 0; i < N; i++) {
-			res.add(pq.poll().getKey());
+		for (int i = 0; i < countMap.size(); i++) {
+			Map.Entry<StringPair, Integer> entry = pq.poll();
+			res.add(entry.getKey());
+//			System.out.println(entry.getKey().description() + entry.getValue());
 		}
 		
 		return res;

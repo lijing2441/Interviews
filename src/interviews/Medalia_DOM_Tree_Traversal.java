@@ -2,8 +2,12 @@ package interviews;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 import org.w3c.dom.*;
@@ -25,15 +29,16 @@ public class Medalia_DOM_Tree_Traversal {
 	list里面，那个就ignore DOM树里面的这个元素。
 
 	举例：
-<html>
-     <body id="content"> 
+	<html>
+     	<body id="content"> 
            This
            <div id="wrapper1">
               is a
                  <div id="container1">
                        <div id="container2">
                                funny
-                       </div> 
+                       </div>
+                 </div> 
                  <div id="container2"> 
                         enjoyable
                  </div>
@@ -45,8 +50,8 @@ public class Medalia_DOM_Tree_Traversal {
            <a id="link">
                    Add a link
            </a> 
-     </body>
-</html>
+     	</body>
+	</html>
 
 	whitelist = {"wrapper4","a little"}
 	所以output就是：
@@ -64,6 +69,7 @@ public class Medalia_DOM_Tree_Traversal {
 		//int depth = -1;
 		Queue<DOMNode> q = new LinkedList<DOMNode>();
 		Queue<Integer> depth = new LinkedList<Integer>();
+		Map<Integer, String> map = new HashMap<Integer, String>(); // depth map
 		q.offer(root);
 		depth.offer(0);
 		while (!q.isEmpty()) {
@@ -75,15 +81,15 @@ public class Medalia_DOM_Tree_Traversal {
 				if (whiteList.contains(eNode.id) || whiteList.contains(eNode.tag)) {
 					continue;
 				}
-				
-				//List<String> curList;
-				if (res.size() <= curDepth) {
-					res.add("");
+				String curStr = "";
+				if (map.containsKey(curDepth)) {
+					curStr = map.get(curDepth);
 				}
-				String curStr = res.get(curDepth);
+				//String curStr = res.get(curDepth);
 				if (curStr.length() > 0) curStr += " "; 
 				curStr += eNode.tag;
 				if (eNode.id != null) curStr += (" " + eNode.id);
+				map.put(curDepth, curStr);
 				// add the children
 				if (eNode.children != null) {
 					for (DOMNode next: eNode.children) {
@@ -94,19 +100,46 @@ public class Medalia_DOM_Tree_Traversal {
 			} else {
 				ContentNode cNode = (ContentNode) node;
 				// if whiteList, ignore
-				/***** something wrong here, "a" "little" might be in different node */
+				/***** "a" "little" might be in different node */
 				/***** need to process to connect them before move to the next level */
 				if (whiteList.contains(cNode.content)) continue;
-				String curStr = res.get(curDepth - 1);
-				curStr += (" " + cNode.content);
+				// check whether each of them are true
+				boolean ignore = false;
+				for (String s : whiteList) {
+					if (cNode.content.indexOf(s) != -1) {
+						ignore = true;
+						break;
+					}
+				}
+				if (ignore) continue;
+				String curStr = "";
+				if (map.containsKey(curDepth)) {
+					curStr = map.get(curDepth);
+				}
+				if (curStr.length() > 0) curStr += " "; 
+				curStr += cNode.content;
+				//if (eNode.id != null) curStr += (" " + eNode.id);
+				map.put(curDepth, curStr);
 			}
 		}
-		for (String s: res) {
-			for (String str: whiteList) {
-				if (s.indexOf(str) != -1) {
-					s.replaceAll(str, "");
-				}
-			}
+		// 去掉任何whitelist里面的东西
+//		for (String s: res) {
+//			for (String str: whiteList) {
+//				if (s.indexOf(str) != -1) {
+//					s.replaceAll(str, "");
+//				}
+//			}
+//		}
+		PriorityQueue<Map.Entry<Integer, String>> pq = new PriorityQueue<Map.Entry<Integer, String>>(new Comparator<Map.Entry<Integer, String>>() {
+            public int compare(Map.Entry<Integer, String> entry1, Map.Entry<Integer, String> entry2) {
+                return entry1.getKey() - entry2.getKey();
+            }
+        });
+		for (Map.Entry<Integer, String> entry: map.entrySet()) {
+			pq.add(entry);
+		}
+		for (int i = 0; i < map.size(); i++) {
+			res.add(pq.poll().getValue());
 		}
 		return res;
 	}
@@ -123,7 +156,7 @@ public class Medalia_DOM_Tree_Traversal {
 		body.children = bodyChildren;
 		
 		ContentNode thisInfo = new ContentNode("This");
-		body.children.add(thisInfo);
+		root.children.add(thisInfo);
 		
 		ElementNode wrapper1 = new ElementNode("div", "wrapper1");
 		
@@ -133,9 +166,87 @@ public class Medalia_DOM_Tree_Traversal {
 		white.add("a little");
 		List<String> res = treeTraverse(root, white);
 		for (String s: res) {
-			System.out.print(s + " ");
+			System.out.println(s + " ");
 		}
 	}
+	
+	public ArrayList<ArrayList<String>> levelOrder(ElementNode root, List<String> whiteList) {
+		ArrayList<ArrayList<String>> res = new ArrayList<ArrayList<String>>();
+		//corner case
+		if (null == root) return res;
+		ArrayList<DOMNode> cur = new ArrayList<DOMNode>();
+		cur.add(root);
+		List<DOMNode> banned = new ArrayList<DOMNode>();
+		while (!cur.isEmpty() && cur.get(0) != null) {
+			ArrayList<String> list = new ArrayList<String>();
+			ArrayList<DOMNode> next = new ArrayList<DOMNode>();
+			// get the next level nodes
+			for (DOMNode node : cur) {
+				if (node instanceof ElementNode) {
+					ElementNode eNode = (ElementNode) node;
+					// if whiteList, ignore
+					if (whiteList.contains(eNode.id) || whiteList.contains(eNode.tag)) {
+						continue;
+					}
+					
+					//String curStr = res.get(curDepth);
+					//if (curStr.length() > 0) curStr += " "; 
+					list.add(eNode.tag);
+					if (eNode.id != null) list.add(eNode.id);
+//					map.put(curDepth, curStr);
+					// add the children
+					if (eNode.children != null) {
+						for (DOMNode child: eNode.children) {
+							next.add(child);
+//							depth.offer(curDepth + 1);
+						}
+					}
+				} else {
+					ContentNode cNode = (ContentNode) node;
+					// if whiteList, ignore
+					/***** something wrong here, "a" "little" might be in different node */
+					/***** need to process to connect them before move to the next level */
+					if (whiteList.contains(cNode.content)) continue;
+					// check whether each of them are true
+					boolean ignore = false;
+					for (String s : whiteList) {
+						if (cNode.content.indexOf(s) != -1) {
+							ignore = true;
+							break;
+						}
+					}
+					if (ignore) continue; 
+					list.add(cNode.content);
+				}
+			}
+			String level = "";
+			for (String s : list) {
+				level += s + " ";
+			}
+			for (String s : whiteList) {
+				if (level.contains(s)) {
+					// content node has something wrong
+					for (int i = 0; i < level.length(); i++) {
+						if (level.substring(i, i + s.length()).equals(s)) {
+							for (DOMNode node: cur) {
+								if (node instanceof ContentNode) {
+									if (s.contains(((ContentNode) node).content)) {
+										cur.remove(node);
+										banned.add(node);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			res.add(list); // if reversely, res.add(0, list), or before return, add Collections.reverse(res)
+			// replace the cur node list with next level node list
+			cur = next;
+		}
+		return res;
+	}
+
 	
 	
 	// 给的如果是file的话，需要parse
@@ -175,15 +286,6 @@ public class Medalia_DOM_Tree_Traversal {
 		}
 		return res;
 	}
-//	public String removeLeadingSpaces(String s) {
-//		int i = 0;
-//		while(i < s.length() && s.charAt(i) == ' ') {
-//			i++;
-//		}
-//		if (i < s.length()) return s.substring(i);
-//		else return "";
-//	}
-	
 	
 	// 用DOM java内置处理api
 	public void xmlDOMTraversal() {

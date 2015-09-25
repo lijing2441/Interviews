@@ -18,6 +18,8 @@ public class Graph_Valid_Tree {
 	 * Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], return
 	 * false.
 	 */
+    // two things to check: cycle and connectivity
+	// 可以用dfs判断联通和找环
 	public boolean validTree(int n, int[][] edges) {
         int edgeNum = edges.length;
         boolean[] visited = new boolean[n];

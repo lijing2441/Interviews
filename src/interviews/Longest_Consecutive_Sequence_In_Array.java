@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Longest_Consecutive_Sequence {
+public class Longest_Consecutive_Sequence_In_Array {
 	/**
 	 * Given an unsorted array of integers, find the length of the longest
 	 * consecutive elements sequence.

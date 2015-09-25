@@ -2,6 +2,7 @@ package interviews;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Reverse_Words_In_A_String {
 	/**
@@ -80,10 +81,9 @@ public class Reverse_Words_In_A_String {
 	public static void main(String[] args){
 		//String x = "   Hello  Dear";
 		String withSpace = "This,,,is.a word";
-		//System.out.println(removeSpaces(x));
 //		System.out.println(reverseWords(x));
-		
-		System.out.println(reverseWithSpaces(withSpace));
+		//System.out.println(reverseWithSpaces(withSpace));
+		System.out.println(reverseWithOpStay(withSpace));
 	}
 	
 	/**
@@ -91,16 +91,46 @@ public class Reverse_Words_In_A_String {
 	 * 
 	 * "this,,,is.a word" => "word,,,a.is this"
 	 */
-//	public String reverseWithOpStay(String s) {
-//		if (s == null || s.length() < 2) return s;
-//		int start = 0;
-//		
-//		for (int i = 0; i < s.length(); i++) {
-//		}
-//		return "";
-//	}
+	public static String reverseWithOpStay(String s) {
+		if (s == null || s.length() < 2) return s;
+		int start = 0, end = 0, len = s.length();
+		Stack<String> stack = new Stack<String>();
+		// 第一遍把所有是word的先push进栈
+		while(start < len && end < len) {
+			while (start < len && !Character.isLetterOrDigit(s.charAt(start))) start++;
+			end = start;
+			while (end < len && Character.isLetterOrDigit(s.charAt(end))) {
+				end++;
+			}
+			String str = s.substring(start, end);
+			stack.push(str);
+			start = end;
+		}
+		// 开始替换
+		String res = "";
+		start = 0;
+		end = 0;
+				
+		while (start < len && end < len) {
+			// starting operators
+			while (end < len && !Character.isLetterOrDigit(s.charAt(end))) end++;
+			res += s.substring(start, end);
+			start = end;
+			// add the one in the stack
+			if (!stack.isEmpty()) res += stack.pop();
+			// skip the current one
+			while (end < len && Character.isLetterOrDigit(s.charAt(end))) end++;
+			start = end;
+		}
+		if (start < end) {
+			res += s.substring(start, end);
+		}
+		return res;
+	}
 	
-	// 保留空格数量
+	/**
+	 * 保留空格数量及位置
+	 */
 	public static String reverseWithSpaces(String s) {
 		if (s == null || s.length() < 2) return s;
 		int len = s.length();

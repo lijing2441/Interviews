@@ -16,7 +16,7 @@ public class Regular_Expression_Matching {
 	private boolean isMatchHelper(String s, String p, int endA, int endB) {
 		if (endA < 0 && endB < 0)
 			return true;
-		if (endB < 0 && endA >= 0)
+		if (endB < 0/* && endA >= 0*/)
 			return false;
 		if (endA < 0) {
 			if (endB > 0 && p.charAt(endB) == '*')
@@ -34,6 +34,8 @@ public class Regular_Expression_Matching {
 				return true;
 			// process the preceding
 			for (int i = endA; i >= 0; i--) {
+				// 防止case: "lintCode" & "*"
+				if (endB <= 0) return false;
 				// if p.charAt(endB - 1) == ‘.’，可以跟所有match
 				// if endB - 1与之前的一个mismatch，false
 				if (p.charAt(endB - 1) != '.' && s.charAt(i) != p.charAt(endB - 1))

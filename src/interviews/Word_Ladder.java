@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
@@ -75,6 +76,9 @@ public class Word_Ladder {
 	 public ArrayList<ArrayList<String>> findLadders(String start, String end, HashSet<String> dict) {
 		 ArrayList<ArrayList<String>> res = new ArrayList<ArrayList<String>>();
 		 HashMap<String, NodeWithP> map = new HashMap<String, NodeWithP>();
+         // 放到字典中去
+		 map.put(start, new NodeWithP(1, start));
+
 		 Queue<String> q = new LinkedList<String>();
 		 q.offer(start);
 		 dict.add(end);
@@ -124,6 +128,94 @@ public class Word_Ladder {
 			 getPath(null, map, cur, res);
 		 }
 	 }
+	 
+	 // second method
+	 public class Michael_Solution {
+			List<List<String>>res = new ArrayList<List<String>>();
+			
+			HashMap<String, List<String> >pre = new HashMap<String, List<String>>();
+			String start;
+			String end;
+			void findPath(String cur, List<String> singlePath){  
+				if(cur.equals(start)){
+					res.add(singlePath);
+					return;
+				}
+				if(!pre.containsKey(cur))
+					return;
+				List<String> p = pre.get(cur);
+				for(String i : p){
+					List<String>ts = new ArrayList<String>(singlePath);
+					ts.add(0,i);
+					findPath(i,ts);
+				}		
+			}
+			HashMap<String, Integer>level = new HashMap<String, Integer>();
+			
+			List<List<String>> bfs(Set<String>dict){
+		    	Queue<String>Q = new LinkedList<String>();
+		    	Queue<String>nlevelQ = new LinkedList<String>();
+		    	Q.add(start);
+		    	level.put(start, 0);
+		    	boolean isOver  = false;
+		    	int curLevel = 1;
+		    	while(!Q.isEmpty()){
+		    		String f = Q.poll();
+		    		//System.out.println(f);
+		    		StringBuffer strbuff = new StringBuffer(f);
+		    		for(int i = 0; i < f.length(); i++){
+		    			char ori = strbuff.charAt(i);
+		    			for(char j = 'a'; j <= 'z'; j++){
+		    				if(j==ori)
+		    					continue;
+		    				strbuff.replace(i, i+1,""+j);       
+		    				String str = strbuff.toString();
+		    				if(str.equals(end))
+		    					isOver = true;
+		    				if(dict.contains(str)){
+		    					if(!str.equals(end) && level.containsKey(str) && level.get(str) < curLevel){
+		    						continue;
+		    					}
+		    					if(!str.equals(end) &&( !level.containsKey(str) || level.get(str) != curLevel)){
+		    						nlevelQ.add(str);
+		    					}
+		    					level.put(str, curLevel);    					
+		    						
+		    					if(pre.containsKey(str)){
+		    						List<String>temp = pre.get(str);
+		    						temp.add(f);
+		    					}else{
+		    						List<String>temp = new LinkedList<String>();
+		    						temp.add(f);
+		    						pre.put(str, temp);
+		    					}    					
+		    				}
+		    			}
+		    			strbuff.replace(i, i+1, ""+ori);
+		    		}
+		    		if(Q.isEmpty()){
+		    			if(isOver)
+		    				break;
+		    			while(!nlevelQ.isEmpty()){
+		    				String temp = nlevelQ.poll();
+		    				Q.add(temp);
+		    			}
+		    			curLevel++;
+		    		}
+		    	}	
+		    	List<String> s = new ArrayList<String>();
+		    	s.add(end);
+		    	findPath(end, s);
+		    	return res;
+		    }
+			public List<List<String>> findLadders(String start, String end, Set<String> dict) {
+				dict.add(start);
+				dict.add(end);
+				this.start = start;
+				this.end = end;
+				return bfs(dict);
+		    }
+		}
 }
 class NodeWithP{
 	public int dist;

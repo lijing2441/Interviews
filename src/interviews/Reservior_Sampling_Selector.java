@@ -1,6 +1,6 @@
 package interviews;
 
-public class Sampling_Select_Based_on_Probability_or_Weight {
+public class Reservior_Sampling_Selector {
 	/**
 	 * 随机选1百万query（从几亿或更多query中）,使每个query被选择的机会 等概率
 	 * 
@@ -52,65 +52,6 @@ public class Sampling_Select_Based_on_Probability_or_Weight {
 		}
 		return reservior;
 	}
-	/**
-	 * Follow-up: Given an array a = {'a', ... 'x'} on n characters and b = {0.1, 0.2, ..., 0.01} of
-	 * probability. Write a random generator that generates the chars according to their probability.
-	 * 
-	 * @analysis:
-	 * 1. Take an auxiliary array (say prefix[]) of size n.
-	 * 2. Populate it with prefix sum, such that prefix[i] represents sum of probabilities from 0 to i.
-	 * 3. Generate a random number(say r) between 0.0 and 1.0.
-	 * 4. Find index of Ceil of random number generated in step #3 in the prefix array. 
-	 * 	  Let the index be indexc.
-	 * 5. Return the random number arr[indexc], where arr[] contains the input n numbers.
-	 */
-	public int myRandomGenerator(int[] arr, int[] probability){
-		if(arr.length != probability.length) return -1;
-		int n = arr.length;
-		// construct the prefix array
-		int[] prefix = new int[n];
-		prefix[0] = probability[0];
-		for(int i = 1; i < n; i++){
-			prefix[i] = prefix[i-1] + probability[i];
-		}
-		//generate a double between [0.0, 1.0)
-		Double curProbab = Math.random();
-		int index = findCeil(prefix, curProbab, 0, n-1);
-		return arr[index];
-	}
-	//find ceiling of the cur probability in prefix
-	public int findCeil(int[] prefix, double cur, int l, int r){
-		while(l < r){
-			int mid = l + (r-l)/2;
-			if(prefix[mid] < cur){
-				l = mid + 1;
-			}else{
-				r = mid;
-			}
-		}
-		if(prefix[l] >= cur) return l;
-		else return -1;
-	}
-	/**
-	 * Write a weight random select, example: [("a", 2.34), ("b", 4.68), ...], b出现概率是a两倍
-	 */
-	public int weightRandomSelector(int[] arr, int[] weight) {
-		if (arr.length != weight.length) return -1;
-		int len = arr.length;
-		int sum = 0;
-		for (int i : weight) {
-			sum += i;
-		}
-		int[] prefix = new int[len];
-		prefix[0] = weight[0] / sum;
-		for (int i = 1; i < len; i++) {
-			prefix[i] = prefix[i - 1] + weight[i] / sum;
-		}
-		double randomDouble = Math.random();
-		int randomIndex = findCeil(prefix, randomDouble, 0, len - 1);
-		return arr[randomIndex];
-	}
-	
 	/**
 	 * 要证明stream[i]中每个数字{0 <= i < n}被选的概率都是k/n.
 	 * 
