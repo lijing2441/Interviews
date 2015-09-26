@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Uber_CSV_parser {
+public class Airbnb_CSV_parser {
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		Uber_CSV_parser obj = new Uber_CSV_parser();
+		Airbnb_CSV_parser obj = new Airbnb_CSV_parser();
 		List<String[]> res = obj.run();
 	}
 

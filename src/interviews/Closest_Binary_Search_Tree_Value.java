@@ -150,4 +150,125 @@ public class Closest_Binary_Search_Tree_Value {
             return null;
         }
     }
+    
+    // 有母节点
+ // Main Test Function, step 3)
+    public static List<Tree> findKClosestNodeInBST(Tree root, int key, int k)
+    {
+        List<Tree> list = new List<Tree>();
+        Tree closestNode = findTreeWithKeyNearestToTheKey(root, key);
+        k--;
+        list.Add(closestNode);
+        Tree nextlarger = nextLargerNodeInBST(closestNode);
+        Tree nextSmaller = nextSmallerNodeInBST(closestNode);
+        while (k > 0)
+        {
+            if (nextlarger == null && nextSmaller == null)
+                throw new StackOverflowException();
+            else if (nextlarger != null && nextSmaller != null)
+            {
+                if (Math.Abs(nextlarger.node - key) >= Math.Abs(nextSmaller.node - key))
+                {
+                    list.Add(nextSmaller);
+                    k--;
+                    nextSmaller = nextSmallerNodeInBST(nextSmaller);
+                }
+                else
+                {
+                    list.Add(nextlarger);
+                    k--;
+                    nextlarger = nextLargerNodeInBST(nextlarger);
+                }
+            }
+            else if (nextlarger != null)
+            {
+                list.Add(nextlarger);
+                k--;
+                nextlarger = nextLargerNodeInBST(nextlarger);
+            }
+            else
+            {
+                list.Add(nextSmaller);
+                k--;
+                nextSmaller = nextSmallerNodeInBST(nextSmaller);
+            }
+        }
+        return list;
+    }
+     
+    //find out the node that is closed to the key, step 1)
+    public static Tree findTreeWithKeyNearestToTheKey(Tree root, int key)
+    {
+        Tree desiredRoot = root;
+        int diff = Math.Abs(root.node - key);
+        while (root != null)
+        {
+            if (diff > Math.Abs(root.node - key))
+            {
+                diff = Math.Abs(root.node - key);
+                desiredRoot = root;
+            }
+            if (root.node > key)
+                root = root.leftChild;
+            else if (root.node < key)
+                root = root.rightChild;
+            else
+                return root;
+            }
+        return desiredRoot;
+    }
+     
+    //step 2) find its next larger node in BST
+    public static Tree nextLargerNodeInBST(Tree current)
+    {
+        if (current.rightChild != null)
+        {
+            Tree nextTree = current.rightChild;
+            while (nextTree.leftChild != null)
+                nextTree = nextTree.leftChild;
+            return nextTree;
+        }
+        else
+       {
+            while (current.parentTree!=null)
+            {
+                if (current != current.parentTree.rightChild)
+                    return current.parentTree;
+                else
+                {
+                    while(current.parentTree!=null&&current==current.parentTree.rightChild)
+                        current = current.parentTree;
+                    return current.parentTree;
+                }
+            }
+            return null;
+        }
+    }
+     
+    //step 2) find its next smaller node in BST
+    public static Tree nextSmallerNodeInBST(Tree current)
+    {
+        if (current.leftChild != null)
+        {
+            Tree nextTree = current.leftChild;
+            while (nextTree.rightChild != null)
+                nextTree = nextTree.rightChild;
+            return nextTree;
+        }
+        else
+        {
+            while (current.parentTree != null)
+            {
+                if (current == current.parentTree.rightChild)
+                    return current.parentTree;
+                else
+               {
+                    while (current.parentTree != null && current == current.parentTree.leftChild)
+                        current = current.parentTree;
+                    return current.parentTree;
+                }
+            }
+            return null;
+        }
+    }
 }

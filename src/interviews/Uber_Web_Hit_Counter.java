@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Web_Hit_Counter {
+public class Uber_Web_Hit_Counter {
 	/**
 	 * Use Queue! or N=900 array
 	 * 
