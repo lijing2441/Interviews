@@ -30,6 +30,22 @@ public class Unique_Paths_In_Matrix {
 		}
 		return map[m - 1][n - 1];
 	}
+	
+	// 一维空间
+	public int uniquePathsO1Space(int m, int n) {
+        if (m * n == 0) return 0;
+        int[] dp = new int[n];
+        for (int i = 0; i < n; i++) {
+            dp[i] = 1;
+        }
+        ///int index = 1;
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                dp[j] += dp[j - 1];
+            }
+        }
+        return dp[n - 1];
+    }
 	/**
 	 * Follow up for "Unique Paths": 
 	 * Now consider if some obstacles are added to the grids. How many unique paths would there be?

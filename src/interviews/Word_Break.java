@@ -13,28 +13,6 @@ public class Word_Break {
 	 * 
 	 * Return true because "leetcode" can be segmented as "leet code".
 	 */
-	
-	// time O(n^2), space O(n)
-	public boolean wordBreak(String s, Set<String> dict) {
-		if (s == null) return false;
-        if (dict.size() == 0 && s.length() == 0) return true; // 全为空
-		if (dict.contains(s))
-			return true;
-
-		List<Integer> list = new LinkedList<Integer>();
-		list.add(0);
-
-		for (int end = 1; end <= s.length(); end++) {
-			for (int i = 0; i < list.size(); i++) {
-				if (dict.contains(s.substring(list.get(i), end))) {
-					list.add(0, end);
-					break;
-				}
-			}
-		}
-		return (list.get(0) == s.length());
-	}
-
 	/**
 	 * DP solution can get O(n) time => O(n * dict.size), with O(n) space
 	 * dp[i] = true means we can get a valid break until index i
@@ -111,6 +89,30 @@ public class Word_Break {
 		}
 		return res;
 	}
+	
+	// 不那么好的解法
+	// time O(n^2), space O(n)
+	public boolean wordBreak(String s, Set<String> dict) {
+		if (s == null)
+			return false;
+		if (dict.size() == 0 && s.length() == 0)
+			return true; // 全为空
+		if (dict.contains(s))
+			return true;
+
+		List<Integer> list = new LinkedList<Integer>();
+		list.add(0);
+
+		for (int end = 1; end <= s.length(); end++) {
+			for (int i = 0; i < list.size(); i++) {
+				if (dict.contains(s.substring(list.get(i), end))) {
+					list.add(0, end);
+					break;
+				}
+			}
+		}
+		return (list.get(0) == s.length());
+	}
 
 	/**
 	 * word break II: Given a string s and a dictionary of words dict, add
@@ -125,32 +127,6 @@ public class Word_Break {
 	 * A solution is ["cats and dog", "cat sand dog"]
 	 * 
 	 */
-	// conventional method, time limit exceeded
-	// 可以加上一些剪枝，pruning， 加上一个possible array
-
-	public ArrayList<String> wordBreak3(String s, Set<String> dict) {
-		ArrayList<String> res = new ArrayList<String>();
-		if (s == null || s.length() == 0)
-			return res;
-		helper(s, dict, 0, "", res);
-		return res;
-	}
-
-	private void helper(String s, Set<String> dict, int start, String item, ArrayList<String> res) {
-		if (start >= s.length()) {
-			res.add(item);
-			return;
-		}
-		StringBuilder str = new StringBuilder();
-		for (int i = start; i < s.length(); i++) {
-			str.append(s.charAt(i));
-			if (dict.contains(str.toString())) {
-				String newItem = item.length() > 0 ? (item + " " + str.toString()) : str.toString();
-				helper(s, dict, i + 1, newItem, res);
-			}
-		}
-	}
-
 	/**
 	 * 动态规划的解法，递推式跟Word
 	 * Break是一样的，只是现在不只要保存true或者false，还需要保存true的时候所有合法的组合，以便在未来需要的时候可以得到。
@@ -158,7 +134,7 @@ public class Word_Break {
 	 * 就是当我们需要前面到某一个元素前的所有合法组合时，我们不需要重新计算了。不过最终复杂度还是主要取决于结果的数量。
 	 */
 
-	// DP method with O(2^n) worst case time， use a hashmap to store the possible results
+	// DP method with O(2^n) worst case time， use hashmap to store the possible results
 	// use a recursion to get the result from the end of cur string to the end
 	// of the whole given string
 	// Hashmap: key: current string, value: the possible string decomposition list
@@ -191,6 +167,32 @@ public class Word_Break {
 		}
 		return res;
 	}
+	
+	// conventional method, time limit exceeded
+		// 可以加上一些剪枝，pruning， 加上一个possible array
+
+		public ArrayList<String> wordBreak3(String s, Set<String> dict) {
+			ArrayList<String> res = new ArrayList<String>();
+			if (s == null || s.length() == 0)
+				return res;
+			helper(s, dict, 0, "", res);
+			return res;
+		}
+
+		private void helper(String s, Set<String> dict, int start, String item, ArrayList<String> res) {
+			if (start >= s.length()) {
+				res.add(item);
+				return;
+			}
+			StringBuilder str = new StringBuilder();
+			for (int i = start; i < s.length(); i++) {
+				str.append(s.charAt(i));
+				if (dict.contains(str.toString())) {
+					String newItem = item.length() > 0 ? (item + " " + str.toString()) : str.toString();
+					helper(s, dict, i + 1, newItem, res);
+				}
+			}
+		}	
 
 	// My method, using a 2-D array to record the string method
 	// then 1-D boolean array to record the cut positions

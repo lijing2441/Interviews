@@ -1,10 +1,12 @@
  package interviews;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
@@ -52,6 +54,7 @@ public class Word_Ladder {
 						// remember to remove the word, since the 
 						// others use it later can not be the shortest
 						dict.remove(newWord);
+						
 					}
 				}
 			}
@@ -85,7 +88,7 @@ public class Word_Ladder {
 		 while(!q.isEmpty()){
 			 String curWord = q.poll();
 			 if(curWord.equals(end)){
-				 getPath(map.get(end), map, new ArrayList<String>(), res);
+				 getPath(map.get(end), new ArrayList<String>(), res);
 				 return res;
 			 }
 			 for(int i = 0; i < curWord.length(); i++){
@@ -113,7 +116,7 @@ public class Word_Ladder {
 		 }
 		 return res;
 	 }
-	 public void getPath(NodeWithP node, HashMap<String, NodeWithP> map, ArrayList<String> cur, ArrayList<ArrayList<String>> res){
+	 public void getPath(NodeWithP node, ArrayList<String> cur, ArrayList<ArrayList<String>> res){
 		 if(node == null){
 			 res.add(cur);
 			 return;
@@ -122,107 +125,168 @@ public class Word_Ladder {
 		 if(!node.prev.isEmpty()){
 			 for(NodeWithP prevNode: node.prev){
 				 ArrayList<String> next = new ArrayList<String>(cur);
-				 getPath(prevNode, map, next, res);
+				 getPath(prevNode, next, res);
 			 }
 		 }else{
-			 getPath(null, map, cur, res);
+			 getPath(null, cur, res);
 		 }
 	 }
 	 
-	 // second method
-	 public class Michael_Solution {
-			List<List<String>>res = new ArrayList<List<String>>();
-			
-			HashMap<String, List<String> >pre = new HashMap<String, List<String>>();
-			String start;
-			String end;
-			void findPath(String cur, List<String> singlePath){  
-				if(cur.equals(start)){
-					res.add(singlePath);
-					return;
-				}
-				if(!pre.containsKey(cur))
-					return;
-				List<String> p = pre.get(cur);
-				for(String i : p){
-					List<String>ts = new ArrayList<String>(singlePath);
-					ts.add(0,i);
-					findPath(i,ts);
-				}		
-			}
-			HashMap<String, Integer>level = new HashMap<String, Integer>();
-			
-			List<List<String>> bfs(Set<String>dict){
-		    	Queue<String>Q = new LinkedList<String>();
-		    	Queue<String>nlevelQ = new LinkedList<String>();
-		    	Q.add(start);
-		    	level.put(start, 0);
-		    	boolean isOver  = false;
-		    	int curLevel = 1;
-		    	while(!Q.isEmpty()){
-		    		String f = Q.poll();
-		    		//System.out.println(f);
-		    		StringBuffer strbuff = new StringBuffer(f);
-		    		for(int i = 0; i < f.length(); i++){
-		    			char ori = strbuff.charAt(i);
-		    			for(char j = 'a'; j <= 'z'; j++){
-		    				if(j==ori)
-		    					continue;
-		    				strbuff.replace(i, i+1,""+j);       
-		    				String str = strbuff.toString();
-		    				if(str.equals(end))
-		    					isOver = true;
-		    				if(dict.contains(str)){
-		    					if(!str.equals(end) && level.containsKey(str) && level.get(str) < curLevel){
-		    						continue;
-		    					}
-		    					if(!str.equals(end) &&( !level.containsKey(str) || level.get(str) != curLevel)){
-		    						nlevelQ.add(str);
-		    					}
-		    					level.put(str, curLevel);    					
-		    						
-		    					if(pre.containsKey(str)){
-		    						List<String>temp = pre.get(str);
-		    						temp.add(f);
-		    					}else{
-		    						List<String>temp = new LinkedList<String>();
-		    						temp.add(f);
-		    						pre.put(str, temp);
-		    					}    					
-		    				}
-		    			}
-		    			strbuff.replace(i, i+1, ""+ori);
-		    		}
-		    		if(Q.isEmpty()){
-		    			if(isOver)
-		    				break;
-		    			while(!nlevelQ.isEmpty()){
-		    				String temp = nlevelQ.poll();
-		    				Q.add(temp);
-		    			}
-		    			curLevel++;
-		    		}
-		    	}	
-		    	List<String> s = new ArrayList<String>();
-		    	s.add(end);
-		    	findPath(end, s);
-		    	return res;
-		    }
-			public List<List<String>> findLadders(String start, String end, Set<String> dict) {
-				dict.add(start);
-				dict.add(end);
-				this.start = start;
-				this.end = end;
-				return bfs(dict);
-		    }
-		}
+	 // if only need one shortest path
+	 public static List<String> findOneShortestLadder(String start, String end, Set<String> set) {
+		 Map<String, NodeWithP> map = new HashMap<String, NodeWithP>();
+		 map.put(start, new NodeWithP(1, start));
+		 set.add(end);
+		 Queue<String> q = new LinkedList<String>();
+		 q.offer(start);
+		 while (!q.isEmpty()) {
+			 String cur = q.poll();
+			 if (cur.equals(end)) {
+				 //System.out.println("Here");
+				 return getOnePath(map.get(end));
+			 }
+			 for(int i = 0; i < cur.length(); i++) {
+				 char[] arr = cur.toCharArray();
+				 char original = arr[i];
+				 for (char c = 'a'; c <= 'z'; c++) {
+					 if (c == original) continue;
+					 arr[i] = c;
+					 String changed = new String(arr);
+					 if (set.contains(changed)) {
+						 if (!map.containsKey(changed)) {
+							 NodeWithP prev = map.get(cur);
+							 NodeWithP next = new NodeWithP(prev.dist + 1, changed);
+							 map.put(changed, next);
+							 next.parent = prev;
+							 set.remove(changed);
+							 q.offer(changed);
+						 }
+					 }
+				 }
+			 }
+		 }
+		 return new ArrayList<String>();
+	 }
+	 public static List<String> getOnePath(NodeWithP node) {
+		 List<String> res = new ArrayList<String>();
+		 while (node != null) {
+			 res.add(0, node.str);
+			 node = node.parent;
+		 }
+		 return res;
+	 }
+	 
+	 public static void main(String[] args) {
+		 String start = "hit";
+		 String end = "cog";
+		 Set<String> set = new HashSet<String>();
+		 set.add("hot");
+		 set.add("dot");
+		 set.add("dog");
+		 set.add("lot");
+		 set.add("log");
+		 List<String> path = findOneShortestLadder(start, end, set);
+		 for (String s: path) {
+			 System.out.print(s + "->");
+		 }
+	 }
+	 
 }
 class NodeWithP{
 	public int dist;
 	public String str;
 	public LinkedList<NodeWithP> prev = new LinkedList<NodeWithP>();
+	public NodeWithP parent;
 	public NodeWithP(int d, String str){
 		dist = d;
 		this.str = str;
 	}
+}
+
+// second method, 用一个hashmap记下来所有父节点
+class Michael_Solution {
+	List<List<String>>res = new ArrayList<List<String>>();
+	
+	HashMap<String, List<String> >pre = new HashMap<String, List<String>>();
+	String start;
+	String end;
+	void findPath(String cur, List<String> singlePath){  
+		if(cur.equals(start)){
+			res.add(singlePath);
+			return;
+		}
+		if(!pre.containsKey(cur))
+			return;
+		List<String> p = pre.get(cur);
+		for(String i : p){
+			List<String>ts = new ArrayList<String>(singlePath);
+			ts.add(0,i);
+			findPath(i,ts);
+		}		
+	}
+	HashMap<String, Integer>level = new HashMap<String, Integer>();
+	
+	List<List<String>> bfs(Set<String>dict){
+    	Queue<String>Q = new LinkedList<String>();
+    	Queue<String>nlevelQ = new LinkedList<String>();
+    	Q.add(start);
+    	level.put(start, 0);
+    	boolean isOver  = false;
+    	int curLevel = 1;
+    	while(!Q.isEmpty()){
+    		String f = Q.poll();
+    		//System.out.println(f);
+    		StringBuffer strbuff = new StringBuffer(f);
+    		for(int i = 0; i < f.length(); i++){
+    			char ori = strbuff.charAt(i);
+    			for(char j = 'a'; j <= 'z'; j++){
+    				if(j==ori)
+    					continue;
+    				strbuff.replace(i, i+1,""+j);       
+    				String str = strbuff.toString();
+    				if(str.equals(end))
+    					isOver = true;
+    				if(dict.contains(str)){
+    					if(!str.equals(end) && level.containsKey(str) && level.get(str) < curLevel){
+    						continue;
+    					}
+    					if(!str.equals(end) &&( !level.containsKey(str) || level.get(str) != curLevel)){
+    						nlevelQ.add(str);
+    					}
+    					level.put(str, curLevel);    					
+    						
+    					if(pre.containsKey(str)){
+    						List<String>temp = pre.get(str);
+    						temp.add(f);
+    					}else{
+    						List<String>temp = new LinkedList<String>();
+    						temp.add(f);
+    						pre.put(str, temp);
+    					}    					
+    				}
+    			}
+    			strbuff.replace(i, i+1, ""+ori);
+    		}
+    		if(Q.isEmpty()){
+    			if(isOver)
+    				break;
+    			while(!nlevelQ.isEmpty()){
+    				String temp = nlevelQ.poll();
+    				Q.add(temp);
+    			}
+    			curLevel++;
+    		}
+    	}	
+    	List<String> s = new ArrayList<String>();
+    	s.add(end);
+    	findPath(end, s);
+    	return res;
+    }
+	public List<List<String>> findLadders(String start, String end, Set<String> dict) {
+		dict.add(start);
+		dict.add(end);
+		this.start = start;
+		this.end = end;
+		return bfs(dict);
+    }
 }

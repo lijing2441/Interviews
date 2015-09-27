@@ -35,6 +35,32 @@ public class Airbnb_租房日期 {
 		return second;
 	}
 	
+	// 找出其中一条最优解法，用二维数组表示dp过程就可以了 O(n), 空间O(2n) => O(n)
+	public static List<Integer> findOneBest(int[] requests) {
+		int len = requests.length;
+		// dp[i][0] -> 本sum包含第i个数； dp[i][1] -> 本sum不包含第i个数
+		int[][] dp = new int[len][2];
+		
+		dp[0][1] = requests[0];
+		dp[1][0] = requests[0];
+		
+		for (int i = 1; i < len; i++) {
+			dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1]);
+			dp[i][1] = dp[i - 1][0] + requests[i];
+		}
+		int max = Math.max(dp[len - 1][0], dp[len - 1][1]);
+		List<Integer> res = new ArrayList<Integer>();
+		int sum = max;
+		for (int i = len - 1; i >= 0; i--) {
+			if (dp[i][1] == sum) {
+				res.add(requests[i]);
+				sum -= requests[i];
+			}
+		}
+		return res;
+	}
+	
+	// 找出所有可能的path
 	public static List<List<Integer>> findBest(int[] requests) {
 		int len = requests.length;
 		int[] dp = new int[len];
@@ -65,11 +91,15 @@ public class Airbnb_租房日期 {
 		int[] A = {4, 10, 3, 1, 5};
 		System.out.println(findMax(A));
 		List<List<Integer>> list = findBest(A);
+		List<Integer> oneSolution = findOneBest(A);
 		for (List<Integer> l : list) {
 			for (int i : l) {
 				System.out.print(i + " ");
 			}
 			System.out.println();
+		}
+		for (int i : oneSolution) {
+			System.out.print(i + " ");
 		}
 	}
 }
