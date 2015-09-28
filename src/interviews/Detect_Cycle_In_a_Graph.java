@@ -27,21 +27,21 @@ public class Detect_Cycle_In_a_Graph {
 		boolean[] recStack = new boolean[n];
 		
 		for(Vertex i: g.vertices){
-			if(isCyclicUtil(i, visited, recStack)) return true;
+			if(isCyclic(i, visited, recStack)) return true;
 		}
 		return false;
 	}
 	// check each node i
-	public boolean isCyclicUtil(Vertex cur, boolean[] visited, boolean[] recStack){
+	public boolean isCyclic(Vertex cur, boolean[] visited, boolean[] recStack){
 		if(!visited[cur.number]){
 			visited[cur.number] = true;
 			// 入 recursion stack
 			recStack[cur.number] = true;
 			
 			for(Vertex i: cur.adjacent){
-				// if this neighbor has not been visited and its recursion return true
+				// if this neighbor has not been visited and its recursion return false
 				// then we have completed all the check for this current node and did not detect a cycle
-				if(!visited[i.number] && !isCyclicUtil(i, visited, recStack)){
+				if(!visited[i.number] && !isCyclic(i, visited, recStack)){
 					return false;
 					// if we either visited this neighbor or a cycle is detected.
 					// if this neighbor is still in the recursion stack, it has a cycle with the current node
