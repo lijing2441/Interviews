@@ -61,7 +61,7 @@ public class Alien_Dictionary_Topological_Sort {
             char curChar = noIncome.poll();
             sb.append(curChar);
             Set<Character> set = graph.get(curChar);
-            graph.remove(curChar);
+            graph.remove(curChar); // remember to remove the edges starting from this node
             if(set == null) continue;
             for(char c : set) {
                 indegree.put(c, indegree.get(c) - 1);

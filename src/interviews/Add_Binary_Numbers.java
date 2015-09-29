@@ -24,7 +24,6 @@ public class Add_Binary_Numbers {
 			carry = set / 2;
 			res = String.valueOf(set % 2) + res;
 		}
-		// Remember here!!!!
 		return carry == 0 ? res : "1" + res;
 	}
 

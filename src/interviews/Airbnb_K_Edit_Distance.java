@@ -67,6 +67,7 @@ class Trie {
 				if (target.charAt(j - 1) == (char)('a' + i)) {
 					next[j] = pre[j - 1]; // a match
 				} else {
+					// cost = 1
 					next[j] = Math.min(pre[j], Math.min(pre[j - 1], next[j - 1])) + 1;
 				}
 				dfs(k, target, cur + (char)('a' + i), next, root.children[i], res);
