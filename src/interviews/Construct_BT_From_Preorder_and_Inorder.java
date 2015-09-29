@@ -20,6 +20,10 @@ public class Construct_BT_From_Preorder_and_Inorder {
 	 * @complexity: Time Complexity: O(n^2). 
 	 * Worst case occurs when tree is totally skewed. 
 	 * Example Preorder and Inorder traversals for worst case are {A, B, C, D} and {D, C, B, A}.
+	 * 
+	 * 看是否legal：
+	 * 看inorder是不是valid:    ascending order
+	 * 看preorder是不是valid:  https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/
 	 */
 	public TreeNode buildTreePI(int[] preorder, int[] inorder) {
         return helper1(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);

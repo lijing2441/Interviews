@@ -1,49 +1,62 @@
 package interviews;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Airbnb_CSV_parser {
-	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		Airbnb_CSV_parser obj = new Airbnb_CSV_parser();
-		List<String[]> res = obj.run();
+		// #1
+		ArrayList<String> output = parseCSV("John,Smith,john.smith@gmail.com,Los Angeles,1");
+		String strOutput = printStr(output);
+		System.out.println(strOutput);
+		// #2
+		output = parseCSV("Jane,Roberts,janer@msn.com,\"San Francisco, CA\",0");
+		strOutput = printStr(output);
+		System.out.println(strOutput);
+		output = parseCSV("\"Alexandra \"\"Alex\"\"\",Menendez,alex.menendez@gmail.com,Miami,1");
+		strOutput = printStr(output);
+		System.out.println(strOutput);
 	}
-
-	public List<String[]> run() {
-		String csvFile = "/Users/mkyong/Downloads/GeoIPCountryWhois.csv";
-		BufferedReader br = null;
-		String line = "";
-		String cvsSpliter = ",";
-		List<String[]> res = new ArrayList<String[]>();
-		try {
-			br = new BufferedReader(new FileReader(csvFile));
-			while ((line = br.readLine()) != null) {
-
-				// use comma as separator
-				String[] parsed = line.split(cvsSpliter);
-				res.add(parsed);
-//				System.out.println("Country [code= " + country[4] + " , name=" + country[5] + "]");
-
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		System.out.println("Done");
-		return res;
+	public static ArrayList<String> parseCSV(String str) {
+        ArrayList<String> res = new ArrayList<String>();
+        boolean inQuote = false;
+        StringBuilder buffer = new StringBuilder();
+        for(int i = 0; i < str.length(); i++) {
+        	if(inQuote) {
+        		if(str.charAt(i) == '"') {
+        			if(i == str.length() - 1) {
+        				res.add(buffer.toString());
+        				return res;
+        			} else if(str.charAt(i + 1) == '"') {
+        				buffer.append('"');
+        				i++;
+        			} else {
+        				res.add(buffer.toString());
+        				buffer.setLength(0);
+        				inQuote = false;
+        				i++;
+        			}
+        		} else buffer.append(str.charAt(i));
+        	} else {
+        		if(str.charAt(i) == '"') {
+        			inQuote = true;
+        		} else if( str.charAt(i) == ',') {
+        			res.add(buffer.toString());
+        			buffer.setLength(0);
+        		} else {
+        			buffer.append(str.charAt(i));
+        		}
+        	}
+        }
+        if(buffer.length() > 0) res.add(buffer.toString());
+        return res;
 	}
+    public static String printStr(ArrayList<String> list) {
+        StringBuilder res = new StringBuilder();
+        for(int i = 0; i < list.size()-1; i++) {
+        	res.append(list.get(i));
+        	res.append('|');
+        }
+        res.append(list.get(list.size()-1));
+        return res.toString();
+    }
 }
