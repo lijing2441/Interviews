@@ -75,7 +75,7 @@ public class Edit_Distance {
 		}
 		if (i == m)
 			// if two string are the same (shift == 0), return false
-			return shift > 0; 
+			return shift > 0;
 		// if the two strings is not same, shift == 
 		if (shift == 0)
 			// if n == m skip current char in s (modify operation in s)

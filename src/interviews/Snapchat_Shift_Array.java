@@ -24,4 +24,10 @@ public class Snapchat_Shift_Array {
 		start += shift;
 		start %= array.length;
 	}
+	public static void main(String[] args) {
+		int[] A = {1, 2, 3, 4};
+		Snapchat_Shift_Array test = new Snapchat_Shift_Array(A);
+		test.shift(1);
+		System.out.println(test.get(0));
+	}
 }

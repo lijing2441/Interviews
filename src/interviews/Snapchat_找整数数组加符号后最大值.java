@@ -15,10 +15,10 @@ public class Snapchat_找整数数组加符号后最大值 {
 		for (int len = 1; len < n; len++) {
 			for (int i = 0; i + len < n; i++) {
 				int max = Integer.MIN_VALUE;
-				for (int j = i; j <= i + len; j++) {
-					int plus = dp[i][j] + dp[j][i + len];
+				for (int j = i; j < i + len; j++) {
+					int plus = dp[i][j] + dp[j + 1][i + len];
 					//System.out.println(i + " " + j + " " + plus);
-					int mult = dp[i][j] * dp[j][i + len];
+					int mult = dp[i][j] * dp[j + 1][i + len];
 					//System.out.println(i + " " + j + " " + mult);
 					max = Math.max(Math.max(plus, mult), max);
 				}
