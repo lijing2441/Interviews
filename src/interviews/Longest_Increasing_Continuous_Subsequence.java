@@ -14,7 +14,6 @@ public class Longest_Increasing_Continuous_Subsequence {
 	 * Note O(n) time and O(1) extra space.
 	 */
 	public int longestIncreasingContinuousSubsequence(int[] A) {
-        // Write your code here
         if (A == null) return 0;
         int len = A.length;
         if (len <= 2) return len;
@@ -38,5 +37,60 @@ public class Longest_Increasing_Continuous_Subsequence {
             if(maxEndHere > maxSoFar) maxSoFar = maxEndHere;
         }
         return maxSoFar;
+    }
+	
+	/**
+	 * Problem II: Give you an integer matrix (with row size n, column size m)，
+	 * find the longest increasing continuous subsequence in this matrix. 
+	 * (The definition of the longest increasing continuous subsequence here 
+	 * can start at any row or column and go up/down/right/left any direction).
+	 * 
+	 * 就是滑雪问题。每个地方由于我们只搜没有进行traverse过的：O(mn) => 时间和空间
+	 * 
+	 * Snapchat + Google
+	 */
+	public int[][] dp;
+    public int[][] data;
+    public int[] x = {-1, 0, 1, 0};
+    public int[] y = {0, 1, 0, -1};
+    public int longestIncreasingContinuousSubsequenceII(int[][] A) {
+        if (A == null || A.length == 0 || A[0].length == 0) return 0;
+        int maxLen = 1;
+        int m = A.length, n = A[0].length;
+        
+        data = A;
+        dp = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (dp[i][j] == 0) {
+                    traverse(i, j);
+                }
+                if (dp[i][j] > maxLen) {
+                    maxLen = dp[i][j];
+                }
+            }
+        }
+        return maxLen;
+    }
+    public int traverse(int row, int col) {
+        int max = -1;
+        for (int i = 0; i < 4; i++) {
+            int newRow = row + y[i];
+            int newCol = col + x[i];
+            if (newRow < data.length && newRow >= 0 && newCol < data[0].length && newCol >= 0 && data[newRow][newCol] > data[row][col]) {
+                if (dp[newRow][newCol] != 0) {
+                    // has been searched before
+                    max = Math.max(max, dp[newRow][newCol]);
+                } else {
+                    max = Math.max(max, traverse(newRow, newCol));
+                }
+            }
+        }
+        if (max == -1) {
+            dp[row][col] = 1;
+        } else {
+            dp[row][col] = 1 + max;
+        }
+        return dp[row][col];
     }
 }

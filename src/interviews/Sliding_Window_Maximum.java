@@ -52,4 +52,7 @@ public class Sliding_Window_Maximum {
         }
         return res;
     }
+	
+	// O(n)做法，用Deque
+	
 }

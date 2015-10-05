@@ -10,7 +10,7 @@ public class Word_Search {
 	 * DFS: 从某一个元素出发，往上下左右深度搜索是否有相等于word的字符串。这里注意每次从一个元素出发时要重置访问标记
 	 * （也就是说虽然单次搜索字符不能重复使用，但是每次从一个新的元素出发，字符还是重新可以用的）。
 	 * 
-	 * There are O(n*m) candidates for starting cell.
+	 * There are O(n*m) candidates for starting cell. => O(m*n) for each search
 	 * 
 	 * 空间上就是要用一个数组来记录访问情况，所以是O(m*n)。
 	 */
@@ -46,19 +46,6 @@ public class Word_Search {
     	}
     	return false;
     }
-    /*
-    if only need to use the four directions:
-    public int[] x = {0, 0, 1, -1};
-    public int[] y = {1, -1, 0, 0}; 
-    
-    public static boolean isSafe(char[][] matrix, int row, int column, String pattern, int index, boolean[][] used){
-    	if(row >= 0 && row < matrix.length && column >= 0 && column < matrix[0].length && matrix[row][column] == pattern.charAt(index) && !used[row][column]){
-    		used[row][column] = true;
-    		return true;
-    	}
-    	return false;
-    }
-    */
 
     /**
      * Word search in leetcode

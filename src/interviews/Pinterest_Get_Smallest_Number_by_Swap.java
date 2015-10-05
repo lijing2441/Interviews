@@ -11,7 +11,6 @@ public class Pinterest_Get_Smallest_Number_by_Swap {
 	 * 两种情况: if m >= n: 找最小的换到第一位，然后循环往复
 	 * 		   otherwise, 在前m中找最下的换到第一位。
 	 * 保持两个指针，现在可以换的位置，已经换完的位置下一位
-	 * 
 	 */
 	/**
 	 * @param input
@@ -61,7 +60,7 @@ public class Pinterest_Get_Smallest_Number_by_Swap {
 	
 	
 	public static void main(String[] arg) {
-		int num = 32516;
-		System.out.println(getSmallestNumWithSwap(num, 4));
+		int num = 321;
+		System.out.println(getSmallestNumWithSwap(num, 2));
 	}
 }
