@@ -1,6 +1,9 @@
 package interviews;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -54,5 +57,27 @@ public class Sliding_Window_Maximum {
     }
 	
 	// O(n)做法，用Deque
-	
+	public ArrayList<Integer> maxSlidingWindowDeque(int[] nums, int k) {
+        int len = nums.length;
+        if (len == 0) return new ArrayList<Integer>();
+        Deque<Integer> deque = new LinkedList<Integer>(); // k-size deque
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        for(int i = 0; i < len; i++) {
+            int num = nums[i];
+            // 保持deque为一个单调递减的单调queue，这样first位置永远是最大的
+            while (!deque.isEmpty() && deque.peekLast() < num) {
+                deque.pollLast();
+            }
+            deque.offerLast(num);
+            // 如果到了k+1个 in array，要开始看是否要poll前面的
+            if (i >= k && deque.peekFirst() == nums[i - k]) {
+                deque.pollFirst();
+            }
+            // 到k个，开始可以加入result
+            if (i >= k - 1) {
+                res.add(deque.peekFirst());
+            }
+        }
+        return res;
+    }
 }

@@ -1,6 +1,7 @@
 package interviews;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class String_Same_Pattern {
 	/**
@@ -63,4 +64,25 @@ public class String_Same_Pattern {
 			return true;
 		}
 	}
+	// simple version: pattern = "abba", str = "dog cat cat dog" should return true.
+	public boolean wordPattern(String pattern, String str) {
+        if (pattern == null && str == null) return true;
+        if (pattern == null || str == null) return false;
+        if (pattern.length() > str.length()) return false;
+        String[] arr = str.split(" ");
+        if (arr.length != pattern.length()) return false;
+        
+        Map<Character, String> map = new HashMap<Character, String>();
+        for (int i = 0; i < arr.length; i++) {
+            if (map.containsKey(pattern.charAt(i)) && !map.get(pattern.charAt(i)).equals(arr[i])) {
+                return false;
+            } else if (!map.containsKey(pattern.charAt(i))) {
+                if (map.containsValue(arr[i])) return false;
+                else {
+                    map.put(pattern.charAt(i), arr[i]);
+                }
+            }
+        }
+        return true;
+    }
 }

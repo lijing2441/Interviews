@@ -81,7 +81,7 @@ public class Online_Median_Data_Stream {
      * @return: the median of numbers
      */
     private PriorityQueue<Integer> minHeap2 = new PriorityQueue<Integer>(); // store large half
-    private PriorityQueue<Integer> maxHeap2 = new PriorityQueue<Integer>(50, new Comparator<Integer>(){
+    private PriorityQueue<Integer> maxHeap2 = new PriorityQueue<Integer>(new Comparator<Integer>(){
             public int compare(Integer num1, Integer num2) {
                 return num2 - num1;
             }
@@ -128,6 +128,24 @@ public class Online_Median_Data_Stream {
         if (minHeap2.size() == maxHeap2.size()) {
             return Math.min(maxHeap2.peek(), minHeap2.peek());
         } else if (maxHeap2.size() > minHeap2.size()) {
+            return maxHeap2.peek();
+        } else {
+            return minHeap2.peek();
+        }
+    }
+    
+    // if I want to get the n/10 th element? 1/10 max heap + 9/10 min heap!
+    public int get1of10thMedian() {
+        if (minHeap2.isEmpty() && maxHeap2.isEmpty()) return Integer.MIN_VALUE;
+        if (minHeap2.isEmpty()) {
+            return maxHeap2.peek();
+        }
+        if (maxHeap2.isEmpty()) {
+            return minHeap2.peek();
+        } 
+        if (minHeap2.size() == 9 * maxHeap2.size()) {
+            return Math.min(maxHeap2.peek(), minHeap2.peek());
+        } else if (maxHeap2.size() > 9 * minHeap2.size()) {
             return maxHeap2.peek();
         } else {
             return minHeap2.peek();

@@ -3,6 +3,8 @@ package interviews;
 public class Airbnb_走格子求最大分数 {
 	/**
 	 * 4 * 4 matrix, 每个格子里面可能正可能负可能0，求从(0, 0)到任意一个点，找最大的分数
+	 * 
+	 * O(3^16) running time
 	 */
 	static int[] x = {1, 0, -1, 0};
 	static int[] y = {0 ,1, 0, -1};

@@ -2,12 +2,9 @@ package interviews;
 
 public class Longest_Common_Substring {
 	/**
-	 * 暴搜：Keep track of the maximum length substring. There will be O(m^2) substrings 
-	 * and we can find whether a string is substring on another string in O(n) time by KMP. <strStr>
+	 * For "ABCD" and "EDCA", the LCS is "A" (or "D", "C"), return 1.
 	 * 
-	 * So overall time complexity of this method would be O(n * m^2)
-	 * 
-	 * Using Naive strStr: O(mn) for each substring -> total: O(n * m^3)
+	 * For "ABCD" and "EACB", the LCS is "AC", return 2.
 	 */
 	/**
 	 * DP: 
@@ -21,8 +18,7 @@ public class Longest_Common_Substring {
 	 *		 	LCSubStr(X, Y, m, n)  = Max(LCSuffix(X, Y, i, j)) where 1 <= i <= m and 1 <= j <= n
 	 * 
 	 * @complexity O(mn) and O(mn)
-	 */
-	/**
+	 *
 	 * Suffix tree can be used here. But unless multiple requests, it's a waste to build a suffix tree.
 	 */
 	// 只需要返回长度
