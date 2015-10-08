@@ -1,16 +1,11 @@
 package interviews;
-
 /**
- * 
- * @author Tina
- *
  *         In a party of N people, only one person is known to everyone. Such a
  *         person may be present in the party, if yes, (s)he doesn't know anyone
  *         in the party. We can only ask questions like "does A know B?". Find
  *         the stranger (celebrity) in minimum number of questions.
  * 
  * @logic
- * 
  *         1. If A knows B, then A can't be celebrity. Discard A, and B may be celebrity. 
  *         2. If A doesn't know B, then B can't be celebrity. Discard B, and A may be celebrity. 
  *         3. Repeat above two steps till we left with only one person. 

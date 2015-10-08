@@ -44,6 +44,8 @@ public class Add_and_Search_Word {
 
     // Returns if the word is in the data structure. A word could
     // contain the dot character '.' to represent any one letter.
+    
+    // 用recursion找 '.'
     public boolean search(String word) {
         return search(word, root);
     }

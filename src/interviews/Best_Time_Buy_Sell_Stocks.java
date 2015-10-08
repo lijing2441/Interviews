@@ -104,6 +104,7 @@ public class Best_Time_Buy_Sell_Stocks {
 		int len = prices.length;
 		if (k <= 0 || prices.length < 2)
 			return 0;
+		// in case of large k
 		if (k >= len / 2) {
 			int res = 0;
 			for (int i = 1; i < len; i++) {
@@ -111,7 +112,7 @@ public class Best_Time_Buy_Sell_Stocks {
 			}
 			return res;
 		}
-
+		
 		int[] local = new int[k + 1];
 		int[] global = new int[k + 1];
 		for (int i = 0; i < len - 1; i++) {

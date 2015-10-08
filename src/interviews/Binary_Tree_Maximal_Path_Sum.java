@@ -16,17 +16,13 @@ public class Binary_Tree_Maximal_Path_Sum {
 	}
 
 	public static int maxPathSum(TreeNode root, int[] max) {
-		/* base case where tree is empty */
-		if (null == root) {
-			return 0;
-		}
+		if (null == root) return 0;
 
 		int leftSum = maxPathSum(root.left, max);
 		int rightSum = maxPathSum(root.right, max);
 		int localMax = Math.max(root.val, Math.max(root.val + leftSum, root.val + rightSum));
 		
-		if (localMax > max[0])
-			max[0] = localMax;
+		if (localMax > max[0]) max[0] = localMax;
 		
 		if (root.val + leftSum + rightSum > max[0])
 			max[0] = root.val + leftSum + rightSum;
@@ -41,8 +37,8 @@ public class Binary_Tree_Maximal_Path_Sum {
 			 * 							  1 
 			 * 							 / \ 
 			 * 							2   3 
-			 *                         /     \ 
-			 *                        4       5
+			 *                         / \ 
+			 *                        4   5
 			 */
 			TreeNode root = new TreeNode(1);
 			root.left = new TreeNode(2);
@@ -50,7 +46,6 @@ public class Binary_Tree_Maximal_Path_Sum {
 			root.left.left = new TreeNode(4);
 			root.left.right = new TreeNode(5);
 
-//			System.out.println("Diameter of the given binary tree is " + maxPathOptimized(root));
 			System.out.println("The max path value of the given BT is " + maxPathSum(root));
 		}
 }

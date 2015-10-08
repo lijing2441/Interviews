@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public class Binary_Tree_PreOrder_Traversal {
 	/**
-	 * Given a binary tree, return the preorder traversal of its nodes' values.
+	 * Given a binary tree, return the pre-order traversal of its nodes' values.
 		
 		For example:
 		Given binary tree {1,#,2,3},

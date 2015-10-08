@@ -15,8 +15,8 @@ public class Binary_Tree_Right_Side_View {
 			 \     \
 			  5     4       <---
 			You should return [1, 3, 4].
-	 */
-	/**
+	 *
+	 *
 	 * @logic 利用size，只有size对，才加入result list。recursion先加右边（这样在右children存在的情况下，不会加左边）；
 	 * 		  如果右边没有，会加上最右的node
 	 */

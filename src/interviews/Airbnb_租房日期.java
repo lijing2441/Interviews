@@ -23,7 +23,6 @@ public class Airbnb_租房日期 {
 	 * 
 	 * follow up是求得到最优解时的request具体情况，类似于求出最短路径的长度后,给出最短路径。
 	 */
-	
 	public static int findMax(int[] requests) {
 		int first = requests[0];
 		int second = Math.max(requests[0], requests[1]);
@@ -87,6 +86,8 @@ public class Airbnb_租房日期 {
 		cur.remove(cur.size() - 1);
 		helper(res, cur, nums, pos + 1, curSum, target);
 	}
+	
+	// driver
 	public static void main(String[] args) {
 		int[] A = {4, 10, 3, 1, 5};
 		System.out.println(findMax(A));

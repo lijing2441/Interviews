@@ -3,7 +3,26 @@ package interviews;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Airbnb_mini_Parser {
+public class Airbnb_Uber_数组flatten {
+	/**
+	 * 现在给一个数组，里面是已经parse好的东西，让使结果成为一个iterator形式的
+	 */
+	public static List<Integer> flattenArray(Object[] arr) {
+		List<Integer> res = new ArrayList<Integer>();
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] instanceof Integer) {
+				res.add((int)arr[i]);
+			} else if (arr[i] instanceof Object[]){
+				List<Integer> curList = flattenArray((Object[])arr[i]);
+				for (int num: curList) {
+					res.add(num);
+				}
+			}
+		}
+		return res;
+	}
+	// follow up: iterator, 参见flatten 2D array，然后recursively的来写
+	
 	/**
 	 * 实现一个mini parser, 输入是以下格式的string:"324" or "[123,456,[788,799,833],[[]],10,[]]" 
 	 * 要求输出:324 or [123,456,[788,799,833],[[]],10,[]] 
@@ -62,10 +81,20 @@ public class Airbnb_mini_Parser {
 	}
 	
 	public static void main(String[] args) {
-		String str1 = "324";
-		System.out.println(miniParser(str1).toString());
-		String str2 = "[123,456,[788,799,833],[[]],10,[]]";
-		System.out.println(miniParser(str2).toString());
+//		String str1 = "324";
+//		System.out.println(miniParser(str1).toString());
+//		String str2 = "[123,456,[788,799,833],[[]],10,[]]";
+//		System.out.println(miniParser(str2).toString());
+		Object[] arr = new Object[3];
+		arr[0] = 1;
+		Object[] elem2 = {2, 3, 4};
+		Object[] elem3 = {};
+		arr[1] = elem2;
+		arr[2] = elem3;
+		List<Integer> res = flattenArray(arr);
+		for (int i : res) {
+			System.out.print(i + " ");
+		}
 	}
 }
 class EntityInArray {

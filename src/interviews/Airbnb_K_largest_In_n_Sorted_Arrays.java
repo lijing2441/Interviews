@@ -36,6 +36,7 @@ public class Airbnb_K_largest_In_n_Sorted_Arrays {
 		int res = 0;
 		for (int i = 0; i < k && !pq.isEmpty(); i++) {
 			NumWithIndex curElem = pq.poll();
+			// 找到第k个，return即可
 			if (i == k - 1) {
 				res = curElem.val;
 				return res;

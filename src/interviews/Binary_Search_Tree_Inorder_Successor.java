@@ -42,11 +42,11 @@ public class Binary_Search_Tree_Inorder_Successor {
 	            stack.add(node);
 	            node = node.left;
 	        } else if (p.val > node.val) {
-	            // stack.add(node);
+	            // 往右边走就不用存了，因为后续节点必然不在此节点的parent上
 	            node = node.right;
 	        } else {
 	        	// 找到node后，开始找successor
-	        	// 如果node右子节点为null，他的succssor为他的parent
+	        	// 如果node右子节点为null，他的successor为他的parent
 	            if (node.right == null) {
 	                // Your case one and case two can combined to this.
 	                if (stack.isEmpty()) {

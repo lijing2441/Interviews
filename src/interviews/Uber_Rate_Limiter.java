@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-public class Uber_Reuqest_Rate_Limiter {
+public class Uber_Rate_Limiter {
 	/**
 	 * Develop an API Rate-limit Throttling Client
 	 * 

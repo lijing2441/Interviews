@@ -43,7 +43,6 @@ public class Iterator_Peeking {
 }
 // leetcode problem
 class PeekingIterator implements Iterator<Integer> {
-    
     public List<Integer> peek;
     public Iterator<Integer> ite;
 	public PeekingIterator(Iterator<Integer> iterator) {

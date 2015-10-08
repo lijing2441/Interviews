@@ -34,7 +34,7 @@ public class Binary_Tree_PostOrder_Traversal {
 			stack.push(root);
 			while (!stack.isEmpty()) {
 				TreeNode node = stack.peek();
-				if ((node.left == null && node.right == null) || visited.contains(node.right) || visited.contains(root.left)) {
+				if ((node.left == null && node.right == null) || visited.contains(node.right) || visited.contains(node.left)) {
 					stack.pop();
 					res.add(node.val);
 					visited.add(node);

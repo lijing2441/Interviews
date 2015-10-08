@@ -62,7 +62,7 @@ class Trie {
 		for (int i = 0; i < 26; i++) {
 			if (root.children[i] == null) continue;
 			int[] next = new int[target.length() + 1];
-			next[0] = cur.length() + 1; // 全都补上
+			next[0] = cur.length() + 1; // 全都补上， cur加上现在要加上的这个char
 			for (int j = 1; j < pre.length; j++) {
 				if (target.charAt(j - 1) == (char)('a' + i)) {
 					next[j] = pre[j - 1]; // a match

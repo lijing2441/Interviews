@@ -47,7 +47,8 @@ public class Closest_Binary_Search_Tree_Value {
 	    res.add(closestNode.val);
 		Stack<TreeNode> smallerStack = new Stack<TreeNode>();
 		Stack<TreeNode> largerStack = new Stack<TreeNode>();
-		Stack<TreeNode> tmpStack = new Stack<TreeNode>(); // in order to keep the order in the stack (root in the bottom)
+		// in order to keep the order in the stack (root in the bottom)
+		Stack<TreeNode> tmpStack = new Stack<TreeNode>(); 
 		while(!stack.isEmpty()) {
 		    tmpStack.push(stack.pop());
 		}
@@ -153,42 +154,47 @@ public class Closest_Binary_Search_Tree_Value {
     
     // 有母节点
  // Main Test Function, step 3)
-    public static List<Tree> findKClosestNodeInBST(Tree root, int key, int k)
+    public static List<TreeNodeWithParent> findKClosestNodeInBST(TreeNodeWithParent root, int key, int k)
     {
-        List<Tree> list = new List<Tree>();
-        Tree closestNode = findTreeWithKeyNearestToTheKey(root, key);
+        List<TreeNodeWithParent> list = new ArrayList<TreeNodeWithParent>();
+        TreeNodeWithParent closestNode = findTreeWithKeyNearestToTheKey(root, key);
         k--;
-        list.Add(closestNode);
-        Tree nextlarger = nextLargerNodeInBST(closestNode);
-        Tree nextSmaller = nextSmallerNodeInBST(closestNode);
+        list.add(closestNode);
+        TreeNodeWithParent nextlarger = nextLargerNodeInBST(closestNode);
+        TreeNodeWithParent nextSmaller = nextSmallerNodeInBST(closestNode);
         while (k > 0)
         {
             if (nextlarger == null && nextSmaller == null)
-                throw new StackOverflowException();
-            else if (nextlarger != null && nextSmaller != null)
+				try {
+					throw new Exception();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if (nextlarger != null && nextSmaller != null)
             {
-                if (Math.Abs(nextlarger.node - key) >= Math.Abs(nextSmaller.node - key))
+                if (Math.abs(nextlarger.val - key) >= Math.abs(nextSmaller.val - key))
                 {
-                    list.Add(nextSmaller);
+                    list.add(nextSmaller);
                     k--;
                     nextSmaller = nextSmallerNodeInBST(nextSmaller);
                 }
                 else
                 {
-                    list.Add(nextlarger);
+                    list.add(nextlarger);
                     k--;
                     nextlarger = nextLargerNodeInBST(nextlarger);
                 }
             }
             else if (nextlarger != null)
             {
-                list.Add(nextlarger);
+                list.add(nextlarger);
                 k--;
                 nextlarger = nextLargerNodeInBST(nextlarger);
             }
             else
             {
-                list.Add(nextSmaller);
+                list.add(nextSmaller);
                 k--;
                 nextSmaller = nextSmallerNodeInBST(nextSmaller);
             }
@@ -197,21 +203,21 @@ public class Closest_Binary_Search_Tree_Value {
     }
      
     //find out the node that is closed to the key, step 1)
-    public static Tree findTreeWithKeyNearestToTheKey(Tree root, int key)
+    public static TreeNodeWithParent findTreeWithKeyNearestToTheKey(TreeNodeWithParent root, int key)
     {
-        Tree desiredRoot = root;
-        int diff = Math.Abs(root.node - key);
+    	TreeNodeWithParent desiredRoot = root;
+        int diff = Math.abs(root.val - key);
         while (root != null)
         {
-            if (diff > Math.Abs(root.node - key))
+            if (diff > Math.abs(root.val - key))
             {
-                diff = Math.Abs(root.node - key);
+                diff = Math.abs(root.val - key);
                 desiredRoot = root;
             }
-            if (root.node > key)
-                root = root.leftChild;
-            else if (root.node < key)
-                root = root.rightChild;
+            if (root.val > key)
+                root = root.left;
+            else if (root.val < key)
+                root = root.right;
             else
                 return root;
             }
@@ -219,26 +225,26 @@ public class Closest_Binary_Search_Tree_Value {
     }
      
     //step 2) find its next larger node in BST
-    public static Tree nextLargerNodeInBST(Tree current)
+    public static TreeNodeWithParent nextLargerNodeInBST(TreeNodeWithParent current)
     {
-        if (current.rightChild != null)
+        if (current.right != null)
         {
-            Tree nextTree = current.rightChild;
-            while (nextTree.leftChild != null)
-                nextTree = nextTree.leftChild;
+        	TreeNodeWithParent nextTree = current.right;
+            while (nextTree.left != null)
+                nextTree = nextTree.left;
             return nextTree;
         }
         else
        {
-            while (current.parentTree!=null)
+            while (current.parent!=null)
             {
-                if (current != current.parentTree.rightChild)
-                    return current.parentTree;
+                if (current != current.parent.right)
+                    return current.parent;
                 else
                 {
-                    while(current.parentTree!=null&&current==current.parentTree.rightChild)
-                        current = current.parentTree;
-                    return current.parentTree;
+                    while(current.parent != null && current==current.parent.right)
+                        current = current.parent;
+                    return current.parent;
                 }
             }
             return null;
@@ -246,29 +252,38 @@ public class Closest_Binary_Search_Tree_Value {
     }
      
     //step 2) find its next smaller node in BST
-    public static Tree nextSmallerNodeInBST(Tree current)
+    public static TreeNodeWithParent nextSmallerNodeInBST(TreeNodeWithParent current)
     {
-        if (current.leftChild != null)
+        if (current.left != null)
         {
-            Tree nextTree = current.leftChild;
-            while (nextTree.rightChild != null)
-                nextTree = nextTree.rightChild;
+        	TreeNodeWithParent nextTree = current.left;
+            while (nextTree.right != null)
+                nextTree = nextTree.right;
             return nextTree;
         }
         else
         {
-            while (current.parentTree != null)
+            while (current.parent != null)
             {
-                if (current == current.parentTree.rightChild)
-                    return current.parentTree;
+                if (current == current.parent.right)
+                    return current.parent;
                 else
                {
-                    while (current.parentTree != null && current == current.parentTree.leftChild)
-                        current = current.parentTree;
-                    return current.parentTree;
+                    while (current.parent != null && current == current.parent.left)
+                        current = current.parent;
+                    return current.parent;
                 }
             }
             return null;
         }
     }
+}
+class TreeNodeWithParent {
+	int val;
+	TreeNodeWithParent left;
+	TreeNodeWithParent right;
+	TreeNodeWithParent parent;
+	public TreeNodeWithParent(int val) {
+		this.val = val;
+	}
 }
