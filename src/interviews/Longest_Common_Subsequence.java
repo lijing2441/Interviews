@@ -17,7 +17,7 @@ public class Longest_Common_Subsequence {
 		int[][] dp = new int[lenA + 1][lenB + 1];
 		for (int i = 1; i <= lenA; i++) {
 			for (int j = 1; j <= lenB; j++) {
-				dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+				dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]); // this line is key
 				if (A.charAt(i - 1) == B.charAt(j - 1)) {
 					if (i == 1 && j == 1) {
 						dp[i][j] = 1;

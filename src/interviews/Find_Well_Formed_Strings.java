@@ -1,7 +1,9 @@
 package interviews;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Find_Well_Formed_Strings {
 	/**
@@ -20,12 +22,12 @@ public class Find_Well_Formed_Strings {
 	 * Get the input string. Find out all the per­mu­ta­tions of a String.
 	 * Before print­ing check if the per­mu­ta­tion is well formed.
 	 */
-	public static List<String> wellFormedStrings(String s) {
-		List<String> res = new ArrayList<String>();
+	public static Set<String> wellFormedStrings(String s) {
+		Set<String> res = new HashSet<String>();
 		permutationHelper(res, s.toCharArray(), 0);
 		return res;
 	}
-	public static void permutationHelper(List<String> res, char[] charArr, int start) {
+	public static void permutationHelper(Set<String> res, char[] charArr, int start) {
 		if (start == charArr.length) {
 			if (isWellFormed(charArr)) {
 				res.add(new String(charArr));
@@ -40,8 +42,8 @@ public class Find_Well_Formed_Strings {
 	}
 	
 	public static boolean isWellFormed(char[] arr) {
-		for (int i = 0; i < arr.length; i++) {
-			if (Character.toLowerCase(arr[i]) > Character.toLowerCase(arr[i])) {
+		for (int i = 0; i < arr.length - 1; i++) {
+			if (Character.toLowerCase(arr[i]) > Character.toLowerCase(arr[i + 1])) {
 				return false;
 			}
 		}
@@ -55,7 +57,7 @@ public class Find_Well_Formed_Strings {
 	}
 	
 	public static void main(String[] args) {
-		List<String> res = wellFormedStrings("Interview");
+		Set<String> res = wellFormedStrings("Interview");
 		for (String s: res) {
 			System.out.println(s);
 		}

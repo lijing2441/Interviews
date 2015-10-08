@@ -1,7 +1,7 @@
 package interviews;
 
 public class Sum_From_Both_Ways {
-	//O(n)
+	//O(n), O(1)
 	public static int equalSumIndex(int[] arr){
 		int n = arr.length;
 		int arrSum = 0;

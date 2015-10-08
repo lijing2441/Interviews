@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Stack;
 
 public class Two_Sum {
-	// if not require for the indices, first sort, then use two pointers
+	// if not ask for the indices, first sort, then use two pointers
 	// O(nlon + n)
 	public int[] twoSum(int[] numbers, int target) {
 		Arrays.sort(numbers);

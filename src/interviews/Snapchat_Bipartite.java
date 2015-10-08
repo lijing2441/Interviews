@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class Snapchat_Bipartite {
 	// check whether a graph is bipartite using bfs
-
 	private int numberOfVertices;
 	private Queue<Integer> queue;
 

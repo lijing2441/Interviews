@@ -2,7 +2,6 @@ package interviews;
 
 public class Longest_Common_Prefix {
 	/**
-	 * 
 	 * @logic 1) "Horizontal matching (over strings)". Pick up the first string
 	 *        and compare it with the rest. Return the minimum prefix found
 	 *        among all comparisons.

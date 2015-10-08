@@ -10,6 +10,45 @@ public class Airbnb_HashTable_分页 {
 	 * 每个⻚面不能重复有重复的host-id.使⽤LinkedHashMap,如果有相同id则放在下页,保存⼀个最后能用的⻚面,
 	 * 每当一个⻚面满了,更新哈希表
 	 */
+	public static ArrayList<ArrayList<String>> getPages(String[] source, int k) {
+		int firstEmptyPage = 0;
+		ArrayList<ArrayList<String>> pages = new ArrayList<ArrayList<String>>();
+		pages.add(new ArrayList<String>());
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>(); // linked hashmap to store pages with same id
+		for (String s : source) {
+			int id = getId(s); // 找出来id
+			if (map.containsKey(id)) {
+				int index = map.get(id) + 1; // 放下一个page
+				if (index == pages.size())
+					pages.add(new ArrayList<String>());
+				pages.get(index).add(s);  // 放下一页
+				map.put(id, index);
+			} else {
+				map.put(id, firstEmptyPage);
+				pages.get(firstEmptyPage).add(s);
+				if (pages.get(firstEmptyPage).size() == k) {
+					firstEmptyPage = update(map, pages, firstEmptyPage); // 给下一页的页码
+				}
+			}
+		}
+		return pages;
+	}
+	// 一页满了之后，把这一页缓存到page，move the empty page pointer
+	private static int update(Map<Integer, Integer> map, ArrayList<ArrayList<String>> pages, int i) {
+		for (String s : pages.get(i)) {
+			int id = getId(s);
+			if (map.get(id) == i)
+				map.remove(id);
+		}
+		if (i == pages.size()) pages.add(new ArrayList<String>());
+		return i + 1;
+	}
+
+	private static int getId(String s) {
+		int i = s.indexOf(',');
+		return Integer.parseInt(s.substring(0, i));
+	}
+	
 	public static void main(String[] args) {
         String[] source = new String[]{
                          "1,28,300.1,SanFrancisco",
@@ -50,43 +89,4 @@ public class Airbnb_HashTable_分页 {
                 System.out.println(str);
         }
     } 
-
-	public static ArrayList<ArrayList<String>> getPages(String[] source, int k) {
-		int firstEmptyPage = 0;
-		ArrayList<ArrayList<String>> pages = new ArrayList<ArrayList<String>>();
-		pages.add(new ArrayList<String>());
-		Map<Integer, Integer> map = new HashMap<Integer, Integer>(); // linked hashmap to store pages with same id
-		for (String s : source) {
-			int id = getId(s); // 找出来id
-			if (map.containsKey(id)) {
-				int index = map.get(id) + 1; // 放下一个page
-				if (index == pages.size())
-					pages.add(new ArrayList<String>());
-				pages.get(index).add(s);  // 放下一页
-				map.put(id, index);
-			} else {
-				map.put(id, firstEmptyPage);
-				pages.get(firstEmptyPage).add(s);
-				if (pages.get(firstEmptyPage).size() == k) {
-					firstEmptyPage = update(map, pages, firstEmptyPage); // 给下一页的页码
-				}
-			}
-		}
-		return pages;
-	}
-	// 一页满了之后，把这一页缓存到page，move the empty page pointer
-	private static int update(Map<Integer, Integer> map, ArrayList<ArrayList<String>> pages, int i) {
-		for (String s : pages.get(i)) {
-			int id = getId(s);
-			if (map.get(id) == i)
-				map.remove(id);
-		}
-		if (i == pages.size()) pages.add(new ArrayList<String>());
-		return i + 1;
-	}
-
-	private static int getId(String s) {
-		int i = s.indexOf(',');
-		return Integer.parseInt(s.substring(0, i));
-	}
 }

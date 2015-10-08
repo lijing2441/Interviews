@@ -131,7 +131,9 @@ public class Word_Ladder {
 		 }
 	 }
 	 
-	 // if only need one shortest path
+	 /**
+	  * if only need one shortest path
+	  */
 	 public static List<String> findOneShortestLadder(String start, String end, Set<String> set) {
 		 Map<String, NodeWithP> map = new HashMap<String, NodeWithP>();
 		 map.put(start, new NodeWithP(1, start));
@@ -174,7 +176,7 @@ public class Word_Ladder {
 		 }
 		 return res;
 	 }
-	 
+	 // driver function
 	 public static void main(String[] args) {
 		 String start = "hit";
 		 String end = "cog";

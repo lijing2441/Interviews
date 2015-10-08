@@ -25,9 +25,6 @@ public class TwoSigma_Fibonacci_Encoding {
 			fibonacci.add(fibonacci.get(size - 1) + fibonacci.get(size - 2));
 			size++;
 		}
-//		for (int i : fibonacci) {
-//			System.out.println(i);
-//		}
 
 		List<Integer> candidates = new ArrayList<Integer>();
 		// from most significant digit to the least

@@ -2,7 +2,7 @@ package interviews;
 
 public class Snapchat_大数加法 {
 	/**
-	 * 大数加法, follow up: 负数怎么办
+	 * 大数加法, follow up: 负数怎么办 (即减法)
 	 */
 	public static String stringPlus(String num1, String num2) {
 		//ignore edge cases about null/empty strings

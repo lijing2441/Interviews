@@ -28,8 +28,7 @@ public class Shorted_Word_Distance {
 				index1 = i;
 				if (index2 != -1) {
 					int cur = Math.abs(index1 - index2);
-					if (cur < dist)
-						dist = cur;
+					if (cur < dist) dist = cur;
 				}
 			} else if (words[i].equals(word2)) {
 				index2 = i;

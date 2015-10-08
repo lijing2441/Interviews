@@ -62,7 +62,6 @@ public class strStr {
 	 * For the pattern “AAAAA”, lps[] is [0, 1, 2, 3, 4]
 	 * For the pattern “AAABAAA”, lps[] is [0, 1, 2, 0, 1, 2, 3]
 	 * For the pattern “AAACAAAAAC”, lps[] is [0, 1, 2, 0, 1, 2, 3, 3, 3, 4]
-	 * 
 	 */
 	public String strStrKMP(String haystack, String needle) {
 		if (needle.length() == 0) return haystack;

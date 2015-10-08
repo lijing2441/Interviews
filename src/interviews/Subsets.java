@@ -14,7 +14,7 @@ public class Subsets {
 		return res;
 	}
 
-	public static void subsetsHelper(int[] S, int cur,
+	public static void subsetsHelper(int[] S, int cur, 
 			ArrayList<ArrayList<Integer>> res, ArrayList<Integer> list) {
 		if (cur == S.length) {
 			res.add(list);

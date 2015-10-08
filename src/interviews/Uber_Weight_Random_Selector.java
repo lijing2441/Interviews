@@ -9,13 +9,17 @@ public class Uber_Weight_Random_Selector {
 	 * {0.1, 0.2, ..., 0.01} of probability. Write a random generator that
 	 * generates the chars according to their probability.
 	 * 
-	 * @analysis: 1. Take an auxiliary array (say prefix[]) of size n. 2.
-	 *            Populate it with prefix sum, such that prefix[i] represents
-	 *            sum of probabilities from 0 to i. 3. Generate a random
-	 *            number(say r) between 0.0 and 1.0. 4. Find index of Ceil of
-	 *            random number generated in step #3 in the prefix array. Let
-	 *            the index be indexc. 5. Return the random number arr[indexc],
-	 *            where arr[] contains the input n numbers.
+	 * @analysis: 1. Take an auxiliary array (say prefix[]) of size n. 
+	 * 			  
+	 * 			  2. Populate it with prefix sum, such that prefix[i] represents sum of probabilities 
+	 * 			     from 0 to i. 
+	 *            
+	 *            3. Generate a random number(say r) between 0.0 and 1.0. 
+	 *            
+	 *            4. Find index of Ceil of random number generated in step #3 in the prefix array. 
+	 *               Let the index be indexc. 
+	 *            
+	 *            5. Return the random number arr[indexc], where arr[] contains the input n numbers.
 	 */
 	// 给概率
 	public int myRandomGenerator(int[] arr, double[] probability) {

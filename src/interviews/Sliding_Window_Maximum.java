@@ -68,7 +68,7 @@ public class Sliding_Window_Maximum {
             while (!deque.isEmpty() && deque.peekLast() < num) {
                 deque.pollLast();
             }
-            deque.offerLast(num);
+            deque.offer(num); // offer at the last position
             // 如果到了k+1个 in array，要开始看是否要poll前面的
             if (i >= k && deque.peekFirst() == nums[i - k]) {
                 deque.pollFirst();

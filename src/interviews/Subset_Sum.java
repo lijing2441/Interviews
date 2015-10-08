@@ -131,6 +131,7 @@ public class Subset_Sum {
 	 * Since there can only be M different subset sums mod M, the line can only be executed 
 	 * M times, for a total of O(MN) time spent on that line.
 	 */
+	@SuppressWarnings("unchecked")
 	public ArrayList<Integer> findSubsets(int[] number, int M){
 		//we use a map to record the (mod - list) pair
 		//when the mod == 0, that is, the numbers in the list compose a multiplication of M

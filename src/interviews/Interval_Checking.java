@@ -92,7 +92,7 @@ public class Interval_Checking {
 	 * 
 	 * version II: 找出overlap最多的interval;
 	 * 
-	 * @logic 用 interval tree
+	 * @logic 见facebook_找最多overlap的做法
 	 */
 	
 	

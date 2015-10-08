@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.TreeSet;
 
 public class Contains_Duplicate {
-
 	/**
 	 * Given an array of integers and an integer k, find out whether there there
 	 * are two distinct indices i and j in the array such that nums[i] = nums[j]

@@ -25,6 +25,7 @@ public class Reverse_Bits {
             n /= 2;
             sb.insert(0, Integer.toString(digit));
         }
+        // padding zeroes
         while(sb.length() < 32) {
             sb.insert(0, '0');
         }

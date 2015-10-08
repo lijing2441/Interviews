@@ -29,6 +29,8 @@ public class Different_Ways_to_Add_Parentheses {
 	 * (((2*3)-4)*5) = 10
 	 * 
 	 * Output: [-34, -14, -10, -10, 10]
+	 * 
+	 * O(Catalan(n)) time -> depending on the possible answer number 
 	 */
 	public static List<Integer> diffWaysToCompute(String input) {
         List<Integer> res = new ArrayList<Integer>();

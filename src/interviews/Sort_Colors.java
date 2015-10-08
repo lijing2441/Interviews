@@ -21,7 +21,7 @@ public class Sort_Colors {
 			} else if (A[i] == 2) {
 				// since we scan from the beginning
 				// we have not check whether the swapped element is 2 or not
-				// so i-- to chekc it again
+				// so i-- to check it again
 				k--;
 				swap(A, k, i);
 				i--;

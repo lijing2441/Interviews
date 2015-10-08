@@ -8,8 +8,7 @@ public class Reverse_LL_In_k_Group {
 	 * If the number of nodes is not a multiple of k then left-out nodes in the
 	 * end should remain as it is.
 	 * 
-	 * You may not alter the values in the nodes, only nodes itself may be
-	 * changed.
+	 * You may not alter the values in the nodes, only nodes itself may be changed.
 	 * 
 	 * Only constant memory is allowed.
 	 * 
@@ -31,6 +30,7 @@ public class Reverse_LL_In_k_Group {
 		while (cur != null) {
 			ListNode pilot = cur;
 			int remaining = k;
+			// find the end of the current group
 			while (pilot != null && remaining > 0) {
 				remaining--;
 				pilot = pilot.next;

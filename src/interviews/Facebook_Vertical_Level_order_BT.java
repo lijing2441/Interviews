@@ -50,10 +50,9 @@ c i
 			ArrayList<ArrayList<Integer>> left,
 			ArrayList<ArrayList<Integer>> right) {
 		// Base case
-		if (root == null)
-			return;
+		if (root == null) return;
 		// Normal case
-		if (index >= 0) {
+		else if (index >= 0) {
 			while (right.size() <= index) {
 				right.add(new ArrayList<Integer>());
 			}

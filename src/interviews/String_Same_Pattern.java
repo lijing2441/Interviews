@@ -64,7 +64,11 @@ public class String_Same_Pattern {
 			return true;
 		}
 	}
-	// simple version: pattern = "abba", str = "dog cat cat dog" should return true.
+	
+	
+	/**
+	 * simple version: pattern = "abba", str = "dog cat cat dog" should return true.
+	 */
 	public boolean wordPattern(String pattern, String str) {
         if (pattern == null && str == null) return true;
         if (pattern == null || str == null) return false;

@@ -59,7 +59,8 @@ public class Surrounded_Regions {
             }
         }
     }
-	//bfs to flood fill each grid on the board boundary
+	
+	// bfs to flood fill each grid on the board boundary
     public void fill(char[][] board, int i, int j){
         //if the current grid is not 'O', no need to fill, return
     	if(board[i][j] != 'O') return;

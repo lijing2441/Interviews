@@ -8,9 +8,8 @@ public class Count_Inversions_In_Array {
 	 * {3, 2, 1}, the answer is 3 because {3, 2}, {3, 1}, {2, 1}.
 	 * 
 	 * Follow-up: Can you do it in O(nlogn) time?
-	 */
-	
-	/**
+	 * 
+	 * @idea
 	 * Method 1: Divide and Conquer to sort the array
 	 * 
 	 * Suppose we know the number of inversions in the left and right half of the array. 
@@ -74,7 +73,7 @@ public class Count_Inversions_In_Array {
 	
 	/**
 	 * Method 2: It is possible to solve this problem in O(n log n) time using a
-	 * balanced binary search tree. Pseudo-code of this algorithm:
+	 * self-balanced binary search tree. Pseudo-code of this algorithm:
 	 * 
 	 * tree = an empty self-balanced binary search tree (or sorted dynamic array)
 	 * answer = 0 

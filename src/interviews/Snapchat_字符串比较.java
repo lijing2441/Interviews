@@ -17,6 +17,7 @@ public class Snapchat_字符串比较 {
 		String str1 = id1.substring(0, end1);
 		String str2 = id2.substring(0, end2);
 		if (str1.compareTo(str2) != 0) return str1.compareTo(str2);
+		// 前面的零要去掉，以免影响长度比较
 		String num1 = removeLeadingZeros(id1.substring(end1));
 		String num2 = removeLeadingZeros(id2.substring(end2));
 		if (num1.length() != num2.length()) {

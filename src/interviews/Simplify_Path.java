@@ -18,7 +18,7 @@ public class Simplify_Path {
             // in the case of /../, remove the first, the string we just added
             else if(s.equals("..")){
                 if(!q.isEmpty()) q.removeFirst();
-            } 
+            }
             else q.addFirst(s);
         }
         // all popped case

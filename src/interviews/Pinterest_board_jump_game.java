@@ -12,6 +12,8 @@ public class Pinterest_board_jump_game {
 	 * right the number of spaces specified on the square you’re currently on.
 	 * Your task is to implement the function: def can_win(board, pos): returns
 	 * True if you can win the board from that starting pos, False otherwise
+	 * 
+	 * O(n) since we only tested each pos at most once
 	 */
 	public static boolean can_win(int[] board, int startPos) {
 		Set<Integer> usedPos = new HashSet<Integer>();

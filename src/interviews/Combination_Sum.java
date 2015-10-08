@@ -26,6 +26,7 @@ import java.util.Stack;
  * NP problem, exponential
  */
 public class Combination_Sum {
+	// recursive way
 	public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
         if(candidates.length == 0) return res;

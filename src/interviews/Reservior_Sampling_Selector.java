@@ -34,7 +34,9 @@ public class Reservior_Sampling_Selector {
 	 * 		if j <= k then
 	 * 			R[j] := S[i]
 	 * 
-	 * Finally: the probability that any item in stream[i] where 0 <= i < n will be in final reservoir[] is k/n.
+	 * Finally: the probability that any item in stream[i] where 0 <= i < n will 
+	 * be in final reservoir[] is k/n.
+	 * 
 	 * 证明见最下
 	 */
 	public int[] selectKItems(int[] stream, int k){

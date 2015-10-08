@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class Snapchat_A子串anagram是B {
-	
+	// keep a sliding window, O(n)
 	public static boolean isSubstringAnagram(String A, String B) {
 		if (A.length() < B.length()) return false;
 		int aLen = A.length(), bLen = B.length();

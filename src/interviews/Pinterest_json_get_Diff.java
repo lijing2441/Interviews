@@ -28,7 +28,7 @@ public class Pinterest_json_get_Diff {
 			String key = (String) entry.getKey();
 			if (json2.containsKey(key)) {
 				Value v = (Value) entry.getValue();
-				if (v.isString) { // string case
+				if (v.isString) { // string case, 不同就只保留json1中的词
 					if (!json2.get(key).strValue.equals(v.strValue)) {
 						json3.put(key, v);
 					}
