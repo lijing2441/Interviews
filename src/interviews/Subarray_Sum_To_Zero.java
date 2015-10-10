@@ -28,7 +28,7 @@ public class Subarray_Sum_To_Zero {
         }
         return res;
 	}
-	// Another O(n^2) method
+	// O(n^2) method, without extra space except results
 	public ArrayList<Integer> subarraySumBad(int[] nums) {
         // write your code here
         ArrayList<Integer> res = new ArrayList<Integer>();
@@ -49,4 +49,36 @@ public class Subarray_Sum_To_Zero {
         }
         return res;
     }
+	
+	/**
+	 * 变种：是否有连续subarray sum = target
+	 * Follow up: 有负数怎么办
+	 */
+	public static void subarraySumEqualsTarget(int[] nums, int target) {
+		if (nums == null || nums.length == 0) {
+			if (target == 0) System.out.println("Empty array that fits 0 target");
+			else System.out.println("no fit");
+		}
+		int len = nums.length;
+		Map<Integer, Integer> indexMap = new HashMap<Integer, Integer>();
+		indexMap.put(0,  -1);
+		int sum = 0;
+		for (int i = 0; i < len; i++) {
+			sum += nums[i];
+			if (indexMap.containsKey(sum - target)) {
+				int start = indexMap.get(sum - target) + 1;
+				int end = i;
+				System.out.println("start: " + start + ", end: " + end);
+				return;
+			} else {
+				indexMap.put(sum, i);
+			}
+		}
+		System.out.println("no fit");
+	}
+	
+	public static void main(String[] args) {
+		int[] nums = {10, 1, 2, 4, -1, 7, 3};
+		subarraySumEqualsTarget(nums, 12);
+	}
 }

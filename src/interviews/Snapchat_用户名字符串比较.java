@@ -1,6 +1,6 @@
 package interviews;
 
-public class Snapchat_字符串比较 {
+public class Snapchat_用户名字符串比较 {
 	/**
 	 * 很多用户名都会重复，通过后面的数字来区分，但是在排序的时候严格按照字符串排序就会出现 abc10 排在 abc2
 	 * 前面（因为‘1’比‘2’要小），但是事实上他们想要的是 abc10 排在 abc2
@@ -22,6 +22,7 @@ public class Snapchat_字符串比较 {
 		String num2 = removeLeadingZeros(id2.substring(end2));
 		if (num1.length() != num2.length()) {
 			return num1.length() - num2.length();
+			// if (num1.length() > num2.length()) return 1; else return -1;
 		} else {
 			for (int i = 0; i < num1.length(); i++) {
 				if (num1.charAt(i) != num2.charAt(i)) {

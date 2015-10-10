@@ -22,8 +22,7 @@ public class Maximal_Points_In_A_Line {
 	 */
 
 	public int maxPoints(Point[] points) {
-		if (points == null || points.length == 0)
-			return 0;
+		if (points == null || points.length == 0) return 0;
 
 		int max = 1;
 		HashMap<Double, Integer> map = new HashMap<Double, Integer>();
