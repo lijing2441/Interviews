@@ -22,6 +22,20 @@ public class Read_N_Characters_Given_Read4 {
 	 * destPos - starting position in the destination data.
 	 * length - the number of array elements to be copied.
 	 */
+	public int readGreat(char[] buf, int n) {
+        char[] buffer = new char[4];
+        int ptr = 0;
+        while (ptr < n) {
+            int bufferCount = read4(buffer);
+            int bufferPtr = 0;
+            while (bufferPtr < bufferCount && ptr < n) {
+                buf[ptr++] = buffer[bufferPtr++];
+            }
+            if (bufferCount < 4) break;
+        }
+        return ptr;
+    }
+	
 	
 	public int readn(char[] buf, int n) {
 		char[] buffer = new char[4];
@@ -56,31 +70,56 @@ public class Read_N_Characters_Given_Read4 {
 	 * － offset 上一次读取之后buffer中剩下字符的偏移量
 	 * － bufsize buffer中剩下字符的个数
 	 */
-	private char[] buffer = new char[4];
-	int offset = 0, bufsize = 0;
-
-	/**
-	 * @param buf	Destination buffer
-	 * @param n		Maximum number of characters to read
-	 * @return 		The number of characters read
-	 */
-	public int read(char[] buf, int n) {
-		int readBytes = 0;
-		boolean eof = false;
-		while (!eof && readBytes < n) {
-			// if there is position occupied by the last time read
-			int sz = (bufsize > 0) ? bufsize : read4(buffer);
-			// we have no place or reach the end of the document
-			if (bufsize == 0 && sz < 4)
-				eof = true;
-			// count the left and copy the left to the array
-			int bytes = Math.min(n - readBytes, sz);
-			for(int i = offset; i < bytes; i++){
-				buf[readBytes++] = buffer[i];
-			}
-			offset = (offset + bytes) % 4;
-			bufsize = sz - bytes;
-		}
-		return readBytes;
-	}
+	
+	public char[] buffer = new char[4];
+    public int bufferPtr = 0;
+    public int bufferCount = 0;
+    
+    public int read(char[] buf, int n) {
+        int ptr = 0;
+        while(ptr < n) {
+            // last read completely finished, no remaining part
+            // thus begin a new read4
+            if(bufferPtr == 0) {
+                bufferCount = read4(buffer);
+            }
+            // no bytes left for read in file, run out of file
+            if(bufferCount == 0) break;
+            // read the bytes currently in the buffer
+            while(bufferPtr < bufferCount && ptr < n) {
+                buf[ptr++] = buffer[bufferPtr++];
+            }
+            // if finished all the bytes, restore bufferPtr to 0
+            if(bufferPtr == bufferCount) bufferPtr = 0;
+        }
+        return ptr;
+    }
+	
+//	private char[] buffer = new char[4];
+//	int offset = 0, bufsize = 0;
+//
+//	/**
+//	 * @param buf	Destination buffer
+//	 * @param n		Maximum number of characters to read
+//	 * @return 		The number of characters read
+//	 */
+//	public int read(char[] buf, int n) {
+//		int readBytes = 0;
+//		boolean eof = false;
+//		while (!eof && readBytes < n) {
+//			// if there is position occupied by the last time read
+//			int sz = (bufsize > 0) ? bufsize : read4(buffer);
+//			// we have no place or reach the end of the document
+//			if (bufsize == 0 && sz < 4)
+//				eof = true;
+//			// count the left and copy the left to the array
+//			int bytes = Math.min(n - readBytes, sz);
+//			for(int i = offset; i < bytes; i++){
+//				buf[readBytes++] = buffer[i];
+//			}
+//			offset = (offset + bytes) % 4;
+//			bufsize = sz - bytes;
+//		}
+//		return readBytes;
+//	}
 }

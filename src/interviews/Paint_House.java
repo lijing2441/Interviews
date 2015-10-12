@@ -31,7 +31,38 @@ public class Paint_House {
 		return Math.min(Math.min(red, blue), green);
 	}
 	
-	// extended to k colors
+	// method O(nk), 只需要每次存下min和second to the min
+	public int minCostIINK(int[][] costs) {
+        int n = costs.length;
+        if (n == 0) return 0;
+        int k = costs[0].length;
+        if (k == 0) return 0;
+        
+        int[] dp = new int[k];
+        int m1 = 0, m2 = 0;
+        for (int i = 0; i < n; i++) {
+            int t1 = m1, t2 = m2;
+            m1 = Integer.MAX_VALUE;
+            m2 = Integer.MAX_VALUE;
+            for (int j = 0; j < k; j++) {
+                if (dp[j] == t1) dp[j] = t2 + costs[i][j];
+                else dp[j] = t1 + costs[i][j];
+                if (dp[j] < m1) {
+                    m2 = m1;
+                    m1 = dp[j];
+                } else if (dp[j] < m2) {
+                    m2 = dp[j];
+                }
+            }
+        }
+        int res = Integer.MAX_VALUE;
+        for (int i = 0; i < k; i++) {
+            if (dp[i] < res) res = dp[i];
+        }
+        return res;
+    }
+	
+	// extended to k colors, O(nkk)
 	public int minCostII(int[][] costs) {
         int n = costs.length;
         if(n == 0) return 0;

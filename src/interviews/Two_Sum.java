@@ -34,7 +34,7 @@ public class Two_Sum {
 		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
 		for (int i = 0; i < numbers.length; i++) {
 			if (map.containsKey(target - numbers[i])) {
-				if (map.get(target - numbers[i]) != i) {
+				if (map.get(target - numbers[i]) != i) { // make sure not the same number
 					res[1] = i + 1;
 					res[0] = map.get(target - numbers[i]) + 1;
 				}

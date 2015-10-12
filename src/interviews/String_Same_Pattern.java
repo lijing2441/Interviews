@@ -24,47 +24,43 @@ public class String_Same_Pattern {
 	 *        and m is the number of distinct characters in the pattern.
 	 */
 	
-	public boolean isSamePattern(String pattern, String input){
-		//corner cases
-		if(pattern == null || input == null) return false;
-		if(input.length() < pattern.length()) return false;
-		//create the map to correspond each letter in pattern to n letters in input
-		HashMap<Character, String> map = new HashMap<Character, String>();
-		return patternMatchHelper(pattern, 0, input, 0, 1, map);
-	}
-	public boolean patternMatchHelper(String pattern, int pIdx, String input, int iStart, int iEnd, HashMap<Character, String> map){
-		if(iStart >= input.length() || iEnd > input.length()) return false;
-		if(pIdx == pattern.length() - 1){
-			//put the last string to test
-			//if it can fit, we return true, else we proceed with the other options 
-			return putInMap(map, pattern.charAt(pIdx), input.substring(iStart, input.length()));
-		}
-		while(iEnd < input.length()){
-			//if we can put
-			if(putInMap(map, pattern.charAt(pIdx), input.substring(iStart, iEnd))){
-				if(patternMatchHelper(pattern, pIdx + 1, input, iEnd, iEnd + 1, map)){
-					return true;
-				}else{
-					//remove the current pattern corresponding from the map
-					if(map.containsKey(pattern.charAt(pIdx))){
-						map.remove(pattern.charAt(pIdx));
-					}
-				}
-			}
-			iEnd++;
-		}
-		return false;
-	}
-	public boolean putInMap(HashMap<Character, String> map, char key, String value){
-		if(map.containsKey(key)){
-			// test whether the existing associated key-value pair is valid for the current key-value checked
-			return map.get(key).equals(value);
-		}else{
-			map.put(key, value);
-			return true;
-		}
-	}
-	
+	public boolean wordPatternMatch(String pattern, String str) {
+        if (pattern == null && str == null) return true;
+        if (pattern == null || str == null) return true;
+        int pLen = pattern.length(), sLen = str.length();
+        if (sLen < pLen) return false;
+        Map<Character, String> patternMap = new HashMap<Character, String>();
+        //Set<String> checked = new HashSet<String>();
+        return matchHelper(pattern, 0, str, 0, patternMap);
+    }
+    public boolean matchHelper(String p, int pIndex, String s, int sStart, Map<Character, String> patternMap) {
+        if (pIndex == p.length() && sStart == s.length()) return true;
+        if (pIndex == p.length() || sStart == s.length()) return false;
+        // case that the patternMap already has a pattern char for pIndex
+        if (patternMap.containsKey(p.charAt(pIndex))) {
+            String curMatch = patternMap.get(p.charAt(pIndex));
+            // check whether the curMatch is consistent with the previous matches in the patternMap
+            if (!s.startsWith(patternMap.get(p.charAt(pIndex)), sStart)) return false;
+            else return matchHelper(p, pIndex + 1, s, sStart + curMatch.length(), patternMap); // match the following
+        } else {
+        	// case that the patternMap does not contains a pattern char for pIndex
+            for (int sEnd = sStart + 1; sEnd <= s.length(); sEnd++) {
+                String curMatch = s.substring(sStart, sEnd);
+                // another pattern char has matched this 
+                if (patternMap.containsValue(curMatch)) {
+                    break;
+                }
+                patternMap.put(p.charAt(pIndex), curMatch);
+                //set.add(curMatch);
+                if (matchHelper(p, pIndex + 1, s, sEnd, patternMap)) return true;
+            }
+            // we still cannot find any match for this pIndex
+            patternMap.remove(p.charAt(pIndex));
+            //set.remove(patternMap.get(p.charAt(pIndex)));
+        }
+        
+        return false;
+    }
 	
 	/**
 	 * simple version: pattern = "abba", str = "dog cat cat dog" should return true.

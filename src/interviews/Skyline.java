@@ -1,7 +1,11 @@
 package interviews;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class Skyline {
 	/**
@@ -62,4 +66,73 @@ public class Skyline {
         res.addAll(l2);
         return res;
     }
+    
+    // max-heap method
+    /**
+	 * Notice that "key points" are either the left or right edges of the
+	 * buildings. Therefore, we first obtain both the edges of all the N
+	 * buildings, and store the 2N edges in a sorted array. Maintain a max-heap
+	 * of building heights while scanning through the edge array:
+	 * 
+	 * If the current edge is a left edge, then add the height of its associated
+	 * building to the max-heap; If the edge is a right one, remove the
+	 * associated height from the heap.
+	 * 
+	 * Then we take the top value of the heap (yi) as the maximum height at the
+	 * current edge position (xi).
+	 * 
+	 * Now (xi, yi) is a potential key point. If yi is the same as the height of
+	 * the last key point in the result list, it means that this key point is
+	 * not a REAL key point, but rather a horizontal continuation of the last
+	 * point, so it should be discarded; otherwise, we add (xi,yi) to the result
+	 * list because it is a real key point. Repeat this process until all the
+	 * edges are checked.
+	 * 
+	 * It takes O(NlogN) time to sort the edge array. For each of the 2N edges,
+	 * it takes O(1) time to query the maximum height but O(logN) time to add or
+	 * remove elements. Overall, this solution takes O(NlogN) time.
+	 */
+    public List<int[]> getSkylineHeap(int[][] buildings) {
+        List<int[]> res = new ArrayList<int[]>();
+        List<int[]> edges = new ArrayList<int[]>();
+        for (int[] b : buildings) {
+            edges.add(new int[] {b[0], -b[2]});
+            edges.add(new int[] {b[1], b[2]});
+        }
+        // get the sorted x
+        Collections.sort(edges, new Comparator<int[]>() {
+            public int compare(int[] a, int[] b) {
+                if (a[0] != b[0]) {
+                    return a[0] - b[0];
+                } else {
+                    return a[1] - b[1];
+                }
+            }
+        });
+        // get the highest height for the current range
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>(new Comparator<Integer>() {
+            public int compare(Integer a, Integer b) {
+                return b - a;
+            }
+        });
+        pq.offer(0);
+        int prev = 0;
+        for (int[] edge : edges) {
+            if (edge[1] < 0) {
+                // left edge
+                pq.offer(-edge[1]);
+            } else {
+                // right edge
+                pq.remove(edge[1]);
+            }
+            int cur = pq.peek(); // current height
+            if (cur != prev) {
+                res.add(new int[] {edge[0], cur});
+                prev = cur;
+            }
+        }
+        return res;
+        
+    }
+
 }

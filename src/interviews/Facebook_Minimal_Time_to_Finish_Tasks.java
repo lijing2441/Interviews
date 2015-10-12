@@ -14,16 +14,6 @@ public class Facebook_Minimal_Time_to_Finish_Tasks {
 	 * follow up: if k is small, how to improve space usability
 	 * 			=> remove the map value after k
 	 */
-	public static void main(String[] args) {
-		String tasks = "ABCDAE";
-		int k = 12;
-		int k2 = 4;
-		int res = minimalTime(tasks, k);
-		int res2 = minimalTime(tasks, k2);
-		System.out.println(res);
-		System.out.println(res2);
-	}
-	
 	public static int minimalTime(String tasks, int k) {
 		if (tasks == null) return 0; 
 		if (tasks.length() == 0 || k == 0) return tasks.length();
@@ -46,4 +36,15 @@ public class Facebook_Minimal_Time_to_Finish_Tasks {
 		}
 		return count;
 	}
+	
+	public static void main(String[] args) {
+		String tasks = "ABCDAE";
+		int k = 12;
+		int k2 = 4;
+		int res = minimalTime(tasks, k);
+		int res2 = minimalTime(tasks, k2);
+		System.out.println(res);
+		System.out.println(res2);
+	}
+	
 }

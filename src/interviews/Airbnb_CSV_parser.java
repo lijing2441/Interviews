@@ -3,6 +3,16 @@ package interviews;
 import java.util.ArrayList;
 
 public class Airbnb_CSV_parser {
+	/**
+	John,Smith,john.smith@gmail.com,Los Angeles,1
+	Jane,Roberts,janer@msn.com,"San Francisco, CA",0
+	"Alexandra ""Alex""",Menendez,alex.menendez@gmail.com,Miami,1
+	"""Alexandra Alex"""
+	John|Smith|john.smith@gmail.com|Los Angeles|1
+	Jane|Roberts|janer@msn.com|San Francisco, CA|0
+	Alexandra "Alex"|Menendez|alex.menendez@gmail.com|Miami|1
+	"Alexandra Alex"
+	*/
 	public static void main(String[] args) {
 		// #1
 		ArrayList<String> output = parseCSV("John,Smith,john.smith@gmail.com,Los Angeles,1");
@@ -16,6 +26,8 @@ public class Airbnb_CSV_parser {
 		strOutput = printStr(output);
 		System.out.println(strOutput);
 	}
+	
+	// function to parse
 	public static ArrayList<String> parseCSV(String str) {
         ArrayList<String> res = new ArrayList<String>();
         boolean inQuote = false;
