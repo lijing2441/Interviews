@@ -1,50 +1,102 @@
 package interviews;
 
+import java.util.Stack;
+
 public class Convert_BT_To_Doubly_LinkedList {
 
 	// in-order traversal: fix the prev pointer first recursively,
 	// then use the prev pointer to get the next pointer and return root;
 
-	public TreeNode BT2DLL(TreeNode root) {
-		fixPrevPtr(root);
-		return fixNextPtr(root);
-	}
-
-	// Changes left pointers to work as previous pointers in converted DLL
-	// The function simply does inorder traversal of Binary Tree and updates
-	// left pointer using previously visited node
-
-	public void fixPrevPtr(TreeNode root) {
-		TreeNode prev = null;
-		if (root != null) {
-			fixPrevPtr(root.left);
-			root.left = prev;
-			prev = root;
-			fixPrevPtr(root.right);
-		}
-	}
-
-	// at this time, the left pointers have been fixed to the previous node in
-	// in-order traversal
-	// Changes right pointers to work as next pointers in converted DLL
-	public TreeNode fixNextPtr(TreeNode root) {
-		TreeNode prev = null;
-
-		// go to the right most node in BT or last node in DLL
-		while (root != null && root.right != null) {
-			root = root.right;
-		}
-
-		// Start from the rightmost node, traverse back using left pointers.
-		// While traversing, change right pointer of nodes.
-		while (root != null && root.left != null) {
-			prev = root;
+	public static TreeNode BT2DLL(TreeNode root) {
+		if (root == null) return root;
+		root = BT2DLLHelper(root);
+		while (root.left != null) {
 			root = root.left;
-			root.right = prev;
 		}
-		// The leftmost node is head of linked list, return it
 		return root;
 	}
+	
+	public static TreeNode BT2DLLHelper(TreeNode root) {
+		if (root == null) {
+			return null;
+		}
+		if (root.left != null) {
+			TreeNode left = BT2DLLHelper(root.left);
+			while (left.right != null) {
+				left = left.right;
+			}
+			left.right = root;
+			root.left = left;
+		}
+		if (root.right != null) {
+			TreeNode right = BT2DLLHelper(root.right);
+			while (right.left != null) {
+				right = right.left;
+			}
+			right.left = root;
+			root.right = right;
+		}
+		return root;
+	}
+	// iterative way
+	public static TreeNode BT2DLLIte(TreeNode root) {
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		TreeNode res = null;
+		TreeNode cur = root;
+		while (!stack.isEmpty() || cur != null) {
+			if (cur != null) {
+				stack.push(cur);
+				cur = cur.left;
+			} else {
+				cur = stack.pop();
+				if (res == null) {
+					res = cur;
+					res.left = null;
+				} else {
+					res.right = cur;
+					cur.left = res;
+					res = res.right;
+				}
+				cur = cur.right;
+			}
+		}
+		res.right = null;
+		while (res.left != null) res = res.left;
+		return res;
+	}
+	
+	// driver
+	public static void main(String[] args) {
+		TreeNode root = new TreeNode(1);
+		root.left = new TreeNode(2);
+		root.right = new TreeNode(3);
+		root.left.left = new TreeNode(4);
+		root.left.right = new TreeNode(5);
+		root.right.left = new TreeNode(6);
+		root.right.right = new TreeNode(7);
+		TreeNode res = BT2DLLIte(root);
+		while (res.right != null) {
+			System.out.println(res.val);
+			res = res.right;
+		}
+		System.out.println(res.val);
+		System.out.println();
+		while (res.left != null) {
+			System.out.println(res.val);
+			res = res.left;
+		}
+		System.out.println(res.val);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * Method 2: give the DLL a head and a tail

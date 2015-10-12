@@ -6,54 +6,49 @@ public class Integer_To_English_Number {
 	 * would be seen on a check. 
 	 * Example: 2376 -> two thousand three hundred and seventy six
 	 */
-	public String[] ones = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "ninteen"};
-	public String[] tens = {"", "ten", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninty"};
-	public String[] bigs = {"thousand", "million", "billion"};
-	
-	public String pronounceNumber(int num){
-		if(num < 0) return "";
-		if(num == 0) return "zero";
-		
-		String res = "";
-		int count = 0;
-		
- 		while(num != 0){
- 			int remaining = num % 1000;
- 			res = convertHundreds(remaining) + res;
- 			num = num / 1000;
- 			// these is the count for the bigs, increase per three digits
- 			count++;
- 			if(num != 0){
- 				res = " " + bigs[count - 1] + " " + res;
- 			}
- 		}
- 		return res;
-	}
-	// convert the number less than 1000
-	public String convertHundreds(int num){
-		// 百位和十位分开
-		if(num == 0) return "";
-		String res = "";
-		if(num % 100 < 20){
-			res = ones[num % 100];
-			num /= 100;
-		}else{
-			res = ones[num % 10];
-			num /= 10;
-			if(num % 10 != 0){
-				res = tens[num % 10] + " " + res;
-				num /= 10;
-			}
-		}
-		if(num == 0) return res;
-		else{
-			if(res.length() == 0){
-				return ones[num] + " hundred";
-			}else{
-				return ones[num] + " hundred and " + res;
-			}
-		}
-	}
+	private String[] ones = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+    private String[] tens = {"Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+    private String[] bigs = {"Thousand", "Million", "Billion"};
+    
+    public String numberToWords(int num) {
+        if (num == 0) return "Zero";
+        if (num < 1000) return convertUnderThousand(num);
+        int bigIndex = 0;
+        String res = "";
+        while (num > 0) {
+            if (num % 1000 > 0) {
+                int remain = num % 1000;
+                String cur = convertUnderThousand(remain);
+                if (bigIndex > 0) {
+                    cur += (" " + bigs[bigIndex - 1]); 
+                } 
+                if (res.length() > 0) res = " " + res;
+                res = cur + res;
+            }
+            num /= 1000;
+            bigIndex++;
+        }
+        return res;
+    }
+    public String convertUnderThousand(int num) {
+        String hundred = ones[num / 100] + " Hundred";
+        String small = "";
+        if (num % 100 > 0) {
+            int under = num % 100;
+            if (under < 20) {
+                small = ones[under];
+            } else {
+                small = tens[under / 10 - 2];
+                if (num % 10 > 0) {
+                    small += (" " + ones[under % 10]);
+                }
+            }
+        }
+        
+        if (num >= 100 && small.length() > 0) return hundred + " " + small;
+        else if (num >= 100) return hundred;
+        else return small;
+    }
 	
 	
 	/**
