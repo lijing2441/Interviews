@@ -20,6 +20,7 @@ public class Add_and_Search_Word {
 	search("bad") -> true
 	search(".ad") -> true
 	search("b..") -> true
+	
 	 */
 	private TrieNode2 root;
 

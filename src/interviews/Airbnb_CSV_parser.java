@@ -8,6 +8,7 @@ public class Airbnb_CSV_parser {
 	Jane,Roberts,janer@msn.com,"San Francisco, CA",0
 	"Alexandra ""Alex""",Menendez,alex.menendez@gmail.com,Miami,1
 	"""Alexandra Alex"""
+	变成
 	John|Smith|john.smith@gmail.com|Los Angeles|1
 	Jane|Roberts|janer@msn.com|San Francisco, CA|0
 	Alexandra "Alex"|Menendez|alex.menendez@gmail.com|Miami|1
@@ -27,7 +28,7 @@ public class Airbnb_CSV_parser {
 		System.out.println(strOutput);
 	}
 	
-	// function to parse
+	// function to parse into each string
 	public static ArrayList<String> parseCSV(String str) {
         ArrayList<String> res = new ArrayList<String>();
         boolean inQuote = false;
@@ -38,7 +39,7 @@ public class Airbnb_CSV_parser {
         			if(i == str.length() - 1) {
         				res.add(buffer.toString());
         				return res;
-        			} else if(str.charAt(i + 1) == '"') {
+        			} else if(str.charAt(i + 1) == '"') { // escape
         				buffer.append('"');
         				i++;
         			} else {

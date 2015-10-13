@@ -12,19 +12,21 @@ public class Best_Time_Buy_Sell_Stocks {
 	 * maximum profit.
 	 */
 	public int maxProfit(int[] prices) {
-		if (prices.length < 2) return 0;
-		int buy = 0;
-		int maxProfit = 0;
-		int curProfit = 0;
-		for (int i = 1; i < prices.length; i++) {
-		if (prices[buy] > prices[i])
-				buy = i;
-			curProfit = prices[i] - prices[buy];
-			if (curProfit > maxProfit)
-				maxProfit = curProfit;
-		}
-		return maxProfit;
-	}
+        int n = prices.length;
+        if(n <= 1) return 0;
+        int curProfit = 0;
+        int maxProfit = 0;
+        int minPrice = prices[0];
+        for(int i = 1; i < n; i++) {
+            if(prices[i] < minPrice) {
+                minPrice = prices[i];
+            } else {
+                curProfit = prices[i] - minPrice;
+                if(curProfit > maxProfit) maxProfit = curProfit;
+            }
+        }
+        return maxProfit;
+    }
 	/**
 	 * II: You may complete as many transactions as you like. However, you may not engage in
 	 * multiple transactions at the same time.

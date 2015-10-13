@@ -6,18 +6,14 @@ public class Singleton {
 	 * 
 	 * A a = A.getInstance(); A b = A.getInstance(); a should equal to b.
 	 */
-	public static Solution instance;
-
-	public static Solution getInstance() {
+	public static volatile Singleton instance = null; // toolkit
+	public Singleton() {}
+	
+	public static synchronized Singleton getInstance() {
 		// write your code here
 		if (instance == null) {
-			instance = new Solution();
+			instance = new Singleton();
 		}
 		return instance;
-	}
-}
-class Solution {
-	public Solution(){
-		
 	}
 }

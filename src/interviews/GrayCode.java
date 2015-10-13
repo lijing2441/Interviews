@@ -28,4 +28,33 @@ public class GrayCode {
 		}
 		return list;
 	}
+	// 根据公式N^(N>>1), Facebook要求O(1)
+	public ArrayList<Integer> grayCodeBitInt(int n) {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        for (int i = 0; i < Math.pow(2, n); i++) {
+            int grayCode = i ^ (i>>1);
+            res.add(grayCode);
+        }
+        return res;
+    }
+	
+	// 返回string
+	public static void grayCodeBit(int bitNum) {
+		for (int i = 0; i < (int)Math.pow(2, bitNum); i++) {
+			int grayCode = (i>>1) ^ i;
+			System.out.println(num2Binary(grayCode, bitNum));
+		}
+	}
+	public static String num2Binary(int num, int bitNum) {
+		String res = "";
+		for (int i = bitNum - 1; i >= 0; i--) {
+			res += ((num >> i) & 1);
+		}
+		return res;
+	}
+	
+	public static void main(String[] args) {
+		int num = 3;
+		grayCodeBit(num);
+	}
 }

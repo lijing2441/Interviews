@@ -31,6 +31,30 @@ public class Roman_To_Integer {
 		}
 		return res;
 	}
+	
+	public int romanToInt2(String s) {
+        if (s == null || s.length() == 0) return 0;
+        int res = 0, len = s.length();
+        
+        for (int i = len - 1; i >= 0; i--) {
+            char c = s.charAt(i);
+            if (c == 'M') res += 1000;
+            else if (c == 'D') res += 500;
+            else if (c == 'C') {
+                if (res >= 500) res -= 100;
+                else res += 100;
+            } else if (c == 'L') res += 50;
+            else if (c == 'X') {
+                if (res >= 50) res -= 10;
+                else res += 10;
+            } else if (c == 'V') res += 5;
+            else if (c == 'I') {
+                if (res >= 5) res -= 1;
+                else res += 1;
+            }
+        }
+        return res;
+    }
 
 	public static void main(String[] args) {
 		String s = "MCMLIV";

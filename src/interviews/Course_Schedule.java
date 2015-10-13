@@ -48,7 +48,7 @@ public class Course_Schedule {
             curList.add(end);
             edgeMap.put(start, curList);
         }
-        for(int i = 0; i < numCourses; i++) {
+        for(int i = 0; i < numCourses; i++) { // 注意这里不是keySet
             if(degree[i] == 0) {
                 q.offer(i);
                 count++;
@@ -148,7 +148,6 @@ public class Course_Schedule {
         }   
         return resArr;
     }
-    
     
     // Recursive way
     public int[] findOrder(int numCourses, int[][] prerequisites) {
