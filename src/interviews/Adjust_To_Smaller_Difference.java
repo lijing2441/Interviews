@@ -1,5 +1,7 @@
 package interviews;
 
+import java.util.ArrayList;
+
 public class Adjust_To_Smaller_Difference {
 	/**
 	 * Given an integer array, adjust each integers so that the difference of
@@ -35,8 +37,7 @@ public class Adjust_To_Smaller_Difference {
 		for (int i = 0; i < n; i++) {
 			// the value can be 1 <= j <= 100
 			for (int j = 1; j <= 100; j++) {
-				//base case, A[0] cannot compare with the left element
-				if (i == 0){
+				if (i == 0){  //base case, A[0] cannot compare with the left element
 					dp[i][j] = Math.abs(A[0] - j);
 				} else {
 					// set it to some value larger than 100
@@ -60,4 +61,32 @@ public class Adjust_To_Smaller_Difference {
 		}
 		return min;
 	}
+	
+	public int MinAdjustmentCost(ArrayList<Integer> A, int target) {
+        int n = A.size();
+        if (n < 2) return 0;
+        int[][] dp = new int[n][101];
+        for (int i = 0; i < n; i++) {
+            for (int j = 1; j <= 100; j++) {
+                if (i == 0) dp[i][j] = Math.abs(A.get(i) - j);
+                else {
+                    dp[i][j] = Integer.MAX_VALUE;
+                    for (int k = 1; k <= 100; k++) {
+                        if (Math.abs(k - j) > target) continue;
+                        int diff = Math.abs(A.get(i) - j) + dp[i - 1][k];
+                        if (diff < dp[i][j]) {
+                            dp[i][j] = diff;
+                        }
+                    }
+                }
+            }
+        }
+        int min = dp[n - 1][1];
+        for (int i = 2; i <= 100; i++) {
+            if (dp[n - 1][i] < min) {
+                min = dp[n - 1][i];
+            }
+        }
+        return min;
+    }
 }

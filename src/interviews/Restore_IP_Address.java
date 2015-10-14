@@ -40,4 +40,27 @@ public class Restore_IP_Address {
         }
         return true;
     }
+    
+    // use backtracking
+    public List<String> restoreIpAddresses2(String s) {
+        if (s == null || s.length() < 4 || s.length() > 12) return new ArrayList<String>();
+        List<String> res = new ArrayList<String>();
+        getValidIP(s, 0, new ArrayList<String>(), res);
+        return res;
+    }
+    
+    public void getValidIP(String s, int step, List<String> cur, List<String> res) {
+        if (step == 3) {
+            if (isValid(cur.get(0)) && isValid(cur.get(1)) && isValid(cur.get(2)) && isValid(s)) {
+                res.add(cur.get(0) + "." + cur.get(1) + "." + cur.get(2) + "." + s);
+            }
+            return;
+        }
+        for (int i = 1; i < 4 && i <= s.length(); i++) {
+            String next = s.substring(0, i);
+            cur.add(next);
+            getValidIP(s.substring(i), step + 1, cur, res);
+            cur.remove(cur.size() - 1);
+        }
+    }
 }

@@ -23,7 +23,8 @@ public class Airbnb_CSV_parser {
 		output = parseCSV("Jane,Roberts,janer@msn.com,\"San Francisco, CA\",0");
 		strOutput = printStr(output);
 		System.out.println(strOutput);
-		output = parseCSV("\"Alexandra \"\"Alex\"\"\",Menendez,alex.menendez@gmail.com,Miami,1");
+		// #3
+		output = parseCSV2("\"Alexandra \"\"Alex\"\"\",Menendez,alex.menendez@gmail.com,Miami,1");
 		strOutput = printStr(output);
 		System.out.println(strOutput);
 	}
@@ -63,6 +64,7 @@ public class Airbnb_CSV_parser {
         if(buffer.length() > 0) res.add(buffer.toString());
         return res;
 	}
+	
     public static String printStr(ArrayList<String> list) {
         StringBuilder res = new StringBuilder();
         for(int i = 0; i < list.size()-1; i++) {
@@ -71,5 +73,43 @@ public class Airbnb_CSV_parser {
         }
         res.append(list.get(list.size()-1));
         return res.toString();
+    }
+    
+    
+    public static ArrayList<String> parseCSV2(String input) {
+    	ArrayList<String> res = new ArrayList<String>();
+    	boolean inQuote = false;
+    	StringBuilder sb = new StringBuilder();
+    	for (int i = 0; i < input.length(); i++) {
+    		if (inQuote) {
+    			if (input.charAt(i) == '"') {
+    				if (i == input.length() - 1) {
+    					res.add(sb.toString());
+    					return res;
+    				} else if (input.charAt(i + 1) == '"') {
+    					sb.append('"');
+    					i++;
+    				} else {
+    					res.add(sb.toString());
+    					sb.setLength(0);
+    					inQuote = false;
+    					i++;
+    				}
+    			} else {
+    				sb.append(input.charAt(i));
+    			}
+    		} else {
+    			if (input.charAt(i) == '"') {
+    				inQuote = true;
+    			} else if (input.charAt(i) == ',') {
+    				res.add(sb.toString());
+    				sb.setLength(0);
+    			} else {
+    				sb.append(input.charAt(i));
+    			}
+    		}
+    	}
+    	if (sb.length() > 0) res.add(sb.toString());
+    	return res;
     }
 }

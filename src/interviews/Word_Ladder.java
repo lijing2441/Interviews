@@ -27,39 +27,44 @@ public class Word_Ladder {
 	 * characters.
 	 *
 	 * word ladder I only needs to return the length between start and end, BFS is enough.
+	 * 
+	 * for word length k, and searching in dictionary takes O(1), and the depth of loop is d
+	 * time complexity is O((k*26)^d), space complexity is O((k*26)^d)
+	 * 
+	 * O(26*str.length*dict.size)=O(L*N)
 	 */
-	public int ladderLength(String start, String end, Set<String> dict) {
-		if (dict == null)
-			return 0;
-		Queue<String> wordQ = new LinkedList<String>();
-		Queue<Integer> distQ = new LinkedList<Integer>();
-
-		wordQ.add(start);
-		distQ.add(1);
-		while (!wordQ.isEmpty()) {
-			String curWord = wordQ.poll();
-			Integer curDist = distQ.poll();
-			if (curWord.equals(end))
-				return curDist;
-
-			for (int i = 0; i < curWord.length(); i++) {
-				char[] ch = curWord.toCharArray();
-				for (char c = 'a'; c <= 'z'; c++) {
-					ch[i] = c;
-					String newWord = new String(ch);
-					if (dict.contains(newWord)) {
-						wordQ.add(newWord);
-						distQ.add(curDist + 1);
-						// remember to remove the word, since the 
-						// others use it later can not be the shortest
-						dict.remove(newWord);
-						
-					}
-				}
-			}
-		}
-		return 0;
-	}
+	public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
+        wordList.add(endWord);
+        Queue<String> q = new LinkedList<String>();
+        //Queue<String> distQ = new LinkedList<String>();
+        q.offer(beginWord);
+        //distQ.offer(1);
+        int level = 1;
+        while (!q.isEmpty()) {
+            int size = q.size();
+            
+            //int curDist = distQ.poll();
+            for (int i = 0; i < size; i++) {
+                String s = q.poll();
+                if (s.equals(endWord)) {
+                    return level;
+                }
+                for (int k = 0; k < s.length(); k++) {
+                    char[] arr = s.toCharArray();
+                    for (int j = 0; j < 26; j++) {
+                        arr[k] = (char)(j + 'a');
+                        String changed = new String(arr);
+                        if (wordList.contains(changed)) {
+                            q.offer(changed);
+                            wordList.remove(changed);
+                        }
+                    }
+                }
+            }
+            level++;
+        }
+        return 0;
+    }
 
 	/**
 	 * Word Ladder II: return all shortest transformation sequence(s) from start
@@ -143,7 +148,6 @@ public class Word_Ladder {
 		 while (!q.isEmpty()) {
 			 String cur = q.poll();
 			 if (cur.equals(end)) {
-				 //System.out.println("Here");
 				 return getOnePath(map.get(end));
 			 }
 			 for(int i = 0; i < cur.length(); i++) {
@@ -176,6 +180,7 @@ public class Word_Ladder {
 		 }
 		 return res;
 	 }
+	 
 	 // driver function
 	 public static void main(String[] args) {
 		 String start = "hit";

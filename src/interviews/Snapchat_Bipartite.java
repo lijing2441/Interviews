@@ -33,7 +33,7 @@ public class Snapchat_Bipartite {
 			element = queue.remove();
 			neighbour = 1;
 			while (neighbour <= numberOfVertices) {
-				// 如果已经被标为
+				// 如果已经被标为相同颜色，说明不可能形成bipartite
 				if (adjacencyMatrix[element][neighbour] == 1 && colored[element] == colored[neighbour]) {
 					return false;
 				}

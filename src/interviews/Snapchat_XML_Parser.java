@@ -2,47 +2,64 @@ package interviews;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Snapchat_XML_Parser {
 	/**
 	 * 实现一个XML parser
 	 */
-	public static void main(String argv[]) {
+	public static void main(String[] args) {
+		File file = new File("src/com/andieguo/xmldemo/books.xml");
+		//books.xml文件应放在和ReadXMLFile.java同级的文件夹下
+		List<Book> books = readXMLFile(file);
+		for (Book book : books) {
+			System.out.println(book.toString());
+		}
+	}
+
+	public static List<Book> readXMLFile(File file) {
+		List<Book> lists = new ArrayList<Book>();
 		try {
-			File fXmlFile = new File("/Users/mkyong/staff.xml");
+
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
-
-			doc.getDocumentElement().normalize();
-			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-
-			NodeList nList = doc.getElementsByTagName("staff");
-
-			System.out.println("----------------------------");
-
-			for (int temp = 0; temp < nList.getLength(); temp++) {
-				Node nNode = nList.item(temp);
-				System.out.println("\nCurrent Element :" + nNode.getNodeName());
-
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
-					Element eElement = (Element) nNode;
-
-					System.out.println("Staff id : " + eElement.getAttribute("id"));
-					System.out.println("First Name : " + eElement.getElementsByTagName("firstname").item(0).getTextContent());
-					System.out.println("Last Name : " + eElement.getElementsByTagName("lastname").item(0).getTextContent());
-					System.out.println("Nick Name : " + eElement.getElementsByTagName("nickname").item(0).getTextContent());
-					System.out.println("Salary : " + eElement.getElementsByTagName("salary").item(0).getTextContent());
+			Document doc = dBuilder.parse(file);
+			NodeList bookList = doc.getElementsByTagName("book");
+			for (int i = 0; i < bookList.getLength(); i++) {
+				Node bookNode = bookList.item(i);
+				if (bookNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element bookElement = (Element) bookNode;
+					Book book = new Book();
+					//book.setCategory(bookElement.getAttribute("category"));
+					Element titleElement = (Element) bookElement.getElementsByTagName("title").item(0);
+					//book.setTitle(titleElement.getTextContent());
+					//book.setTitleLang(titleElement.getAttribute("lang"));
+					NodeList authorList = bookElement.getElementsByTagName("author");
+					String author = "";
+					for (int j = 0; j < authorList.getLength(); j++) {
+						author = author + authorList.item(j).getTextContent() + "/";
+					}
+					author = author.substring(0, author.length() - 1);
+					//book.setAuthor(author);
+					//book.setYear(Integer.valueOf(bookElement.getElementsByTagName("year").item(0).getTextContent()));
+					//book.setPrice(Double.valueOf(bookElement.getElementsByTagName("price").item(0).getTextContent()));
+					lists.add(book);
 				}
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return lists;
 	}
+}
+class Book {
 }
