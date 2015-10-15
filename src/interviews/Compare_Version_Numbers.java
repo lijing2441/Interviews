@@ -21,6 +21,7 @@ public class Compare_Version_Numbers {
         int len1 = v1.length;
         int len2 = v2.length;
         int len = len1 >= len2? len1: len2;
+        if (len1 != len2) return len1 - len2;
         for(int i = 0; i < len; i++){
             int n1 = i < len1 ? Integer.parseInt(v1[i]) : 0;
             int n2 = i < len2 ? Integer.parseInt(v2[i]) : 0;

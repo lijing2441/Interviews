@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Queue;
 
 public class Facebook_输出多叉树每层node数量 {
+	// bfs
 	public static void printNodeNumInEachLevel(MultiwayTreeNode root) {
 		if (root == null) System.out.println("Empty Tree");
 		Queue<MultiwayTreeNode> q = new LinkedList<MultiwayTreeNode>();

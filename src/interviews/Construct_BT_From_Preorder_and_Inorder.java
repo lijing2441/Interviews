@@ -49,7 +49,7 @@ public class Construct_BT_From_Preorder_and_Inorder {
         return root;
     }
     
-    /** Iterative method */
+    /** Iterative method - O(n), O(n) */
 	public TreeNode buildTreePIIte(int[] preorder, int[] inorder) {
         if(preorder.length == 0 || preorder.length != inorder.length) return null;
         int preorderIndex = 0;
@@ -59,7 +59,7 @@ public class Construct_BT_From_Preorder_and_Inorder {
         stack.push(root);
         TreeNode node = null;
         while(!stack.isEmpty()){
-            if(inorder[inorderIndex] == stack.peek().val){
+            if(inorder[inorderIndex] == stack.peek().val){ // find the root
                 inorderIndex++;
                 if(inorderIndex >= inorder.length) break;
                 node = stack.pop();

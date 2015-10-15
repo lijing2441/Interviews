@@ -6,30 +6,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class BST_Level_Order_Traversal {
-	// BFS, O(n) time, O(n) space
-	public ArrayList<ArrayList<Integer>> levelOrder(TreeNode root) {
-		ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
-		//corner case
-		if (null == root) return res;
-		ArrayList<TreeNode> cur = new ArrayList<TreeNode>();
-		cur.add(root);
-		while (!cur.isEmpty() && cur.get(0) != null) {
-			ArrayList<Integer> list = new ArrayList<Integer>();
-			ArrayList<TreeNode> next = new ArrayList<TreeNode>();
-			// get the next level nodes
-			for (TreeNode n : cur) {
-				list.add(n.val);
-				if (n.left != null)
-					next.add(n.left);
-				if (n.right != null)
-					next.add(n.right);
-			}
-			res.add(list); // if reversely, res.add(0, list), or before return, add Collections.reverse(res)
-			// replace the cur node list with next level node list
-			cur = next;
-		}
-		return res;
-	}
 	// use only one queue to do BFS,每层记下queue初始size即可
 	public ArrayList<ArrayList<Integer>> levelOrderOneQueue(TreeNode root) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();

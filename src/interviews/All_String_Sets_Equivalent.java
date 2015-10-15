@@ -43,7 +43,7 @@ public class All_String_Sets_Equivalent {
 	}
 
 	public static void main(String[] args) {
-		String[][] test = { { "b", "a" }, { "a", "b" } };
+		String[][] test = { { "b", "a", "a", "c" }, { "a", "b" } };
 		boolean identical = allStringSetsIdentical(test);
 		if (identical)
 			System.out.println("true");

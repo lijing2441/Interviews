@@ -64,7 +64,7 @@ public class Continuous_Subarray_Sum {
                 end = i;
             }
             if (start == 0 || end == len - 1) continue;
-            if (sum - local > global) {
+            if (sum - local > global) { // 找余下最大
                 global = sum - local;
                 maxStart = (end + 1) % len;
                 maxEnd = (len + start - 1) % len; // 注意避免负数

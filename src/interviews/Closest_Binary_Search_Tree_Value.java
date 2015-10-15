@@ -57,10 +57,11 @@ public class Closest_Binary_Search_Tree_Value {
 		    smallerStack.push(popped);
 		    largerStack.push(popped);
 		}
+		// start to get the smaller and larger tree node
 		TreeNode nextSmaller = getPredecessorIte(closestNode, smallerStack);
 		TreeNode nextLarger = getSuccessorIte(closestNode, largerStack);
 		while(k > 0) {
-		    if(nextSmaller == null && nextLarger == null) return res;
+		    if(nextSmaller == null && nextLarger == null) return res; // not enough in the list so far
 		    else if(nextSmaller != null && nextLarger != null) {
 		        if(Math.abs(nextSmaller.val - target) <= Math.abs(nextLarger.val - target)) {
 		            res.add(nextSmaller.val);
@@ -154,135 +155,120 @@ public class Closest_Binary_Search_Tree_Value {
     
     // 有母节点
  // Main Test Function, step 3)
-    public static List<TreeNodeWithParent> findKClosestNodeInBST(TreeNodeWithParent root, int key, int k)
-    {
-        List<TreeNodeWithParent> list = new ArrayList<TreeNodeWithParent>();
-        TreeNodeWithParent closestNode = findTreeWithKeyNearestToTheKey(root, key);
-        k--;
-        list.add(closestNode);
-        TreeNodeWithParent nextlarger = nextLargerNodeInBST(closestNode);
-        TreeNodeWithParent nextSmaller = nextSmallerNodeInBST(closestNode);
-        while (k > 0)
-        {
-            if (nextlarger == null && nextSmaller == null)
+	public static List<TreeNodeWithParent> findKClosestNodeInBST(
+			TreeNodeWithParent root, int key, int k) {
+		List<TreeNodeWithParent> list = new ArrayList<TreeNodeWithParent>();
+		TreeNodeWithParent closestNode = findTreeWithKeyNearestToTheKey(root,
+				key);
+		k--;
+		list.add(closestNode);
+		TreeNodeWithParent nextlarger = nextLargerNodeInBST(closestNode);
+		TreeNodeWithParent nextSmaller = nextSmallerNodeInBST(closestNode);
+		while (k > 0) {
+			if (nextlarger == null && nextSmaller == null)
 				try {
 					throw new Exception();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			else if (nextlarger != null && nextSmaller != null)
-            {
-                if (Math.abs(nextlarger.val - key) >= Math.abs(nextSmaller.val - key))
-                {
-                    list.add(nextSmaller);
-                    k--;
-                    nextSmaller = nextSmallerNodeInBST(nextSmaller);
-                }
-                else
-                {
-                    list.add(nextlarger);
-                    k--;
-                    nextlarger = nextLargerNodeInBST(nextlarger);
-                }
-            }
-            else if (nextlarger != null)
-            {
-                list.add(nextlarger);
-                k--;
-                nextlarger = nextLargerNodeInBST(nextlarger);
-            }
-            else
-            {
-                list.add(nextSmaller);
-                k--;
-                nextSmaller = nextSmallerNodeInBST(nextSmaller);
-            }
-        }
-        return list;
-    }
-     
-    //find out the node that is closed to the key, step 1)
-    public static TreeNodeWithParent findTreeWithKeyNearestToTheKey(TreeNodeWithParent root, int key)
-    {
-    	TreeNodeWithParent desiredRoot = root;
-        int diff = Math.abs(root.val - key);
-        while (root != null)
-        {
-            if (diff > Math.abs(root.val - key))
-            {
-                diff = Math.abs(root.val - key);
-                desiredRoot = root;
-            }
-            if (root.val > key)
-                root = root.left;
-            else if (root.val < key)
-                root = root.right;
-            else
-                return root;
-            }
-        return desiredRoot;
-    }
-     
-    //step 2) find its next larger node in BST
-    public static TreeNodeWithParent nextLargerNodeInBST(TreeNodeWithParent current)
-    {
-        if (current.right != null)
-        {
-        	TreeNodeWithParent nextTree = current.right;
-            while (nextTree.left != null)
-                nextTree = nextTree.left;
-            return nextTree;
-        }
-        else
-       {
-            while (current.parent!=null)
-            {
-                if (current != current.parent.right)
-                    return current.parent;
-                else
-                {
-                    while(current.parent != null && current==current.parent.right)
-                        current = current.parent;
-                    return current.parent;
-                }
-            }
-            return null;
-        }
-    }
-     
-    //step 2) find its next smaller node in BST
-    public static TreeNodeWithParent nextSmallerNodeInBST(TreeNodeWithParent current)
-    {
-        if (current.left != null)
-        {
-        	TreeNodeWithParent nextTree = current.left;
-            while (nextTree.right != null)
-                nextTree = nextTree.right;
-            return nextTree;
-        }
-        else
-        {
-            while (current.parent != null)
-            {
-                if (current == current.parent.right)
-                    return current.parent;
-                else
-               {
-                    while (current.parent != null && current == current.parent.left)
-                        current = current.parent;
-                    return current.parent;
-                }
-            }
-            return null;
-        }
-    }
+			else if (nextlarger != null && nextSmaller != null) {
+				if (Math.abs(nextlarger.val - key) >= Math.abs(nextSmaller.val
+						- key)) {
+					list.add(nextSmaller);
+					k--;
+					nextSmaller = nextSmallerNodeInBST(nextSmaller);
+				} else {
+					list.add(nextlarger);
+					k--;
+					nextlarger = nextLargerNodeInBST(nextlarger);
+				}
+			} else if (nextlarger != null) {
+				list.add(nextlarger);
+				k--;
+				nextlarger = nextLargerNodeInBST(nextlarger);
+			} else {
+				list.add(nextSmaller);
+				k--;
+				nextSmaller = nextSmallerNodeInBST(nextSmaller);
+			}
+		}
+		return list;
+	}
+
+	// find out the node that is closed to the key, step 1)
+	public static TreeNodeWithParent findTreeWithKeyNearestToTheKey(
+			TreeNodeWithParent root, int key) {
+		TreeNodeWithParent desiredRoot = root;
+		int diff = Math.abs(root.val - key);
+		while (root != null) {
+			if (diff > Math.abs(root.val - key)) {
+				diff = Math.abs(root.val - key);
+				desiredRoot = root;
+			}
+			if (root.val > key)
+				root = root.left;
+			else if (root.val < key)
+				root = root.right;
+			else
+				return root;
+		}
+		return desiredRoot;
+	}
+
+	// step 2) find its next larger node in BST
+	public static TreeNodeWithParent nextLargerNodeInBST(
+			TreeNodeWithParent current) {
+		if (current.right != null) {
+			TreeNodeWithParent nextTree = current.right;
+			while (nextTree.left != null)
+				nextTree = nextTree.left;
+			return nextTree;
+		} else {
+			while (current.parent != null) {
+				if (current != current.parent.right)
+					return current.parent;
+				else {
+					while (current.parent != null
+							&& current == current.parent.right)
+						current = current.parent;
+					return current.parent;
+				}
+			}
+			return null;
+		}
+	}
+
+	// step 2) find its next smaller node in BST
+	public static TreeNodeWithParent nextSmallerNodeInBST(
+			TreeNodeWithParent current) {
+		if (current.left != null) {
+			TreeNodeWithParent nextTree = current.left;
+			while (nextTree.right != null)
+				nextTree = nextTree.right;
+			return nextTree;
+		} else {
+			while (current.parent != null) {
+				if (current == current.parent.right)
+					return current.parent;
+				else {
+					while (current.parent != null
+							&& current == current.parent.left)
+						current = current.parent;
+					return current.parent;
+				}
+			}
+			return null;
+		}
+	}
 }
+
 class TreeNodeWithParent {
 	int val;
 	TreeNodeWithParent left;
 	TreeNodeWithParent right;
 	TreeNodeWithParent parent;
+
 	public TreeNodeWithParent(int val) {
 		this.val = val;
 	}

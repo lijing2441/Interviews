@@ -4,9 +4,8 @@ import java.util.Stack;
 
 public class Convert_BT_To_Doubly_LinkedList {
 
-	// in-order traversal: fix the prev pointer first recursively,
-	// then use the prev pointer to get the next pointer and return root;
-
+	// fix the left subtree first, go directly right until null
+	// connect left subtree with root, and then do the right subtree
 	public static TreeNode BT2DLL(TreeNode root) {
 		if (root == null) return root;
 		root = BT2DLLHelper(root);
@@ -38,7 +37,7 @@ public class Convert_BT_To_Doubly_LinkedList {
 		}
 		return root;
 	}
-	// iterative way
+	// iterative way, do an inorder traversal
 	public static TreeNode BT2DLLIte(TreeNode root) {
 		Stack<TreeNode> stack = new Stack<TreeNode>();
 		TreeNode res = null;
@@ -60,7 +59,8 @@ public class Convert_BT_To_Doubly_LinkedList {
 				cur = cur.right;
 			}
 		}
-		res.right = null;
+		res.right = null; // clear up
+		// go back to the head of the list
 		while (res.left != null) res = res.left;
 		return res;
 	}
@@ -74,7 +74,7 @@ public class Convert_BT_To_Doubly_LinkedList {
 		root.left.right = new TreeNode(5);
 		root.right.left = new TreeNode(6);
 		root.right.right = new TreeNode(7);
-		TreeNode res = BT2DLLIte(root);
+		TreeNode res = BT2DLL(root);
 		while (res.right != null) {
 			System.out.println(res.val);
 			res = res.right;

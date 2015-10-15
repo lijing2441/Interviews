@@ -98,9 +98,9 @@ public class Number_Of_Islands {
 	 * We only consider up/down/left/right adjacent.
 	 * 
 	 */
+	// each island will have a father integer, who has itself as father in the father map
 	int[] x = {0, 1, 0, -1};
 	int[] y = {1, 0, -1, 0};
-	// each island will have a father integer, who has itself as father in the father map
 	public List<Integer> numIslands2(int n, int m, Point[] operators) {
 	    if (operators == null || operators.length == 0) return new ArrayList<Integer>();
 
