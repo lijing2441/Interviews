@@ -10,6 +10,7 @@ public class Bitwise_AND_of_Numbers_Range {
 	 * @logic remove all the right part with different digits, only remaining the part in the left.
 	 */
 	public int rangeBitwiseAnd(int m, int n) {
+		if (m == n) return m;
         int count = 0;
         while(m != n){
             m >>= 1;

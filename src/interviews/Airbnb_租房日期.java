@@ -52,7 +52,7 @@ public class Airbnb_租房日期 {
 		int sum = max;
 		for (int i = len - 1; i >= 0; i--) {
 			if (dp[i][1] == sum) {
-				res.add(requests[i]);
+				res.add(0, requests[i]);
 				sum -= requests[i];
 			}
 		}

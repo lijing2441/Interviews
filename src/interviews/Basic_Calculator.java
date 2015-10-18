@@ -118,4 +118,49 @@ public class Basic_Calculator {
         // the last number should be result
         return nums.pop();
 	}
+	
+	/**
+	 * 用expression evaluation的方法写
+	 */
+	public int calculateIII(String s) {
+		if(s == null || s.length() == 0) return 0;
+        Stack<Integer> numStack = new Stack<Integer>();
+        Stack<Character> opStack = new Stack<Character>();
+        char[] arr = s.toCharArray();
+        int len = arr.length;
+        int ptr = 0;
+        while (ptr < len) {
+            if (arr[ptr] == ' ') ptr++;
+            else if (arr[ptr] == '+' || arr[ptr] == '-' || arr[ptr] == '*' || arr[ptr] == '/') {
+                while (!opStack.isEmpty() && isHigherPriority(opStack.peek(), arr[ptr])) {
+                    numStack.push(calculate(opStack.pop(), numStack.pop(), numStack.pop()));
+                }
+                opStack.push(arr[ptr++]);
+            } else {
+                int num = 0;
+                while (ptr < len && Character.isDigit(arr[ptr])) {
+                    num = 10 * num + (int)(arr[ptr++] - '0');
+                }
+                numStack.push(num);
+            }
+        }
+        while (!opStack.isEmpty()) {
+            numStack.push(calculate(opStack.pop(), numStack.pop(), numStack.pop()));
+        }
+        if (numStack.isEmpty()) return 0;
+        else return numStack.pop();
+	}
+	public int calculate (char op, int num2, int num1) {
+	    if (op == '+') return num1 + num2;
+	    else if (op == '-') return num1 - num2;
+	    else if (op == '*') return num1 * num2;
+	    else return num1 / num2;
+	}
+	public boolean isHigherPriority (char op1, char op2) {
+	    if (op1 == '*' || op1 == '/') return true;
+	    else {
+	        if (op2 == '+' || op2 == '-') return true;
+	        else return false;
+	    }
+	}
 }

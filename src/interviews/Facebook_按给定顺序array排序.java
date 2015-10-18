@@ -16,6 +16,20 @@ public class Facebook_按给定顺序array排序 {
 			return new int[0];
 		}
 		int len = arr1.length;
+		for (int i = 0; i < len; i++) {
+			if (arr2[i] != i) {
+				int otherIndex = arr2[i];
+				swap(arr2, i, otherIndex);
+				swap(arr1, i, otherIndex);
+				i--;
+			}
+		}
+		return arr1;
+	}
+	public static void swap(int[] arr, int i, int j) {
+		int tmp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = tmp;
 	}
 	public static void main(String[] args) {
 		int[] arr1 = {5, 0, 3, 2, 8};

@@ -23,6 +23,7 @@ public class Airbnb_Get_Free_Interval_of_All_People {
 			}
 		});
 		// build a minimal heap with the first element
+		// if the list is Empty, we can ignore it
 		for (int i = 0; i < personNum; i++) {
 			Interval[] schedule = schedules.get(i).meeings;
 			if (schedule != null && schedule.length != 0) {

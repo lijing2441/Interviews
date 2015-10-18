@@ -1,7 +1,5 @@
 package interviews;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 public class Binary_Search_Tree_Inorder_Successor {

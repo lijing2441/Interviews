@@ -52,23 +52,32 @@ public class BST_Level_Order_Traversal {
 		}
 	}
 	// without using extra spaces except stack
-	public void PrintLevel(TreeNode root, int level) {
-		helper(root,level,0);
+	public static void PrintLevel(TreeNode root) {
+		helper(root, 0, 0);
 	}
-	public void helper(TreeNode root,int level,int currentLevel){
-		if(root == null){
+
+	public static void helper(TreeNode root, int level, int currentLevel) {
+		if (root == null) {
 			return;
-		}else{
-			if(currentLevel == level){
-				System.out.print(root.val + " ");
-			}else if(currentLevel < level){
-				helper(root.left,level,currentLevel + 1);
-				helper(root.right,level,currentLevel + 1);
-			}else{
-				return;
+		} else {
+			if (currentLevel == level) {
+				System.out.println(root.val + " in level: " + level + "");
+//			} else {
+				helper(root.left, level + 1, currentLevel + 1);
+				helper(root.right, level + 1, currentLevel + 1);
 			}
-			return;
 		}
+	}
+
+	public static void main(String[] args) {
+		TreeNode root = new TreeNode(1);
+		root.left = new TreeNode(2);
+		root.right = new TreeNode(3);
+		root.left.left = new TreeNode(4);
+		root.left.right = new TreeNode(5);
+		root.right.left = new TreeNode(6);
+		root.right.right = new TreeNode(7);
+		PrintLevel(root);
 	}
 
 	// DFS, using HashMap

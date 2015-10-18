@@ -44,7 +44,7 @@ public class Additive_sequence {
 	
 	public static void main(String[] args) {
 		String num = "122436";
-		String num2 = "1235";
+		String num2 = "12357";
 		System.out.println(isAdditive(num));
 		System.out.println(isAdditive(num2));
 	}
