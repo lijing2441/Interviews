@@ -10,8 +10,6 @@ public class Airbnb_K_largest_In_n_Sorted_Arrays {
 	 * 1. if brute force => search for largest head each time O(n), 重复k次 => O(n*k)
 	 * 2. heap? n-size的heap，每次最大的入堆，要标每个入堆的下标，然后还要存一个index array来标明每个array走到哪一步了
 	 * 		O(n + klogn) 建初始堆 => nlogn
-	 * 3. binary search?
-	 * 4. Quick-selection?
 	 */
 	public static int findKLargestNum(List<List<Integer>> lists, int k) {
 		if (lists == null || lists.size() == 0) return -1;

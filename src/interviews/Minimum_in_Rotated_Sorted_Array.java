@@ -13,15 +13,13 @@ public class Minimum_in_Rotated_Sorted_Array {
 	 */
 	public int findMin(int[] num) {
         if(num.length == 0 || num == null) return -1;
-        //if(num.length < 2) return num
-        int l = 0;
-        int r = num.length - 1;
-        if(num[l] < num[r]) return num[0];
+        int l = 0, r = num.length - 1;
         
         while(l < r - 1){
+        	if(num[l] < num[r]) return num[l];
             int mid = (l + r) / 2;
             if(num[l] < num[mid]){
-                l = mid;
+                l = mid + 1;
             }else{
                 r = mid;
             }

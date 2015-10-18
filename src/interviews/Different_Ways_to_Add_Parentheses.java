@@ -59,7 +59,7 @@ public class Different_Ways_to_Add_Parentheses {
         return res;
     }
 	public static void main(String[] args) {
-		String s = "1+2+3";
+		String s = "1+2+3+4+5";
 		List<Integer> res = diffWaysToCompute(s);
 		for(int num : res) {
 			System.out.println(num);

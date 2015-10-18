@@ -11,8 +11,7 @@ public class Find_Missing_Number {
 	 * Challenge Do it in-place with O(1) extra memory and O(n) time.
 	 */
 	/**
-	 * @param nums
-	 *            : an array of integers
+	 * @param nums : an array of integers
 	 * @return: an integer
 	 */
 	public int findMissing(int[] nums) {

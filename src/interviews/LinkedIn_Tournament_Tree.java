@@ -12,10 +12,7 @@ public class LinkedIn_Tournament_Tree {
      * 就继续向下遍历，如果已经是叶子节点，并且依然与根节点相同，那就返回MAX_VALUE，然后最终返回两个值中的
      * 最小值应该就是secMin了吧？）
 	 * 
-	 * @param root
-	 * @return
 	 */
-	
 	public static int secMin(TreeNode root) {
 		if (root == null || (root.left == null && root.right == null)) {
 			return -1;

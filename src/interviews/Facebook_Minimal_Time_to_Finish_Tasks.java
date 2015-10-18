@@ -13,6 +13,8 @@ public class Facebook_Minimal_Time_to_Finish_Tasks {
 	 * 
 	 * follow up: if k is small, how to improve space usability
 	 * 			=> remove the map value after k
+	 * 
+	 * follow up 2: 如果可以改变任务的顺序，最短任务时间是多少？ => 根据每个任务出现的频率排序，优先处理频率高的
 	 */
 	public static int minimalTime(String tasks, int k) {
 		if (tasks == null) return 0; 

@@ -10,6 +10,7 @@ import java.util.ArrayList;
  * respectively. 
  * 
  * For example, There exist two distinct solutions to the 4-queens
+ * 
  * puzzle:
  * 
  * [ 

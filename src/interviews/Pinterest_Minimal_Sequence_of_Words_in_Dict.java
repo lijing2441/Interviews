@@ -14,7 +14,7 @@ public class Pinterest_Minimal_Sequence_of_Words_in_Dict {
 	 * input: "aaaisaname" dict: ("a", "aaa", "is", "name") output:
 	 * "aaa is a name" Wrong output: "a a a is a name"
 	 */
-	// simiar to work break
+	// similar to work break
 	public static void segmentWords(String input, Set<String> dict) {
 		if (input == null || input.length() == 0) System.out.println("Empty string");
 		if (dict.contains(input)) System.out.println(input);

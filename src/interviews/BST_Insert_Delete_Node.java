@@ -80,10 +80,8 @@ public class BST_Insert_Delete_Node {
     }
     // find the parent node of the targeting node
     public TreeNode findParentNode(TreeNode parent, TreeNode node, int value) {
-        if (node == null) return parent; // in case root == null
-        if (node.val == value) {
-            return parent;
-        }
+        if (node == null || node.val == value) return parent; // in case root == null
+
         if (node.val < value) {
             return findParentNode(node, node.right, value);
         } else {

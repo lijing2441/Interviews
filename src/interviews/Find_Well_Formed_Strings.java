@@ -1,8 +1,6 @@
 package interviews;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Find_Well_Formed_Strings {

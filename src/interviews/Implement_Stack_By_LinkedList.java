@@ -9,9 +9,9 @@ public class Implement_Stack_By_LinkedList {
 	}
 	public void push(int data) {
 		if (first == null) {
-			first = new StackNode(data, null);
+			first = new StackNode(data);
 		} else {
-			last.next = new StackNode(data, null);
+			last.next = new StackNode(data);
 			last = last.next;
 		}
 	}
@@ -36,9 +36,8 @@ public class Implement_Stack_By_LinkedList {
 	private class StackNode {
 		int data;
 		StackNode next;
-		private StackNode(int data, StackNode next) {
+		private StackNode(int data) {
 			this.data = data;
-			this.next = next;
 		}
 	}
 }

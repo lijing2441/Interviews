@@ -32,7 +32,7 @@ public class Max_Tree {
                 if (stack.isEmpty()) {
                     right.left = node;
                 } else {
-                	// 还要进一步检查，如果后面的node还小，使node成为当前node的右节点，下一步还需要pop
+                	// 还要进一步检查，如果后面的node还小于right，使node成为当前node的右节点，下一步还需要pop
                 	// 如果比当前节点大，就可以把node成为当前node的左节点，然后当前元素压栈
                     TreeNode left = stack.peek();
                     if (left.val > right.val) {

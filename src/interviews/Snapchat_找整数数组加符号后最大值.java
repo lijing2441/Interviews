@@ -25,7 +25,6 @@ public class Snapchat_找整数数组加符号后最大值 {
 				dp[i][i + len] = max;
 			}
 		}
-		//System.out.println(dp[3][3]);
 		return dp[0][n - 1];
 	}
 	public static void main(String[] args) {

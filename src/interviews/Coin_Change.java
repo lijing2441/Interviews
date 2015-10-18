@@ -40,7 +40,7 @@ public class Coin_Change {
 	 * 		then it can be written as sum of count(S[], m-1, amount) and count(S[], m, amount-Sm).
 	 */
 	//coins means the value of each type of coin, O(mn)
-	public int count(int[] coins, int change){
+	public static int count(int[] coins, int change){
 		int types = coins.length;
 		// We need n+1 rows as the table is constructed in bottom up manner using 
 	    // the base case 0 value case (n = 0)
@@ -111,6 +111,6 @@ public class Coin_Change {
 	public static void main(String[] args){
 		int[] coins = {1, 2, 3, 5};
 		int x = 22;
-		System.out.println(getMinCoins(coins, x));
+		System.out.println(count(coins, x));
 	}
 }

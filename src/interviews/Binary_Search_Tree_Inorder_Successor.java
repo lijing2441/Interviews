@@ -33,30 +33,24 @@ public class Binary_Search_Tree_Inorder_Successor {
     }
 	
 	// 利用bst的特性, if balanced => can be logn, not => still O(n)
-	public TreeNode solution2(TreeNode root, TreeNode p) {
-		List<TreeNode> stack = new ArrayList<>();
+	public TreeNode inorderSuccessorIte(TreeNode root, TreeNode p) {
+        if (root == null) return null;
+        Stack<TreeNode> stack = new Stack<TreeNode>();
 	    TreeNode node = root;
-	    while (true) {
-	    	// 先找到那个node
+	    while (!stack.isEmpty() || node != null) {
 	        if (p.val < node.val) {
-	            stack.add(node);
+	            stack.push(node);
 	            node = node.left;
 	        } else if (p.val > node.val) {
-	            // 往右边走就不用存了，因为后续节点必然不在此节点的parent上
 	            node = node.right;
 	        } else {
-	        	// 找到node后，开始找successor
-	        	// 如果node右子节点为null，他的successor为他的parent
 	            if (node.right == null) {
-	                // Your case one and case two can combined to this.
 	                if (stack.isEmpty()) {
 	                   return null;
 	                } else {
-	                    return stack.remove(stack.size() - 1);
+	                    return stack.pop();
 	                }
 	            } else {
-	                // Right Sub Tree Case
-	            	// 右子树不为空，找右子树的最左节点
 	                node = node.right;
 	                while (node.left != null) {
 	                    node = node.left;
@@ -65,5 +59,6 @@ public class Binary_Search_Tree_Inorder_Successor {
 	            }
 	        }
 	    }
-	}
+	    return null;
+    }
 }

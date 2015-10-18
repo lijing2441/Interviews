@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Pinterest_Serialize_Deserilize_BT {
 	/**
-	 * An example of testdata: Binary tree {3,9,20,#,#,15,7}, denote the following structure:
+	 * An example of test data: Binary tree {3,9,20,#,#,15,7}, denote the following structure:
 
   		3
  	   / \

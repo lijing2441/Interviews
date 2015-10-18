@@ -34,7 +34,6 @@ public class Quick_Sort {
 		quickSortTraditional(a, i, right);
 	}
 	
-	
 	// improved version, break in the loop
 	public void quickSort(int[] a, int left, int right) {
 		if (left >= right)

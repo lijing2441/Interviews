@@ -31,8 +31,8 @@ public class Facebook_找overlap最多的interval {
 		// use differentialArray to node the difference between all possible positions
 		int[] differentialArray = new int[len * 2];
 		int counter = 0; // mark as counter in differentialArray
-		while (sPtr < len || ePtr < len) {
-			if (sPtr < len && ePtr < len) {
+		while (sPtr < len && ePtr < len) {
+//			if (sPtr < len && ePtr < len) {
                 if (starts[sPtr] < ends[ePtr]) {
                 	count++;
                 	differentialArray[counter++] = count;
@@ -45,18 +45,20 @@ public class Facebook_找overlap最多的interval {
                 	differentialArray[counter++] = count;
                 	ePtr++;
                 }
-            } else if (sPtr < len) {
-            	count++;
-            	differentialArray[counter++] = count;
-            	if (maxCount < count) {
-                    maxCount = count;
-                }
-                sPtr++;
-            } else {
-            	count--;
-            	differentialArray[counter++] = count;
-            	ePtr++;
-            }
+//            } 
+//			else if (sPtr < len) {
+//            	count++;
+//            	differentialArray[counter++] = count;
+//            	if (maxCount < count) {
+//                    maxCount = count;
+//                }
+//                sPtr++;
+//            } 
+//			else {
+//            	count--;
+//            	differentialArray[counter++] = count;
+//            	ePtr++;
+//            }
 		}
 		System.out.println("Maximal overlap number should be : " + maxCount);
 		List<Interval> res = new ArrayList<Interval>();
@@ -66,8 +68,8 @@ public class Facebook_找overlap最多的interval {
 				if (res.size() != 0 && res.get(res.size() - 1).end == intervalPoints[i]) {
 					Interval cur = res.get(res.size() - 1);
 					cur.end = intervalPoints[i + 1];
-					res.remove(res.size() - 1);
-					res.add(cur);
+//					res.remove(res.size() - 1);
+//					res.add(cur);
 				} else {
 					Interval newInterval = new Interval(intervalPoints[i], intervalPoints[i + 1]);
 					res.add(newInterval);

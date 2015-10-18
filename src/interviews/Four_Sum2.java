@@ -17,6 +17,7 @@ public class Four_Sum2 {
 		}
 		Arrays.sort(num);
 		TreeMap<Integer, List<Pair>> map = new TreeMap<>();
+		// insert all possible pairs
 		for (int i = 0; i < num.length; i++) {
 			for (int j = i + 1; j < num.length; j++) {
 				Pair pair = new Pair(num[i], i, num[j], j);

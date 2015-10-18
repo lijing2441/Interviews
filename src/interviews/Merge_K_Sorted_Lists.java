@@ -87,7 +87,6 @@ public class Merge_K_Sorted_Lists {
 	 *    After replacing the root, heapify the tree.
 	 */
 	public ListNode mergeKListsPQ(List<ListNode> lists) {  
-        // write your code here
         if (lists == null || lists.size() == 0) return null;
         PriorityQueue<ListNode> pq = new PriorityQueue<ListNode>(lists.size(), new Comparator<ListNode>() {
             public int compare(ListNode node1, ListNode node2) {

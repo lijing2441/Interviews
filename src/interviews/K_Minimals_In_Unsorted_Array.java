@@ -30,8 +30,8 @@ public class K_Minimals_In_Unsorted_Array {
 	// heapify the heap using index = i element as the top
 	// build the heap from bottom, so it does not sift down, but sift up
 	public static void maxHeapify(int[] a, int size, int i) {
-		int l = 2 * i;
-		int r = 2 * i + 1;
+		int l = 2 * i + 1;
+		int r = 2 * i + 2;
 		int largest = i;
 		if (l < size && a[l] > a[largest]) {
 			largest = l;

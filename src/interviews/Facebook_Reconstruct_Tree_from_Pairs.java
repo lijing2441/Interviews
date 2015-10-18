@@ -17,6 +17,7 @@ public class Facebook_Reconstruct_Tree_from_Pairs {
 	    for (ParentChildPair p: parentChildPairs) {
 	    	childParentMap.put(p.child, p.parent);
 	    }
+	    // find root
 	    Nary_TreeNode root = null;
 	    for (Integer p: childParentMap.values()) {
 	    	if (!childParentMap.keySet().contains(p)) {
