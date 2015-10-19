@@ -88,4 +88,5 @@ public class Facebook_Jump_River {
 		System.out.println(minSteps(paths));
 		System.out.println(smallestJumps(paths));
 	}
+	
 }

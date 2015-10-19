@@ -50,8 +50,7 @@ public class Uber_Find_Neighbor_Counts_In_Matrix {
 		return result;
 	}
 
-	private static void dfs(byte[][] infos, char[][] slashes, int x, int y,
-			byte pos, int n, int m) {
+	private static void dfs(byte[][] infos, char[][] slashes, int x, int y, byte pos, int n, int m) {
 		infos[x][y] |= pos;
 		if (slashes[x][y] == '/') {
 			if (pos == LEFT) {

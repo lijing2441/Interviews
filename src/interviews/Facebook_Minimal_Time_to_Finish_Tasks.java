@@ -12,7 +12,7 @@ public class Facebook_Minimal_Time_to_Finish_Tasks {
 	 * Example: ABCDAE, k = 12, then the minimal time will be 15.
 	 * 
 	 * follow up: if k is small, how to improve space usability
-	 * 			=> remove the map value after k
+	 * 			  => remove the map value after k
 	 * 
 	 * follow up 2: 如果可以改变任务的顺序，最短任务时间是多少？ => 根据每个任务出现的频率排序，优先处理频率高的
 	 */

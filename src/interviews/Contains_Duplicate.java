@@ -46,4 +46,11 @@ public class Contains_Duplicate {
         }
         return false;
     }
+	
+	/**
+	 * 另一个思路：
+	 * 遍历，记录k个数，每个在BST里面存(arr-l/2, arr+l/2)这样一个区间，如果出现重合的区间就表示这k
+	 * 个里面有距离小于等于L的元素.Interval tree 就是一个BST只不过每个node都是一个区间，以是否重合
+	 * 判断相等，在左边或者右边比较大小
+	 */
 }

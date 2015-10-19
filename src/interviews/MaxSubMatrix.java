@@ -69,11 +69,9 @@ public class MaxSubMatrix {
 				for (int i = 0; i < row; i++)
 					temp[i] += M[i][right];
 
-				// Find the maximum sum subarray in temp[]. The kadane()
-				// function
+				// Find the maximum sum subarray in temp[]. The kadane() function
 				// also sets values of start and finish. So 'sum' is sum of
-				// rectangle between (start, left) and (finish, right) which is
-				// the
+				// rectangle between (start, left) and (finish, right) which is the
 				// maximum sum with boundary columns strictly as left and right.
 
 				// local variable

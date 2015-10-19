@@ -25,7 +25,7 @@ public class Facebook_Combination_Product {
 			for (int j = 0; j < len; j++) {
 				int bit = tmp & 1;
 				tmp >>= 1;
-				if (bit > 0) {
+				if (bit == 1) {
 					cur *= arr[j];
 				}
 			}

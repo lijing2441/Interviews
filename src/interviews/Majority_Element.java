@@ -3,6 +3,7 @@ package interviews;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Given an array of size n, find the majority element. The majority element is
@@ -38,7 +39,7 @@ public class Majority_Element {
         if(num == null || num.length == 0) return -1;
         if(num.length <= 2) return num[0];
         
-        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         for(int i = 0; i < num.length; i++){
             if(map.containsKey(num[i])){
                 map.put(num[i], map.get(num[i]) + 1);

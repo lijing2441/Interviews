@@ -21,7 +21,7 @@ public class Search_Kth_In_BST {
 			// we find the node
 			if(node.left.getCount() + 1 == count){
 				return node;
-			}else if(node.left.getCount() < count){
+			}else if(node.left.getCount() + 1 < count){
 				node = node.right;
 				count -= (node.left.getCount() + 1);
 			}else{

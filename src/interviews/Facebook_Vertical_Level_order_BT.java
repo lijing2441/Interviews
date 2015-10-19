@@ -36,7 +36,7 @@ c i
 	public static void Print(TreeNode root) {
 		ArrayList<ArrayList<Integer>> right = new ArrayList<ArrayList<Integer>>();
 		ArrayList<ArrayList<Integer>> left = new ArrayList<ArrayList<Integer>>();
-		printHelper(0, root, left, right); 
+		printHelper(0, root, left, right);
 		// Print result
 		for (int i = left.size() - 1; i > 0; i--) {
 			System.out.println(left.get(i));
@@ -87,5 +87,4 @@ c i
 
 		Print(root);
 	}
-
 }

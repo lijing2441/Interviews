@@ -6,14 +6,11 @@ import java.util.Scanner;
  * Decimal to octal conversion
  */
 public class Conversion_Numerial {
-	public static int convert_From_10_To_Octal(int numberToConvert){
-		int pos = 1;
-		int res = 0;
+	public static String convert_From_10_To_Octal(int numberToConvert){
+		String res = "";
 		while(numberToConvert != 0){
-			int tmp = (numberToConvert % 8) * pos;
-			pos *= 10;
+			res = (numberToConvert % 8) + res;
 			numberToConvert /= 8;
-			res += tmp;
 		}
 		return res;
 	}
@@ -26,9 +23,7 @@ public class Conversion_Numerial {
 	public static String convert_From_10_To_ERIC(int numberToConvert){
 		StringBuilder sb = new StringBuilder();
 		while(numberToConvert != 0){
-			// find the each digit one by one from the right
 			int index = numberToConvert % 4;
-			// equal to res = numerial[index] + res
 			sb.insert(0, numerial[index]);
 			numberToConvert /= 4;
 		}
@@ -69,10 +64,10 @@ public class Conversion_Numerial {
 	//driver function
 	@SuppressWarnings("resource")
 	public static void main (String args[]) {
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter number: ");
-        int oct  = input.nextInt();
-        String result = String.valueOf(convert_From_10_To_ERIC(oct));
+        //Scanner input = new Scanner(System.in);
+        //System.out.print("Enter number: ");
+        //int oct  = input.nextInt();
+        String result = String.valueOf(convert_From_10_To_Octal(16));
         System.out.println(result);
     }
 }

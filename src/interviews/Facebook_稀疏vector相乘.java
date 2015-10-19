@@ -58,7 +58,7 @@ public class Facebook_稀疏vector相乘 {
 		}
 		int sum = 0;
 		int left = 0, right = v2.size() - 1;
-		for (int[] pair1: v1) {
+		for (int[] pair1 : v1) {
 			int index = pair1[0];
 			// find the pos in v2 using binary search
 			while (left < right) {
@@ -66,6 +66,7 @@ public class Facebook_稀疏vector相乘 {
 				if (v2.get(mid)[0] == index) {
 					sum += pair1[1] * v2.get(mid)[1];
 					left = mid + 1;
+					break;
 				} else if (v2.get(mid)[0] < index){
 					left = mid + 1;
 				} else {

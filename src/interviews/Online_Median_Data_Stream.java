@@ -98,6 +98,7 @@ public class Online_Median_Data_Stream {
         }
         return res;
     }
+    // maxHeap size >= minHeap size
     public void addNewNumber(int num) {
         if (maxHeap2.size() == minHeap2.size()) { // maxHeap入堆
             if (maxHeap2.peek() != null && minHeap2.peek() < num) {

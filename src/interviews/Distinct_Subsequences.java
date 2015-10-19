@@ -33,8 +33,6 @@ public class Distinct_Subsequences {
 		// base cases
 		if (S.charAt(0) == T.charAt(0))
 			dptable[0][0] = 1;
-		else
-			dptable[0][0] = 0;
 		
 		for (int j = 0; j < ti; ++j) {
 			for (int i = 1; i < si; ++i) {

@@ -2,7 +2,7 @@ package interviews;
 
 import java.util.ArrayList;
 
-public class Continuous_Subarray_Sum {
+public class Largest_Continuous_Subarray_Sum {
 	// find the biggest sum subarray, return the start and end index
 	public ArrayList<Integer> continuousSubarraySum(int[] A) {
         if (A == null || A.length == 0) return new ArrayList<Integer>();
