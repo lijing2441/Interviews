@@ -109,8 +109,37 @@ public class Coin_Change {
 	}
 	
 	public static void main(String[] args){
-		int[] coins = {1, 2, 3, 5};
-		int x = 22;
-		System.out.println(count(coins, x));
+		int[] coins = {1, 2, 3};
+		int x = 6;
+		//System.out.println(count(coins, x));
+		System.out.println(getCoinChange(coins, x));
+	}
+	
+	/**
+	 * When order matters
+	 * 
+	 * Taking the example of S={1,2,3}, and call f(n) the number of solutions for amount n.
+	 * Then we have:
+	 * f(n) = 0 if n < 0 => initialize 
+	 * f(0) = 1
+	 * f(n) = f(n-1) + f(n-2) + f(n-3) if n > 0 (where the numbers 1,2,3 are the elements of S)
+	 * 
+	 * I take again the specific set S={1,2,3} as example, the general case is likewise easy. 
+	 * To count the number of solutions for n look at the first element. It can be 1, 2, or 3. 
+	 * If it is 1, there are f(n-1) ways to arrange the remaining elements. If it is 2 there 
+	 * are f(n-2) ways for the remaining elements and finally if it is 3 there are f(n-3) ways 
+	 * for the remaining elements. The total number must therefore be the sum of the three.
+	 */
+	public static int getCoinChange(int[] coins, int change) {
+		int[] dp = new int[change + 1];
+		dp[0] = 1;
+		for (int i = 1; i <= change; i++) {
+			for (int j = 0; j < coins.length; j++) {
+				if (i - coins[j] >= 0) {
+					dp[i] += dp[i - coins[j]];
+				}
+			}
+		}
+		return dp[change];
 	}
 }

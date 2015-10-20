@@ -38,6 +38,7 @@ public class Uber_Weight_Random_Selector {
 		return arr[index];
 	}
 	
+	// linear scan
 	public int randomGenerator(int[] arr, double[] prob) {
 		if (arr.length != prob.length)
 			return -1;
