@@ -41,8 +41,8 @@ public class Swap_Nodes_In_Pair {
 			tmp.next = cur;
 			prev.next = tmp;
 
+			prev = cur;
 			cur = cur.next;
-			prev = prev.next.next;
 		}
 		return dummy.next;
 	}

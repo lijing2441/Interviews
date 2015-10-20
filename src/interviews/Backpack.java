@@ -51,9 +51,17 @@ public class Backpack {
 	 * 
 	 * f[i][j] = max{f[i-1][j], j>=A[i-1]? f[i-1][j-A[i-1]]+V[i-1] : 0}
 	 */
-	
-	
-	
-	
-	
+	public int backPackII(int m, int[] A, int V[]) {
+        int[][] dp = new int[A.length + 1][m + 1];
+        dp[0][0] = 0;
+        for (int i = 1; i <= A.length; i++) {
+            for (int j = 0; j <= m; j++) {
+                dp[i][j] = dp[i - 1][j];
+                if (j >= A[i - 1]) {
+                    dp[i][j] = Math.max(dp[i][j], dp[i - 1][j - A[i - 1]] + V[i - 1]);
+                }
+            }
+        }
+        return dp[A.length][m];
+    }
 }
