@@ -58,9 +58,9 @@ public class Palantir_找岛屿最大值 {
 	}
 	public static void main(String[] args) {
 		int[][] matrix = {
-				{1, 2, 0, 0},
+				{-1, 2, 0, 0},
 				{3, 0, 4, 0},
-				{0, 1, 0, 1},	
+				{0, 1, 0, 1},
 		};
 		System.out.println(getMaxIsland(matrix));
 		

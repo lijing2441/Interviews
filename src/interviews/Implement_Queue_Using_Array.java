@@ -14,7 +14,16 @@ public class Implement_Queue_Using_Array {
 		head = -1;
 		tail = -1;
 	}
-
+	
+	public int size() {
+		if (head == -1 && tail == -1) return 0;
+		if (tail < head) {
+			return tail - head + 1 + capacity;
+		} else {
+			return tail - head + 1;
+		}
+	}
+	
 	public boolean isEmpty() {
 		return (head == -1 && tail == -1);
 	}

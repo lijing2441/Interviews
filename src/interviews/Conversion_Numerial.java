@@ -1,7 +1,5 @@
 package interviews;
 
-import java.util.Scanner;
-
 /**
  * Decimal to octal conversion
  */

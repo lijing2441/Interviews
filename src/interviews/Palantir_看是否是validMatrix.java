@@ -11,6 +11,7 @@ public class Palantir_看是否是validMatrix {
 		int m = puzzle.length, n = puzzle[0].length;
 		boolean[][] marked = new boolean[m][n];
 		helper(puzzle, 0, 0, marked);// dfs search all 0s connected to (0, 0)
+		// after search, if there is 0 grid which is not marked, then the graph cannot be valid
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
 				if (puzzle[i][j] == 0 && !marked[i][j]) {
