@@ -37,6 +37,24 @@ public class Uber_Weight_Random_Selector {
 		int index = findCeil(prefix, curProbab, 0, n - 1);
 		return arr[index];
 	}
+	
+	public int randomGenerator(int[] arr, double[] prob) {
+		if (arr.length != prob.length)
+			return -1;
+		int n = arr.length;
+		// construct the prefix array
+		double[] prefix = new double[n];
+		//prefix[0] = prob[0];
+		double random = Math.random();
+		for (int i = 0; i < n; i++) {
+			prefix[i] = prob[i];
+			if (i > 0) prefix[i] += prefix[i - 1];
+			if (random < prefix[i]) {
+				return arr[i];
+			}
+		}
+		return -1;
+	}
 
 	// find ceiling of the cur probability in prefix
 	public int findCeil(double[] prefix, double cur, int l, int r) {

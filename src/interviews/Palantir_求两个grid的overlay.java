@@ -7,5 +7,27 @@ public class Palantir_求两个grid的overlay {
 	 * 
 	 * Node: color; child[] 如果这片区域都是同一个颜色则child为空数组,否则color就是undefined
 	 */
-	public 
+	public ColorNode getANDBetweenBT(ColorNode n1, ColorNode n2) {
+		if (n1 == null || n2 == null) return null;
+		ColorNode root = null;
+		if (n1.color == 0 || n2.color == 0) {
+			root = new ColorNode(0);
+		} else {
+			root = new ColorNode(1);
+		}
+		for (int i = 0; i < 4; i++) {
+			root.children[i] = getANDBetweenBT(n1.children[i], n2.children[i]);
+		}
+		return root;
+	}
+	
+}
+class ColorNode {
+	// 0->black; 1->white
+	int color;
+	ColorNode[] children;
+	public ColorNode(int c) {
+		this.color = c;
+		children = new ColorNode[4];
+	}
 }

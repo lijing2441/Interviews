@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 
 public class Clone_Graph {
@@ -36,6 +37,23 @@ public class Clone_Graph {
 		}
 		return copy;
 	}
+	
+	// DFS 方法
+	public UndirectedGraphNode cloneGraphDFS(UndirectedGraphNode node) {
+        if(node==null) return null;
+        Map<UndirectedGraphNode, UndirectedGraphNode>  map = new HashMap<>();
+        clone(node, map);
+        return map.get(node);
+    }
+
+    private void clone(UndirectedGraphNode node, Map<UndirectedGraphNode, UndirectedGraphNode> map) {
+        if(map.containsKey(node)) return;
+        map.put(node, new UndirectedGraphNode(node.label));
+        for(UndirectedGraphNode t : node.neighbors) {
+            clone(t, map);
+            map.get(node).neighbors.add(map.get(t));
+        }
+    }
 }
 class UndirectedGraphNode {
     int label;
