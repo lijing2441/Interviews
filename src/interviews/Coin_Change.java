@@ -109,8 +109,8 @@ public class Coin_Change {
 	}
 	
 	public static void main(String[] args){
-		int[] coins = {1, 2, 3};
-		int x = 6;
+		int[] coins = {2, 3, 7};
+		int x = 5;
 		//System.out.println(count(coins, x));
 		System.out.println(getCoinChange(coins, x));
 	}
