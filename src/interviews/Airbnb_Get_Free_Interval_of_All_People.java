@@ -10,7 +10,6 @@ public class Airbnb_Get_Free_Interval_of_All_People {
 	 * Given a lot of person, who has a sorted schedule each (a list of intervals).
 	 * Get the free interval for all people.
 	 */
-	
 	public static List<Interval> getFreeIntervals(List<Person> schedules){
 		List<Interval> res = new ArrayList<Interval>();
 		if(schedules == null || schedules.size() == 0) return res;
@@ -98,7 +97,7 @@ class Person {
 	}
 }
 class IntervalWithIndex {
-	int index;
+	int index; // where it comes from
 	Interval interval;
 	public IntervalWithIndex(int i, Interval interval) {
 		this.index = i;
