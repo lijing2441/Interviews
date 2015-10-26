@@ -56,7 +56,7 @@ public class Airbnb_Strings覆盖尽量多格子 {
             System.out.println(str);
         }
 	}
-	
+	// find the maximal list of strings that can be inserted into the 4x4 board
 	public List<String> findOptimalSolution(char[][] board, MyTrieNode root) {
         List<String> res = new ArrayList<>();
         if (board == null || board.length == 0 || board[0].length == 0) {
@@ -75,7 +75,7 @@ public class Airbnb_Strings覆盖尽量多格子 {
     }
 
     public void searchNext(char[][] board, int x, int y, MyTrieNode node, List<String> res, MyTrieNode root) {
-        if (node.isString) {
+        if (node.isEnd) {
             List<String> next = findOptimalSolution(board, root);
 
             List<String> tmp = new ArrayList<>();
@@ -115,12 +115,12 @@ public class Airbnb_Strings覆盖尽量多格子 {
 }
 class MyTrieNode {
     Map<Character, MyTrieNode> map;
-    boolean isString;
+    boolean isEnd;
     String s;
 
     public MyTrieNode() {
         map = new HashMap<>();
-        isString = false;
+        isEnd = false;
         s = "";
     }
 
@@ -137,7 +137,7 @@ class MyTrieNode {
             node = node.map.get(ch);
         }
 
-        node.isString = true;
+        node.isEnd = true;
         node.s = str;
     }
 }

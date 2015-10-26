@@ -4,7 +4,8 @@ public class Airbnb_HilbertCurve {
 	int[][] cellSeq = {{0, 3, 2, 1}, {0, 1, 2, 3}, {0, 1, 2, 3}, {2, 1, 0, 3}};
     int[][] pattern = {{3, 0, 1, 2}, {0, 1, 2, 3}, {0, 1, 2, 3}, {1, 2, 3, 0}};
     int[][] position = {{0, 1}, {3, 2}};
-
+    
+    // 二维变一维
     public int pointToIndex(int x, int y, int order) {
         int offset = 0;
         int patternId = 1;
