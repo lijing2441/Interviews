@@ -2,6 +2,7 @@ package interviews;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.PriorityQueue;
 
 public class Meeting_Rooms {
 	/**
@@ -73,4 +74,30 @@ public class Meeting_Rooms {
 		}
 		return numRooms;
 	}
+	
+	// priority queue 做法
+	public int minMeetingRoomsIII(Interval[] intervals) {
+        int len = intervals.length;
+        if(len <= 1) return len;
+        Arrays.sort(intervals, new Comparator<Interval>() {
+           public int compare(Interval i1, Interval i2) {
+               if (i1.start != i2.start) {
+                   return i1.start - i2.start; 
+               } else {
+                   return i1.end - i2.end;
+               }
+           }
+        });
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        pq.offer(intervals[0].end);
+        for (int i = 1; i < len; i++) {
+            int start = intervals[i].start;
+            int end = pq.peek();
+            if (start >= end) {
+                pq.poll();
+            }
+            pq.offer(intervals[i].end);
+        }
+        return pq.size();
+    }
 }
