@@ -56,3 +56,41 @@ public class Pinterest_Serialize_Deserilize_BT {
     }
 	  
 }
+// in leetcode
+class Codec {
+    
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        serialize(root, sb);
+        return sb.toString();
+    }
+    public void serialize(TreeNode root, StringBuilder sb) {
+        if (root == null) {
+            sb.append("# ");
+        } else {
+            sb.append(root.val + " ");
+            serialize(root.left, sb);
+            serialize(root.right, sb);
+        }
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        if (data == null || data.length() == 0) return null;
+        String[] arr = data.split(" ");
+        Iterator<String> it = (Arrays.asList(arr)).iterator();
+        return deserialize(it);
+    }
+    public TreeNode deserialize(Iterator<String> it) {
+        if (!it.hasNext()) {
+            return null;
+        }
+        String val = it.next();
+        if (val.equals("#")) return null;
+        TreeNode root = new TreeNode(Integer.parseInt(val));
+        root.left = deserialize(it);
+        root.right = deserialize(it);
+        return root;
+    }
+}

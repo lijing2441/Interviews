@@ -55,4 +55,30 @@ public class Largest_Rectangle_In_Histogram {
         }
         return maxHist;
     }
+	
+	// anotehr way
+	public int largestRectangleArea2(int[] height) {
+        if (height == null || height.length == 0) return 0;
+        Stack<Integer> stack = new Stack<Integer>();
+        Stack<Integer> index = new Stack<Integer>();
+        int max = 0;
+        for (int i = 0; i <= height.length; i++) {
+            if (i < height.length && (stack.isEmpty() || height[i] >= stack.peek())) {
+                stack.push(height[i]);
+                index.push(i);
+            } else {
+                int k = 0;
+                while (!stack.isEmpty() && (i == height.length || height[i] < stack.peek())) {
+                    k = index.pop();
+                    int cur = (i - k) * stack.pop();
+                    if (cur > max) max = cur;
+                }
+                if (i < height.length) {
+                    stack.push(height[i]);
+                    index.push(k);
+                }
+            }
+        }
+        return max;
+    }
 }

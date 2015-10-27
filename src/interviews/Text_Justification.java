@@ -1,6 +1,7 @@
 package interviews;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Text_Justification {
 	/**
@@ -105,4 +106,73 @@ public class Text_Justification {
 		}
 		return res;
 	}
+	
+	
+	// without the list<list<String>> buffer
+	public List<String> fullJustify2(String[] words, int maxWidth) {
+        ArrayList<String> res = new ArrayList<String>();
+		if (words == null || words.length == 0 || maxWidth == 0) {
+			res.add("");
+			return res;
+		}
+		//save each satisfiable list for each line 
+		ArrayList<String> curList = new ArrayList<>();
+		int count = 0;
+		int wordLen = 0;
+		for (int i = 0; i <= words.length; i++) {
+			// the current line can still hold
+			if (i < words.length && (count == 0 || (count + 1 + words[i].length() <= maxWidth))) {
+				int curLen = words[i].length();
+				curList.add(words[i]);
+				wordLen += curLen;
+				if (count == 0)
+					count += curLen;
+				else
+					count += (1 + curLen);
+			} else {
+			    res.add(addList(res, curList, wordLen, maxWidth, i==words.length));
+			    
+				// open a new list to store the next line
+				if (i < words.length) {
+				    curList = new ArrayList<String>();
+	    			curList.add(words[i]);
+    				count = words[i].length();
+    				wordLen = count;
+				}
+			}
+		}
+		return res;
+    }
+    public String addList(List<String> res, List<String> curList, int wordLen, int maxWidth, boolean isLastLine) {
+        StringBuilder sb = new StringBuilder();
+        int wordCount = curList.size();
+	    if (wordCount <= 1) {
+		    sb.append(curList.get(0));
+		    while (sb.length() < maxWidth)
+			    sb.append(" ");
+	    } else if (isLastLine) { // the last line scenario
+	        for (int j = 0; j < curList.size(); j++) {
+  				sb.append(curList.get(j));
+    			if (sb.length() < maxWidth)
+			    	sb.append(" ");
+		    }
+		    while (sb.length() < maxWidth) sb.append(" ");
+	    } else {
+		    // find the number of spaces we should allocate for 
+		    int spaces = (maxWidth - wordLen) / (wordCount - 1);
+		    // find if we need to allocate more whitespace to the left strings
+		    int lefts = (maxWidth - wordLen) % (wordCount - 1);
+		    for (int j = 0; j < wordCount; j++) {
+			    sb.append(curList.get(j));
+			    if (j < wordCount - 1) {
+				    for (int k = 0; k < spaces; k++)
+					    sb.append(" ");
+				    if (j < lefts) {
+				    	sb.append(" ");
+				    }
+			    }
+		    }
+	    }
+	    return sb.toString();
+    }
 }
