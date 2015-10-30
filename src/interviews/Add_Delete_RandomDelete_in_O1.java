@@ -64,7 +64,7 @@ public class Add_Delete_RandomDelete_in_O1 {
 		map.remove(num);
 		map.put(lastNum, toReplace);
 		arr[toReplace] = lastNum;
-		arr[index] = 0;
+		arr[index] = 0; // set the last position to 0
 	}
 	public boolean contains(int num) {
 		return map.containsKey(num);

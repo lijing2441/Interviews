@@ -33,28 +33,25 @@ public class Facebook_移除括号余下有效括号对 {
 		System.out.println(isBalanced(test2));
 		
 	}
-	
-	private static final char L_PAREN = '('; 
-	private static final char R_PAREN = ')'; 
-	
+		
 	public static String isBalanced(String s) { 
 		Stack<CharRef> stack = new Stack<CharRef>(); 
 		char[] bf = s.toCharArray(); 
 		for (int i = 0; i < bf.length; i++) { 
-			if (bf[i] == L_PAREN) 
-				stack.push(new CharRef(L_PAREN, i)); 
-			else if (bf[i] == R_PAREN) { 
+			if (bf[i] == '(') 
+				stack.push(new CharRef('(', i)); 
+			else if (bf[i] == ')') { 
 				if (stack.isEmpty()) bf[i] = ' ';
 				else { 
 					CharRef ref = stack.pop(); 
-					if (ref.value != L_PAREN) { 
+					if (ref.value != '(') { 
 						bf[i] = ' '; 
 						bf[ref.index] = ' '; 
-					} 
+					}
 				} 
 			}
 		}  
-		while (!stack.isEmpty()) { 
+		while (!stack.isEmpty()) {  // 这个很关键
 			bf[stack.pop().index] = ' '; 
 		} 
 		String result = new String(bf); 

@@ -105,13 +105,9 @@ public class Palindrome_Permutation {
             List<String> tmp = new ArrayList<String>();
             for(String l : res) {
                 for(int j = 0; j <= l.length(); j++) {
-                    String newL = new String(l);
-                    if(j == 0) newL = arr[i] + newL;
-                    else if(j == l.length()) newL = newL + arr[i];
-                    else {
-                        newL = newL.substring(0, j) + arr[i] + newL.substring(j);
-                    }
-                    if(set.add(newL)) tmp.add(newL);
+                    StringBuilder newL = new StringBuilder(l);
+                    newL.insert(j, arr[i]);
+                    if(set.add(newL.toString())) tmp.add(newL.toString());
                 }
             }
             res = tmp;

@@ -78,10 +78,10 @@ public class Airbnb_CSV_parser {
     
     public static ArrayList<String> parseCSV2(String input) {
     	ArrayList<String> res = new ArrayList<String>();
-    	boolean inQuote = false;
+    	boolean isQuote = false;
     	StringBuilder sb = new StringBuilder();
     	for (int i = 0; i < input.length(); i++) {
-    		if (inQuote) {
+    		if (isQuote) {
     			if (input.charAt(i) == '"') {
     				if (i == input.length() - 1) {
     					res.add(sb.toString());
@@ -92,7 +92,7 @@ public class Airbnb_CSV_parser {
     				} else {
     					res.add(sb.toString());
     					sb.setLength(0);
-    					inQuote = false;
+    					isQuote = false;
     					i++;
     				}
     			} else {
@@ -100,10 +100,10 @@ public class Airbnb_CSV_parser {
     			}
     		} else {
     			if (input.charAt(i) == '"') {
-    				inQuote = true;
+    				isQuote = true;
     			} else if (input.charAt(i) == ',') {
     				res.add(sb.toString());
-    				sb.setLength(0);
+					sb.setLength(0);
     			} else {
     				sb.append(input.charAt(i));
     			}

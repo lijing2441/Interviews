@@ -106,7 +106,7 @@ public class BST_Insert_Delete_Node {
                 tmpParent = tmp;
                 tmp = tmp.left;
             }
-            // cut the tmp off from its original location
+            // cut the tmp off from its original location, 注意右节点可能还有枝
             if (tmpParent.left == tmp) {
                 tmpParent.left = tmp.right;
             } else {

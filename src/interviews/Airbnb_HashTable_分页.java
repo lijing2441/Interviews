@@ -13,10 +13,12 @@ public class Airbnb_HashTable_分页 {
 	public static ArrayList<ArrayList<String>> getPages(String[] source, int k) {
 		int firstEmptyPage = 0;
 		ArrayList<ArrayList<String>> pages = new ArrayList<ArrayList<String>>();
+		// always put the empty page first and then add things into it
 		pages.add(new ArrayList<String>());
+		// host:id - updated 
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>(); // linked hashmap to store pages with same id
 		for (String s : source) {
-			int id = getId(s); // 找出来id
+			int id = getId(s); // 找出来host id
 			if (map.containsKey(id)) {
 				int index = map.get(id) + 1; // 放下一个page
 				if (index == pages.size())

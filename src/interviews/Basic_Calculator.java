@@ -3,9 +3,7 @@ package interviews;
 import java.util.Stack;
 
 public class Basic_Calculator {
-	/**
-	 * 计算器+-乘/见add operators to get target
-	 * 
+	/** 
 	 * Implement a basic calculator to evaluate a simple expression string.
 	 * 
 	 * The expression string may contain open ( and closing parentheses ), the

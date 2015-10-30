@@ -37,7 +37,7 @@ public class Airbnb_租房日期 {
 	// 找出其中一条最优解法，用二维数组表示dp过程就可以了 O(n), 空间O(2n) => O(n)
 	public static List<Integer> findOneBest(int[] requests) {
 		int len = requests.length;
-		// dp[i][0] -> 本sum包含第i个数； dp[i][1] -> 本sum不包含第i个数
+		// dp[i][0] -> 本sum不包含第i个数； dp[i][1] -> 本sum包含第i个数
 		int[][] dp = new int[len][2];
 		
 		dp[0][1] = requests[0];

@@ -53,7 +53,7 @@ public class Different_Ways_to_Add_Parentheses {
                 }
             }
         }
-        if(res.size() == 0) {
+        if(res.size() == 0) { // left or right empty
             res.add(Integer.parseInt(input));
         }
         return res;

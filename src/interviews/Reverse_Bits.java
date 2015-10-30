@@ -22,7 +22,7 @@ public class Reverse_Bits {
         StringBuilder sb = new StringBuilder();
         while(n > 0) {
             int digit = n % 2;
-            n /= 2;
+            n >>= 1;
             sb.insert(0, Integer.toString(digit));
         }
         // padding zeroes

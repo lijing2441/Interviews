@@ -2,7 +2,9 @@ package interviews;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Google_Uber_Flowing_Water {
 	/**
@@ -28,6 +30,58 @@ public class Google_Uber_Flowing_Water {
 	 * 	  另外可以不用HashMap记录visited，用一个跟输入同样大小的二维数组就行。
 	 * 2. 输入规模增大导致存储空间增大：.... 这个好像没什么办法？
 	 */
+	
+	public List<Point> flowingWater(int[][] matrix) {
+		int m = matrix.length;
+		int n = matrix[0].length;
+		Set<Point> pac = new HashSet<Point>();
+		Set<Point> alt = new HashSet<Point>();
+		for (int i = 0; i < m; i++) {
+			Point p = new Point(0, i);
+			pac.add(p);
+			bfs(p, pac, matrix);
+		}
+		for (int i = 0; i < n; i++) {
+			Point p = new Point(i, 0);
+			pac.add(p);
+			bfs(p, pac, matrix);
+		}
+		for (int j = 0; j < n; j++) {
+			Point p = new Point(j, 0);
+			alt.add(p);
+			bfs(p, alt, matrix);
+		}
+		for (int j = 0; j < m; j++) {
+			Point p = new Point(0, j);
+			alt.add(p);
+			bfs(p, alt, matrix);
+		}
+		List<Point> res = new ArrayList<Point>();
+		for (Point p: pac) {
+			if (alt.contains(p)) {
+				res.add(p);
+			}
+		}
+		return res;
+	}
+	int[] x = {1, 0, -1, 0};
+	int[] y = {0, 1, 0, -1};
+	public void bfs(Point p, Set<Point> set, int[][] matrix) {
+		for (int i = 0; i < 4; i++) {
+			int newX = p.x + x[i];
+			int newY = p.y + y[i];
+			if (newX < 0 || newX >= matrix[0].length || newY < 0 || newY >= matrix.length) continue;
+			Point next = new Point(newX, newY);
+			if (matrix[newY][newX] < matrix[p.y][p.x] || set.contains(next)) {
+				continue;
+			}
+			set.add(next);
+			bfs(next, set, matrix);
+		}
+	}
+	
+	
+	
 	public class Solution {
 		public List<Point> flowing_water(int[][] mat) {
 	        int n = mat.length;

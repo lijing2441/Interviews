@@ -75,11 +75,77 @@ public class Facebook_找overlap最多的interval {
 		list.add(i3);
 		list.add(i4);
 		List<Interval> results = getMaxOverlapInterval(list);
+		List<Interval> results2 = getMinOverlapInterval(list);
 		for (Interval res : results)
+			System.out.println("[" + res.start + ", " + res.end + "] ");
+		System.out.println();
+		for (Interval res : results2)
 			System.out.println("[" + res.start + ", " + res.end + "] ");
 	}
 
-	// 线段树
+	// get the minimal overlap interval
+	public static List<Interval> getMinOverlapInterval(List<Interval> intervals) {
+		int len = intervals.size();
+		int[] starts = new int[len];
+		int[] ends = new int[len];
+		int[] intervalPoints = new int[len * 2]; // used to find the maximal
+													// interval finally
+		int ptr = 0, ptr2 = 0;
+		for (Interval i : intervals) {
+			starts[ptr] = i.start;
+			ends[ptr] = i.end;
+			intervalPoints[ptr2++] = i.start;
+			intervalPoints[ptr2++] = i.end;
+			ptr++;
+		}
+		Arrays.sort(starts);
+		Arrays.sort(ends);
+		Arrays.sort(intervalPoints);
+		int sPtr = 0, ePtr = 0, count = 0, minCount = Integer.MAX_VALUE;
+		// use differentialArray to node the difference between all possible positions
+		int[] differentialArray = new int[len * 2];
+		int counter = 0; // mark as counter in differentialArray
+		while (sPtr < len || ePtr < len) {
+			if (sPtr < len && ePtr < len) {
+				if (starts[sPtr] < ends[ePtr]) {
+					count++;
+					differentialArray[counter++] = count;
+					sPtr++;
+				} else {
+					count--;
+					differentialArray[counter++] = count;
+					if (minCount > count) {
+						minCount = count;
+					}
+					ePtr++;
+				}
+			} else if (ePtr < len) {
+				if (minCount > count) {
+					minCount = count;
+				}
+				count--;
+				differentialArray[counter++] = count;
+				ePtr++;
+			}
+		}
+		
+		System.out.println("Minimal overlap number should be : " + minCount);
+		List<Interval> res = new ArrayList<Interval>();
+		for (int i = 0; i < len * 2 - 1; i++) {
+			if (differentialArray[i] == minCount) {
+				// in case of continuous intervals
+				if (res.size() != 0 && res.get(res.size() - 1).end == intervalPoints[i]) {
+					Interval cur = res.get(res.size() - 1);
+					cur.end = intervalPoints[i + 1];
+				} else {
+					if (intervalPoints[i] == intervalPoints[i + 1]) continue;
+					Interval newInterval = new Interval(intervalPoints[i], intervalPoints[i + 1]);
+					res.add(newInterval);
+				}
+			}
+		}
+		return res;
+	}
 
 }
 

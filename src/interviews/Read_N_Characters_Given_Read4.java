@@ -88,7 +88,7 @@ public class Read_N_Characters_Given_Read4 {
             // read the bytes currently in the buffer
             while(bufferPtr < bufferCount && ptr < n) {
                 buf[ptr++] = buffer[bufferPtr++];
-            }
+            }	
             // if finished all the bytes, restore bufferPtr to 0
             if(bufferPtr == bufferCount) bufferPtr = 0;
         }

@@ -2,9 +2,9 @@ package interviews;
 
 public class Count_Inversions_In_Array {
 	/**
-	 * Given an array of integer, find the number of un-ordered pairs in that array. 
+	 * Given an array of integer, find the number of unordered pairs in that array. 
 	 * Examples:
-	 * {1, 3, 2}, the answer is 1 because {3, 2} is un-ordered,
+	 * {1, 3, 2}, the answer is 1 because {3, 2} is unordered,
 	 * {3, 2, 1}, the answer is 3 because {3, 2}, {3, 1}, {2, 1}.
 	 * 
 	 * Follow-up: Can you do it in O(nlogn) time?

@@ -54,19 +54,19 @@ public class Largest_Continuous_Subarray_Sum {
         // 再扫一遍，找最小的subarray，若减去比global大，则更新
         local = 0;
         start = 0;
-        int end = -1;
+//        int end = -1;
         for (int i = 0; i < len; i++) {
             if (local > 0) {
-                start = end = i;
+                start = i;
                 local = A[i];
             } else {
                 local += A[i];
-                end = i;
+//                end = i;
             }
-            if (start == 0 || end == len - 1) continue;
+            if (start == 0 || i == len - 1) continue;
             if (sum - local > global) { // 找余下最大
                 global = sum - local;
-                maxStart = (end + 1) % len;
+                maxStart = (i + 1) % len;
                 maxEnd = (len + start - 1) % len; // 注意避免负数
             }
         }

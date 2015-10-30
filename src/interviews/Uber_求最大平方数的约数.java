@@ -37,7 +37,7 @@ public class Uber_求最大平方数的约数 {
 				return mid;
 			} else if ((input / mid) > mid) {
 				left = mid + 1;
-				res = left;
+				res = mid;
 			} else {
 				right = mid - 1;
 			}

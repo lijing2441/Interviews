@@ -22,7 +22,7 @@ public class Facebook_Find_Alibaba {
 	 * 
 	 * CanSurvive[k][n] : 第k天，第n个房间小偷是否可以survive
 	 * 
-	 * CanSurvive[i][j] = CanSurvive[i-1][j-1] or CanSurvive[i-1][j+1] && sequence[i] != j
+	 * CanSurvive[i][j] = (CanSurvive[i-1][j-1] or CanSurvive[i-1][j+1]) && sequence[i] != j
 	 */
 	public static boolean canCatchTheft(int n, int strategy[]) {
         int k = strategy.length;
@@ -39,6 +39,7 @@ public class Facebook_Find_Alibaba {
                 a = j == 0 ? false : pre;
                 b = j == n - 1 ? false : nextDay[j + 1];
                 pre = nextDay[j]; // store current day for the next round
+                // nextDay[i][j] = (next[i - 1][j - 1] || next[i - 1][j + 1]) && strategy[i] != j
                 nextDay[j] = ((a || b) && strategy[i] != j);
                 if(nextDay[j] == true) canSurvive = true; 
             }
