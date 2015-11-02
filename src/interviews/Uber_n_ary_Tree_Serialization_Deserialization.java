@@ -41,7 +41,6 @@ public class Uber_n_ary_Tree_Serialization_Deserialization {
 			root = new N_ary_TreeNode(val);
 		    for (int i = 0; i < childrenNum; i++)
 		    	deSerialize(root.children.get(i), fileToRead);
-		 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

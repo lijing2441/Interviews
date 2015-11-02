@@ -25,20 +25,20 @@ public class Subarray_Sum_Closest {
                 return n1.num - n2.num;
             }
         });
-        int res = Integer.MAX_VALUE;
+        int diff = Integer.MAX_VALUE;
         ArrayList<Integer> list = new ArrayList<Integer>();
         for (int i = 1; i <= len; i++) {
-            if (res >= (sums[i].num - sums[i - 1].num)) {
-                res = (sums[i].num - sums[i - 1].num);
+            if (diff >= (sums[i].num - sums[i - 1].num)) {
+                diff = (sums[i].num - sums[i - 1].num);
                 list.clear();
-                int index1 = sums[i].index - 1;
-                int index2 = sums[i - 1].index - 1;
+                int index1 = sums[i].index;
+                int index2 = sums[i - 1].index;
                 if (index1 < index2) {
-                    list.add(index1 + 1);
-                    list.add(index2);
-                } else {
-                    list.add(index2 + 1);
                     list.add(index1);
+                    list.add(index2 - 1);
+                } else {
+                    list.add(index2);
+                    list.add(index1 - 1);
                 }
             }
         }

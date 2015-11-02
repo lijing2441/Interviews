@@ -17,7 +17,7 @@ public class Group_Shifted_Strings {
 	 * shifting sequence.
 	 * 
 	 * For example, 
-	 * 
+	 *  
 	 * given: ["abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"],
 	 * 
 	 * Return:

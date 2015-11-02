@@ -18,7 +18,6 @@ public class Matrix_Zigzag_Traversal {
         //int i = 0, j = 0, index = 1;
         //int start = 0, end = m * n - 1;
         int[] res = new int[m * n];
-        res[0] = matrix[0][0];
         int index = 0;
         for (int i = 0; i < m + n - 1; i++) { // i -> (row + col) sum
             if (i % 2 == 1) {

@@ -37,11 +37,11 @@ public class Uber_Find_Neighbor_Counts_In_Matrix {
 		int result = 0;
 		for (int i = 0; i < n; ++i) {
 			for (int j = 0; j < m; ++j) {
-				if ((infos[i][j] & LEFT) == 0) {
+				if ((infos[i][j] & LEFT) == 0) { // odd
 					dfs(infos, slashes, i, j, LEFT, n, m);
 					result++;
 				}
-				if ((infos[i][j] & RIGHT) == 0) {
+				if ((infos[i][j] & RIGHT) == 0) { // even
 					dfs(infos, slashes, i, j, RIGHT, n, m);
 					result++;
 				}

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-public class Shorted_Word_Distance {
+public class Shortest_Word_Distance {
 	/**
 	 * Given a list of words and two words word1 and word2, return the shortest
 	 * distance between these two words in the list.

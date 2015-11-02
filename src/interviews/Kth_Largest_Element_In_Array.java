@@ -31,8 +31,8 @@ public class Kth_Largest_Element_In_Array {
         }
     }
     public void minHeapify(int[] heap, int size, int i) {
-        int l = 2 * i;
-        int r = 2 * i + 1;
+        int l = 2 * i + 1;
+        int r = 2 * i + 2;
         int largest = i;
         if(l < size && heap[l] < heap[largest]) {
             largest = l;

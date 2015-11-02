@@ -36,7 +36,7 @@ public class Facebook_Find_Alibaba {
             canSurvive = false; 
             pre = false;
             for (int j = 0; j < n; ++j) { 
-                a = j == 0 ? false : pre;
+                a = j == 0 ? false : pre; // nextDay[i - 1]已被改为当前一轮值，所以要存下来
                 b = j == n - 1 ? false : nextDay[j + 1];
                 pre = nextDay[j]; // store current day for the next round
                 // nextDay[i][j] = (next[i - 1][j - 1] || next[i - 1][j + 1]) && strategy[i] != j

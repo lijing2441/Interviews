@@ -56,7 +56,7 @@ public class Largest_Rectangle_In_Histogram {
         return maxHist;
     }
 	
-	// anotehr way
+	// another way
 	public int largestRectangleArea2(int[] height) {
         if (height == null || height.length == 0) return 0;
         Stack<Integer> stack = new Stack<Integer>();

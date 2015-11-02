@@ -89,7 +89,7 @@ public class Majority_Element {
             }else if(count > 0){
                 if(majority == num[i]) count++;
                 else count--;
-            } 
+            }
         }
         return majority;
     }

@@ -155,7 +155,7 @@ public class Text_Justification {
             int lefts = (maxWidth - wordLen) % (wordCount - 1);
             for (int i = start; i < end; i++) {
                 sb.append(words[i]);
-                if (i < end - 1) {
+                if (i < end - 1) { // 关键！！
                     for (int j = 0; j < spaces; j++) {
                         sb.append(" ");
                     }

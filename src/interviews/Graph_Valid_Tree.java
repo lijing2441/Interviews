@@ -20,7 +20,6 @@ public class Graph_Valid_Tree {
 	 * false.
 	 */
     // two things to check: cycle and connectivity
-	// union find的方法在下面
 	// 可以用dfs判断联通和找环
 	public boolean validTree(int n, int[][] edges) {
         int edgeNum = edges.length;

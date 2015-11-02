@@ -30,12 +30,12 @@ public class Airbnb_找空闲时间 {
             Segment seg = heap.poll();
             boolean isLast = false;
 
-            if (seg.end >= end) {
+            if (seg.end >= end) {  // 关键
                 isLast = true;
             }
 
             if (seg.start > lastEndTime) {
-                res.add(new Segment(lastEndTime, seg.start));
+                res.add(new Segment(lastEndTime, Math.min(seg.start, end)));
                 lastEndTime = seg.end;
             } else {
                 lastEndTime = Math.max(lastEndTime, seg.end);
@@ -69,6 +69,7 @@ public class Airbnb_找空闲时间 {
 
         l3.add(new Segment(60, 80));
         l3.add(new Segment(110, 130));
+        l3.add(new Segment(160, 170));
 
         List<Segment> res = new Airbnb_找空闲时间().schedule(input, 55, 150);
         for (Segment seg : res) {

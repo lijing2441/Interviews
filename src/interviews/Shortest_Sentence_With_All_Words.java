@@ -56,7 +56,7 @@ public class Shortest_Sentence_With_All_Words {
 			}
 			//check if we need to update the minDiff
 			if(minDiff > max - min){
-				minDiff = max- min;
+				minDiff = max - min;
 				res[0] = i;
 				res[1] = j;
 				res[2] = k;

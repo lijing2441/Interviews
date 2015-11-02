@@ -32,7 +32,7 @@ public class Airbnb_Get_Free_Interval_of_All_People {
 				isEnd = true;
 			}
 			if (i.start > lastEndTime) {
-				res.add(new Interval(lastEndTime, i.start));
+				res.add(new Interval(lastEndTime, Math.min(i.start, end)));
 				lastEndTime = i.end;
 			} else {
 				lastEndTime = Math.max(i.end, lastEndTime);
@@ -52,7 +52,9 @@ public class Airbnb_Get_Free_Interval_of_All_People {
 		Interval[] meetings1 = {i1 ,i2, i3};
 		Interval i4 = new Interval(1, 3);
 		Interval i5 = new Interval(8, 11);
-		Interval[] meetings2 = {i4 ,i5};
+		Interval i8 = new Interval(8, 15);
+
+		Interval[] meetings2 = {i4 ,i5, i8};
 		Interval i6 = new Interval(0, 1);
 		Interval i7 = new Interval(5, 7);
 		Interval[] meetings3 = {i6 ,i7};
@@ -60,7 +62,7 @@ public class Airbnb_Get_Free_Interval_of_All_People {
 		list.add(Arrays.asList(meetings1));
 		list.add(Arrays.asList(meetings2));
 		list.add(Arrays.asList(meetings3));
-		List<Interval> res = schedule(list, 0, 12);
+		List<Interval> res = schedule(list, 0, 13);
 		for (Interval i : res) {
 			System.out.println(i.start + "->" + i.end);
 		}
