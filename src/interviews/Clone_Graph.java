@@ -12,8 +12,7 @@ public class Clone_Graph {
 	// we need to prevent create duplicates
 	public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
 		if (node == null) return null;
-		// use the value as key 
-		// use the node as value
+		// use the value as key, the node as value
 		HashMap<Integer, UndirectedGraphNode> map = new HashMap<Integer, UndirectedGraphNode>();
 		Queue<UndirectedGraphNode> q = new LinkedList<UndirectedGraphNode>();
 		q.add(node);

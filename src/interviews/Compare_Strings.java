@@ -12,7 +12,6 @@ public class Compare_Strings {
 	 * For A = "ABCD", B = "AABC", return false.
 	 */
 	public boolean compareStrings(String A, String B) {
-		// write your code here
 		if (A.length() < B.length())
 			return false;
 		int[] count = new int[26];

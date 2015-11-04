@@ -29,4 +29,38 @@ public class Longest_Increasing_Subsequence {
         }
         return max;
     }
+	
+	
+	// O(nlogn) method, binary search to get the right position
+	public int lengthOfLIS(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        int n = nums.length;
+        int[] res = new int[n];
+        res[0] = nums[0];
+        int maxLen = 1;
+        for (int i = 1; i < n; i++) {
+            if (nums[i] > res[maxLen - 1]) {
+                res[maxLen] = nums[i];
+                maxLen++;
+            } else if (nums[i] < res[0]) {
+                res[0] = nums[i];
+            } else {
+                int index = getIndex(res, 0, maxLen - 1, nums[i]);
+                res[index] = nums[i];
+            }
+        }
+        return maxLen;
+    }
+    public int getIndex(int[] nums, int start, int end, int target) {
+        while (start <= end) {
+            int mid = (start + end) / 2;
+            if (nums[mid] == target) return mid;
+            else if (nums[mid] < target) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+        return start;
+    }
 }

@@ -15,7 +15,7 @@ public class Pinterest_board_jump_game {
 	 * 
 	 * O(n) since we only tested each pos at most once
 	 */
-	public static boolean can_win(int[] board, int startPos) {
+	public static boolean canJump(int[] board, int startPos) {
 		Set<Integer> usedPos = new HashSet<Integer>();
 		return helper(board, startPos, usedPos);
 	}
@@ -32,6 +32,6 @@ public class Pinterest_board_jump_game {
 	public static void main(String[] args) {
 		int[] arr = {1, 3, 2, 0, 5, 2, 8, 4, 1};
 		int start = 5;
-		System.out.println(can_win(arr, start));
+		System.out.println(canJump(arr, start));
 	}
 }

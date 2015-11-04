@@ -52,7 +52,6 @@ public class GrayCode {
 		}
 		return res;
 	}
-	
 	public static void main(String[] args) {
 		int num = 3;
 		grayCodeBit(num);

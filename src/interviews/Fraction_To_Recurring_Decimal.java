@@ -48,7 +48,7 @@ public class Fraction_To_Recurring_Decimal {
             }
             map.put(numeratorl, sb.length()); // 要先put
             res = numeratorl/denoml;
-            numeratorl = (numeratorl%denoml)* 10;
+            numeratorl = (numeratorl%denoml) * 10;
             sb.append(res);
         }
         return sb.toString();

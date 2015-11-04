@@ -3,7 +3,6 @@ package interviews;
 import java.util.Stack;
 
 public class Convert_BT_To_Doubly_LinkedList {
-
 	// fix the left subtree first, go directly right until null
 	// connect left subtree with root, and then do the right subtree
 	public static TreeNode BT2DLL(TreeNode root) {

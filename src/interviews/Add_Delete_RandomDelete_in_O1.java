@@ -40,7 +40,6 @@ public class Add_Delete_RandomDelete_in_O1 {
 				try {
 					throw new Exception("the data structure is full");
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -54,7 +53,6 @@ public class Add_Delete_RandomDelete_in_O1 {
 			try {
 				throw new Exception("the data structure is empty");
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

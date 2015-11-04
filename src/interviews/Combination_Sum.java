@@ -138,13 +138,13 @@ public class Combination_Sum {
     }
     public void helper(int numSoFar, int targetCount, int targetSum, List<Integer> curList, List<List<Integer>> res) {
         if(0 == targetSum && 0 == targetCount) {
-            res.add(curList);
+            res.add(new ArrayList<Integer>(curList));
             return;
         }
         if(targetSum <= 0 || targetCount == 0 || numSoFar > 9) return;
         for(int i = numSoFar; i <= 9; i++) {
             curList.add(i);
-            helper(i + 1, targetCount - 1, targetSum - i, new ArrayList<Integer>(curList), res);
+            helper(i + 1, targetCount - 1, targetSum - i, curList, res);
             curList.remove(curList.size() - 1);
         }
     }
