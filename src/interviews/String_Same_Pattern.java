@@ -56,9 +56,7 @@ public class String_Same_Pattern {
             }
             // we still cannot find any match for this pIndex
             patternMap.remove(p.charAt(pIndex));
-            //set.remove(patternMap.get(p.charAt(pIndex)));
         }
-        
         return false;
     }
 	

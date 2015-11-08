@@ -26,11 +26,12 @@ public class Pinterest_找最长anagram_derive {
 		// 存sorted和对应原词
 		Map<String, List<String>> sortedMap = new HashMap<String, List<String>>();
 		// 存shorter word -> longer word 的graph
-		TreeMap<String, List<String>> graph = new TreeMap<String, List<String>>(new Comparator<String>() {
-			public int compare(String s1, String s2) {
-				return s1.length() - s2.length();
-			}
-		});
+		HashMap<String, List<String>> graph = new HashMap<String, List<String>>();
+//		(new Comparator<String>() {
+//			public int compare(String s1, String s2) {
+//				return s1.length() - s2.length();
+//			}
+//		});
 		// 必须先塞长度小的string，这样后面才能塞大的进入相应的list
 		Collections.sort(words, new Comparator<String>() {
 			public int compare(String s1, String s2) {
@@ -38,9 +39,12 @@ public class Pinterest_找最长anagram_derive {
 			}
 		});
 		// 建图
+		String maxString = "";
+		int maxLen = 0;
 		for (String s : words) {
 			char[] arr = s.toCharArray();
 			Arrays.sort(arr);
+			// 放sorted里面
 			String sorted = new String(arr);
 			if (!sortedMap.containsKey(sorted)) {
 				sortedMap.put(sorted, new ArrayList<String>());
@@ -55,20 +59,24 @@ public class Pinterest_找最长anagram_derive {
 					String previous = removeChar(sorted, i);
 					if (graph.containsKey(previous)) {
 						graph.get(previous).add(sorted);
+						if (maxLen < sorted.length()) {
+							maxLen = sorted.length();
+							maxString = s;
+						}
 					}
 				}
 			}
 		}
-		String res = "";
-		String lastKey = graph.lastKey();
-		while (graph.containsKey(lastKey) && graph.get(lastKey).size() == 0) {
-			lastKey = graph.lowerKey(lastKey);
-		}
-		if (graph.containsKey(lastKey)) {
-			String sortedString = graph.get(lastKey).get(0);
-			res = sortedMap.get(sortedString).get(0);
-		}
-		return res;
+//		String res = "";
+//		String lastKey = graph.lastKey();
+//		while (graph.containsKey(lastKey) && graph.get(lastKey).size() == 0) {
+//			lastKey = graph.lowerKey(lastKey);
+//		}
+//		if (graph.containsKey(lastKey)) {
+//			String sortedString = graph.get(lastKey).get(0);
+//			res = sortedMap.get(sortedString).get(0);
+//		}
+		return maxString;
 	}
 	
 	public static String removeChar(String s, int index) {

@@ -12,7 +12,7 @@ public class Google_找最大等差数列 {
 	 * 
 	 * map[pair(a[i],a[j]-a[i])] = max(map[pair(a[j],a[j]-a[i])] , 1) + 1 
 	 * 
-	 * 其中pair(a,b)表示以a为首项，b为等差的等差数列的最长的长度
+	 * 其中pair(a,b)表示以a为首项，b为等差的等差数列, value为最长的长度
 	 * 
 	 * 从a[n-1]一直算到a[0],所有的pair(a[k],b)都算出来了，现在只要找出其中最大的即可。
 	 */

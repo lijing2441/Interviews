@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 public class Uber_Rate_Limit_TokenBucket {
 	public static void main(String[] args) throws InterruptedException {
 		TokenBucket bucket = new TokenBucket(250, TimeUnit.MINUTES);
-		Thread.sleep(1000L);
+		Thread.sleep(1000L); // sleep 1s
 		for (int i = 0; i < 5; i++) {
 			System.out.println(bucket.take());
 		}

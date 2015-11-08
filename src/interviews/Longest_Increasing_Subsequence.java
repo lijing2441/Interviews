@@ -45,7 +45,7 @@ public class Longest_Increasing_Subsequence {
             } else if (nums[i] < res[0]) {
                 res[0] = nums[i];
             } else {
-                int index = getIndex(res, 0, maxLen - 1, nums[i]);
+                int index = getIndex(res, 0, maxLen - 1, nums[i]); // here!! 是res，不是num
                 res[index] = nums[i];
             }
         }

@@ -3,37 +3,29 @@ package interviews;
 public class Sqrt {
 	// return integer, O(logn) time,
 	public int sqrt(int x) {
-		if (x == 0 || x == 1)
-			return x;
-		int left = 0;
-		int right = x;
-		int mid = 0;
-		int res = 0;
-		while (left <= right) {
-			mid = (left + right) / 2;
-			if (mid == x / mid) {
-				return mid;
-			} else if (mid > x / mid) {
-				right = mid - 1;
-			} else {
-				left = mid + 1;
-				res = mid;
-			}
-		}
-		return res;
+		long res = 0;
+        if (x <= 1) return x;
+        long l = 0, r = x;
+        while (l <= r) {
+            long mid = (l + r) / 2;
+            if (mid * mid == x) return (int)mid;
+            else if (mid * mid > x) {
+                r = mid - 1;
+            } else {
+                l = mid + 1;
+                res = mid;
+            }
+        }
+        return (int)res;
 	}                  
                                                                                                                                            
 	// Newton's method
 	public int sqrt2(int x) {
-		if (x == 0)
-			return 0;
-		double res = 1;
-		while (Math.abs(res / 2 + x / (2 * res) - res) >= 0.01) {
-			res = res / 2 + x / (2 * res);
+		long res = x;
+		while (res * res > x) {
+			res = (res + x / res) / 2;
 		}
-		if ((int) res * (int) res > x)
-			res--;
-		return (int) res;
+		return (int)res;
 	}
 
 	// return double, stop until the difference less than epsilon = 0.0001

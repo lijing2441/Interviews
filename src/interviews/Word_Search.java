@@ -97,6 +97,7 @@ public class Word_Search {
         public List<String> findWords(char[][] board, String[] words) {
             if(board.length == 0 || board[0].length == 0 || words.length == 0) return new ArrayList<String>();
             Trie trie = new Trie();
+            // use trie to keep record of the word list
             for(int i = 0; i < words.length; i++) {
                 trie.insert(words[i]);
             }

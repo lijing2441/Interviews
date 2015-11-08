@@ -32,26 +32,26 @@ public class String_To_Integer_atoi {
 		// index of the char we are dealing with currently
 		int i = 0;
 		// ignore the whitespace
-		while(str.charAt(i) == ' ') i++;
+		while (str.charAt(i) == ' ') i++;
 		// check the sign
-		if(str.charAt(i) == '+'){
+		if (str.charAt(i) == '+') {
 			sign = 1;
 			i++;
-		}
-		else if(str.charAt(i) == '-'){
+		} else if (str.charAt(i) == '-') {
 			sign = -1;
 			i++;
 		}
 		
 		//check the valid digit, if no digit shows up, go to the last step
-		while(i < len && str.charAt(i) <= '9' && str.charAt(i) >= '0'){
+		while(i < len && Character.isDigit(str.charAt(i))){
+			char c = str.charAt(i);
 			// check the boundary, if the res is MIN_VALUE or MAX_VALUE
-			if(res > INT_MAX / 10 || (res == INT_MAX / 10 && str.charAt(i) >= '8')){
+			if(res > INT_MAX / 10 || (res == INT_MAX / 10 && c >= '8')){
 				if(sign == -1) return INT_MIN;
 				else return INT_MAX;
 			}
 			// if not exceed boundary, proceed to convert the current char to digit
-			res = res * 10 + (str.charAt(i) - '0');
+			res = res * 10 + (int)(c - '0');
 			i++;
 		}
 		res = res * sign;

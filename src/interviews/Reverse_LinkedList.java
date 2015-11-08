@@ -51,10 +51,11 @@ public class Reverse_LinkedList {
 
 	// reversely print a LL, O(n) and O(n)
 	public static void rev_LL_print(ListNode head) {
-		if (head != null) {
+		if (head.next != null) {
 			rev_LL_print(head.next);
-			System.out.print(head.val + " ");
 		}
+		System.out.print(head.val + " ");
+
 	}
 	
 	// driver method
@@ -63,6 +64,6 @@ public class Reverse_LinkedList {
 		head.next = new ListNode(2);
 		head.next.next = new ListNode(3);
 		head.next.next.next = new ListNode(4);
-		rev_LL_print2(head);
+		rev_LL_print(head);
 	}
 }

@@ -42,12 +42,12 @@ public class Pinterest_找最长的公共前缀 {
 		TrieWithDepth trie = new TrieWithDepth();
 		for (int i = 0; i < list.size(); i++) {
 			String cur = list.get(i);
-			if (trie.startsWith(cur)) {
+			if (trie.startsWith(cur)) { // already existing in the trie
 				if (cur.length() > maxLen) {
 					maxLen = cur.length();
 					maxLenPrefix = cur;
 				}
-			} else {
+			} else {  // need to insert
 				int curLen = trie.insert(cur);
 				if (curLen > maxLen) {
 					maxLen = curLen;
@@ -84,7 +84,7 @@ class TrieWithDepth {
 		for (int i = 0; i < arr.length; i++) {
 			int index = (int)(arr[i]-'a');
 			if (node.children[index] == null) {
-				if (commonDepth == -1) commonDepth = i;
+				if (commonDepth == -1) commonDepth = i; // key
 				node.children[index] = new TrieNode();
 			}
 			node = node.children[index];

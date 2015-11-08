@@ -30,9 +30,9 @@ public class Pinterest_Get_Smallest_Number_by_Swap {
 		if (m == 0 || start == input.length()) return input;
 		// find the smallest digit to swap to the start
 		int smallestDigit = getSmallestDigitInRange(input, start, m);
-		if (smallestDigit == start) { // in this case, we do not need to swap at this digit
-			return getSmallestNumHelper(input, start + 1, m);
-		}
+//		if (smallestDigit == start) { // in this case, we do not need to swap at this digit
+//			return getSmallestNumHelper(input, start + 1, m);
+//		}
 		// swap to get the smallestDigit to the leading position
 		String swaped = swapInPair(input.toCharArray(), smallestDigit, start);
 		return getSmallestNumHelper(swaped, start + 1, m - smallestDigit + start);

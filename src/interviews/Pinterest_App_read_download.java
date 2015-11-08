@@ -24,4 +24,5 @@ public class Pinterest_App_read_download {
 	 * The schema is up to you, but it should try to be as consistent for
 	 * different sites as possible
 	 */
+
 }

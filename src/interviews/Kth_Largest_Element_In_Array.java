@@ -1,7 +1,5 @@
 package interviews;
 
-import java.util.ArrayList;
-
 public class Kth_Largest_Element_In_Array {
 	/**
 	 * Find the kth largest element in an unsorted array. Note that it is the
@@ -11,7 +9,7 @@ public class Kth_Largest_Element_In_Array {
 	 * 
 	 * Note: You may assume k is always valid, 1 ≤ k ≤ array's length.
 	 */
-	public int findKthLargest(int[] nums, int k) {
+	public int findKthLargestHeap(int[] nums, int k) {
         int[] heap = new int[k];
         for(int i = 0; i < k; i++) {
             heap[i] = nums[i];
@@ -54,32 +52,31 @@ public class Kth_Largest_Element_In_Array {
     /**
      * Method 2: Quick Selection. Average O(n) time, worst case O(n^2), O(1) extra space
      */
-    public int kthLargestElement(int k, ArrayList<Integer> numbers) {
-        if (k <= 0 || k > numbers.size()) return -1;
-        int[] arr = new int[numbers.size()];
-        for (int i = 0; i < numbers.size(); i++) arr[i] = numbers.get(i);
-        return quickSelect(arr, 0, numbers.size() - 1, arr.length - k + 1);
+    public int findKthLargest(int[] nums, int k) {
+        return helper(nums, 0, nums.length - 1, nums.length - k + 1);
     }
-    public int quickSelect(int[] nums, int start, int end, int size) {
-        // use the start index element as pivot
-        int pivot = nums[end];
-        int l = start, r = end;
-        while (true) {
-            while (l < r && nums[l] < pivot) {
+    public int helper(int[] nums, int start, int end, int k) {
+        int pivot = nums[start];
+        int l = start + 1, r = end;
+        while (l <= r) {
+            while (l <= r && nums[l] <= pivot) {
                 l++;
             }
-            while (l < r && nums[r] >= pivot) {
+            while (l <= r && nums[r] > pivot) {
                 r--;
             }
-            if(l == r) break;
-            swap(nums, l, r);
+            if (l < r) {
+                swap(nums, l, r);
+                l++;
+                r--;
+            }
         }
-        swap(nums, l, end);
-        if (size == l + 1) return nums[l];
-        else if (size < l + 1) {
-            return quickSelect(nums, start, l - 1, size);
+        swap(nums, start, r);
+        if (r + 1 == k) return nums[r];
+        else if (r + 1 < k) {
+            return helper(nums, r + 1, end, k);
         } else {
-            return quickSelect(nums, l + 1, end, size);
+            return helper(nums, start, r - 1, k);
         }
     }
 }

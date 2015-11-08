@@ -39,12 +39,14 @@ public class Bulls_and_Cows {
             if (sArr[i] == gArr[i]) {
                 bull++;
             } else {
+            	// 如果不是bull，先把count记下来
                 int num = 1;
                 if (map.containsKey(sArr[i])) num += map.get(sArr[i]);
                 map.put(sArr[i], num);
             }
             
         }
+        // second pass => 确定cows
         for (int i = 0; i < len; i++) {
             if (sArr[i] == gArr[i]) {
                 continue;

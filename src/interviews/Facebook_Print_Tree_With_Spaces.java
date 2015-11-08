@@ -11,7 +11,7 @@ public class Facebook_Print_Tree_With_Spaces {
         return res;
     }
     public static void helper(List<String> res, TreeNode root, String cur, List<Integer> indent, int curIndent, int depth) {
-        String next = cur + Integer.toString(root.val);
+        String next = cur + Integer.toString(root.val); // 如果有超过one digit的，可以用delimiter
         if (indent.size() > depth) {
         	indent.set(depth, curIndent);
         } else {
@@ -20,6 +20,7 @@ public class Facebook_Print_Tree_With_Spaces {
         
         if(root.left == null && root.right == null) {
         	int min = Integer.MAX_VALUE;
+        	// 找出来最小的indent，然后别的都print more spaces
             for (int i = 0; i < next.length(); i++) {
             	min = Math.min(min, indent.get(i));
             }
@@ -32,7 +33,6 @@ public class Facebook_Print_Tree_With_Spaces {
             	}
             	System.out.println(next.charAt(i));
             }
-            
         } else {
             if(root.left != null) helper(res, root.left, next, indent, curIndent - 1, depth + 1);
             if(root.right != null) helper(res, root.right, next, indent, curIndent + 1, depth + 1);

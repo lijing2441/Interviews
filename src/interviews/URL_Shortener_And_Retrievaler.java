@@ -34,19 +34,13 @@ public class URL_Shortener_And_Retrievaler {
 	
 	// convert an integer id to a short url
 	public String getShortURLFromID(int dbID) {
-		List<Integer> digits = new ArrayList<Integer>();
+		StringBuilder sb = new StringBuilder();
 		while (dbID > 0) {
-			int remainder = dbID % BASE;
-			digits.add(remainder);
-			dbID = dbID / BASE;
+			int index = dbID % BASE;
+			sb.insert(0, APPLICABLE_CHARS.charAt(index));
+			dbID /= BASE;
 		}
-		// convert the numbers to the code
-		StringBuilder shortCode = new StringBuilder(digits.size());
-		for (int i = digits.size() - 1; i >= 0; i--) {  // we count from the end to the begin
-			shortCode.append(APPLICABLE_CHARS.charAt(digits.get(i)));
-		}
-
-		return shortCode.toString();
+		return sb.toString();
 	}
 
 	/**
@@ -62,12 +56,10 @@ public class URL_Shortener_And_Retrievaler {
 	 */
 	//change from a 62-base number to decimal
 	public static int getDbIdFromShortURL(String shortURL) {
-		int dbID = 0;
-		for (int i = 0, j = shortURL.length() - 1; i < shortURL.length() && j >= 0; i++, j--) {
-			char letter = shortURL.charAt(i);
-			int digit = APPLICABLE_CHARS.indexOf(letter);
-			dbID += digit * Math.pow(BASE, j);
+		int res = 0;
+		for (int i = 0; i < shortURL.length(); i++) {
+			res = res * 62 + (APPLICABLE_CHARS.indexOf(shortURL.charAt(i)));
 		}
-		return dbID;
+		return res;
 	}
 }

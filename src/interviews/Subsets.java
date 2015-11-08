@@ -98,18 +98,18 @@ public class Subsets {
         Arrays.sort(num);
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
         ArrayList<Integer> cur = new ArrayList<Integer>();
-        HashSet<ArrayList<Integer>> used = new HashSet<ArrayList<Integer>>();
+        Set<Integer> used = new HashSet<Integer>();
         helper(num, 0, cur, used, res);
         return res;
     }
-    public void helper(int[] num, int index, ArrayList<Integer> cur, HashSet<ArrayList<Integer>> used, ArrayList<ArrayList<Integer>> res){
+    public void helper(int[] num, int index, ArrayList<Integer> cur, Set<Integer> used, ArrayList<ArrayList<Integer>> res){
         if(index == num.length){
             res.add(new ArrayList<Integer>(cur));
             return;
         }
         cur.add(num[index]);
-        if(!used.contains(cur)){
-            used.add(new ArrayList<Integer>(cur));
+        if(!used.contains(cur.hashCode())){
+            used.add(cur.hashCode());
             helper(num, index + 1, cur, used, res);
         }
         cur.remove(cur.size() - 1);

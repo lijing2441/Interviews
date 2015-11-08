@@ -88,6 +88,15 @@ public class Three_Sum {
 		return res;
 	}
 
+	// backtracking : combination sum III
+	public List<List<Integer>> threeSumBacktracking(int[] num) {
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		int n = num.length;
+		Arrays.sort(num);
+		//helper(num, 3, 0, )
+		
+		return res;
+	}
 	/**
 	 * Three sum in a BST, sum to zero.
 	 * 
