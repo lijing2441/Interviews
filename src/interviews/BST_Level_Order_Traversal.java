@@ -62,7 +62,6 @@ public class BST_Level_Order_Traversal {
 		} else {
 			if (currentLevel == level) {
 				System.out.println(root.val + " in level: " + level + "");
-//			} else {
 				helper(root.left, level + 1, currentLevel + 1);
 				helper(root.right, level + 1, currentLevel + 1);
 			}

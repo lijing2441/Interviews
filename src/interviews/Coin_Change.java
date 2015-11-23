@@ -1,5 +1,7 @@
 package interviews;
 
+import java.util.Arrays;
+
 public class Coin_Change {
 	/**
 	 * Find the minimum no. of coins to make up the given sum from the list of
@@ -11,10 +13,11 @@ public class Coin_Change {
 	public static int getMinCoins(int[] coins, int change){
 		int[] counts = new int[change + 1];
 		//initialize to MAX_VALUE
+		Arrays.fill(counts, Integer.MAX_VALUE);
 		counts[0] = 0;
-		for(int i = 1; i <= change; i++){
-			counts[i] = Integer.MAX_VALUE;
-		}
+//		for(int i = 1; i <= change; i++){
+//			counts[i] = Integer.MAX_VALUE;
+//		}
 		for(int i = 1; i <= change; i++){
 			//since we need to reuse the last column, we keep a variable here to record
 			int curCount = Integer.MAX_VALUE;

@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Largetst_Numer_With_Concatenation_of_Array {
+public class Largest_Numer_With_Concatenation_of_Array {
 	/**
 	 * Given a list of non negative integers, arrange them such that they form
 	 * the largest number.

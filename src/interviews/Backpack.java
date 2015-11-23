@@ -27,8 +27,8 @@ public class Backpack {
 		for (int i = 0; i < A.length; i++) {
 			for (int j = 0; j <= m; j++) {
 				dp[i + 1][j] = dp[i][j];
-				if (j >= A[i] && dp[i][j - A[i]]) {
-					dp[i + 1][j] = true;
+				if (j >= A[i]) {
+					dp[i + 1][j] |= dp[i][j - A[i]];
 				}
 			}
 		}

@@ -26,7 +26,7 @@ public class Isomorphic_Strings {
         for(int i = 0; i < s.length(); i++) {
             char cs = arr1[i];
             
-            if(map.get(cs) == null) {
+            if(!map.containsKey(cs)) {
                 if(map.containsValue(arr2[i])) {
                     return false;
                 }

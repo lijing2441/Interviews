@@ -41,7 +41,7 @@ public class Facebook_Find_Alibaba {
                 pre = nextDay[j]; // store current day for the next round
                 // nextDay[i][j] = (next[i - 1][j - 1] || next[i - 1][j + 1]) && strategy[i] != j
                 nextDay[j] = ((a || b) && strategy[i] != j);
-                if(nextDay[j] == true) canSurvive = true; 
+                if(nextDay[j]) canSurvive = true; 
             }
             if (!canSurvive) return true;
         }

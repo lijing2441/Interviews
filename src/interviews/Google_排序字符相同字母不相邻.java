@@ -46,11 +46,3 @@ public class Google_排序字符相同字母不相邻 {
 		System.out.println(getOutput(input));
 	}
 }
-class StringWithFrequency {
-	int times;
-	String str;
-	public StringWithFrequency(String s, int t) {
-		this.str = s;
-		this.times = t;
-	}
-}
